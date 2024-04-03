@@ -3,20 +3,15 @@
 
 typedef char* (*FunctionPtr)();
 
-int create_listener_socket(int port);
-
-int listen_on_socket(int listener_socket,
+int listen_on_socket(int port,
                      char** endpoints,
                      FunctionPtr* functions,
                      int endpointCount);
 
-int create_sender_socket();
-
-char* send_and_recieve_on_socket(int sender_socket,
-                                 const char* ip,
+char* send_and_recieve_on_socket(const char* ip,
                                  int port,
                                  const char* message);
 
-int send_kill_message(int sender_socket, const char* ip, int port);
+int send_kill_message(const char* ip, int port);
 
 #endif
