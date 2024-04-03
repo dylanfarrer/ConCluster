@@ -30,7 +30,7 @@ TEST_F(SocketTest, SendAndReceiveOnSocket) {
     std::thread server_thread([&]() {
         char* endpoints[] = {(char*)"endpoint1", (char*)"endpoint2"};
         FunctionPtr functions[] = {function1, function2};
-        int result = listen_on_socket(port, endpoints, functions, 2);
+        int result = listen_on_socket(port, endpoints, functions, 2, 2);
         EXPECT_EQ(result, 0);
     });
 
