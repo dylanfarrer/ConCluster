@@ -219,7 +219,7 @@ static int create_sender_socket() {
 
 	if((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("Could not create sender socket.\n");
-		return 1;
+		return -1;
 	}
     return sockfd;
 }
