@@ -39,7 +39,7 @@ char* send_and_recieve_on_socket(const char* ip,
 
 /**
  * @brief Attempt to create a new socket (AF_INET, SOCK_STREAM) and connect to the specified IP and port, then send a kill message.
- *        Only compatible with servering sockets from this hader. Socket is closed on exit.
+ *        Only compatible with server sockets from this header. Socket is closed on exit.
  * 
  * @param ip ip to connect to.
  * @param port port to connect to.
