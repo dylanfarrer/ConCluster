@@ -83,7 +83,6 @@ int listen_on_socket(int port,
             close_socket(listener_socket);
         }
     }
-    close_socket(listener_socket);
     return 0;
 }
 
@@ -225,7 +224,7 @@ static int create_sender_socket() {
 }
 
 static void close_socket(int socket_fd) {
-    if (close(socket_fd) < 0) {
+    if (close(socket_fd) != 0) {
         if (errno == EBADF) {
             printf("Error: Bad file descriptor when closing socket.\n");
         } else if (errno == EINTR) {
