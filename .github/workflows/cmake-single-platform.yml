@@ -17,8 +17,8 @@ jobs:
       run: cmake -B ${{github.workspace}}/build
 
     - name: Build
-      run: cd build && ./tests
+      run: cmake --build ${{github.workspace}}/build
 
     - name: Test
       working-directory: ${{github.workspace}}/build
-      run: ctest
+      run: ./tests
