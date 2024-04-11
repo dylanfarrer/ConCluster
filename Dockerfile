@@ -1,10 +1,12 @@
 # build stage
-FROM alpine:latest as builder
+FROM ubuntu:latest as builder
 
-RUN apk update && \
-    apk add --no-cache \
-    build-base \
-    cmake
+#RUN apk update && \
+#    apk add --no-cache \
+#    build-base \
+#    cmake
+
+RUN apt update && apt install -y gcc clang clang-tools cmake
 
 WORKDIR /app
 
@@ -16,11 +18,14 @@ COPY test/ ./test/
 RUN mkdir build && cd build && cmake .. && make
 
 # run stage
-FROM alpine:latest
+#FROM alpine:latest
+FROM ubuntu:latest
 
-RUN apk update && \
-    apk add --no-cache \
-    libstdc++
+#RUN apk update && \
+#    apk add --no-cache \
+#    libstdc++
+
+RUN apt-get update
 
 WORKDIR /app
 

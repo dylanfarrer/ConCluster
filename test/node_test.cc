@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 extern "C" {
     #include "../include/node.h"
@@ -17,6 +18,8 @@ void* testNodeFunction(void* args) {
 
 // Test node creation and deletion
 TEST_F(NodeTest, NodeCreationAndDeletion) {
+
+    printf("At start of nodetest\n");
     // create components
     char** char_ids = (char**) malloc(3 * sizeof(char*));
     char_ids[0] = (char*) malloc(12 * sizeof(char));
@@ -161,7 +164,9 @@ TEST_F(NodeTest, NodeCreationAndDeletion) {
     node* node = create_node(id, role, address, actions, background_tasks, servers, contacts);
     ASSERT_NE(node, nullptr); // Check if node creation was successful
 
+    printf("Just before freeing\n");
+
     // Delete node
     int result = delete_node(node);
-    EXPECT_EQ(result, 0); // Check if node deletion was successful (calls all other deletes internally)
+    ASSERT_EQ(result, 0); // Check if node deletion was successful (calls all other deletes internally)
 }
