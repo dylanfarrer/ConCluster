@@ -35,6 +35,8 @@ int listen_on_socket(int port,
     int client_socket;
     socklen_t client_addr_len = sizeof(client_addr);
 
+
+    int item_sent = -1; // flag to indicate successful recieve/response in each iteration.
     while (1) {
         // Accept incoming connections
         if ((client_socket = accept(listener_socket, (struct sockaddr*)&client_addr, &client_addr_len)) < 0) {
@@ -74,9 +76,15 @@ int listen_on_socket(int port,
                     printf("Send failed\n");
                     close_socket(listener_socket);
                 }
+                item_sent = 0;
                 break;
             }
         }
+        if (item_sent == 0) {
+            item_sent = -1;
+            continue;
+        }
+
         const char* error_message = "ERR";
         if (send(client_socket, error_message, strlen(error_message), 0) < 0) {
             printf("Send failed\n");
