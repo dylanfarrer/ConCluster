@@ -10,6 +10,10 @@ node_actions* create_actions(Action* actions, int action_count) {
         return NULL;
     }
 
+    if (action_count < 0) {
+        return NULL;
+    }
+
     actions_struct->actions = malloc(sizeof(Action) * action_count);
     if (actions_struct->actions == NULL) {
         free(actions_struct);

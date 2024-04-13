@@ -26,7 +26,7 @@ typedef struct {
 /**
  * @brief Create a node_single_server struct.
  * Performs a shallow copy on the address struct.
- * if malloc fails or actions is NULL, returns NULL.
+ * if malloc fails or address is NULL, returns NULL.
  * 
  * @param address address struct to represent server addresses. Cannot be NULL.
  * @param serve void* (void*) function pointer to represent a serve mechanism.

@@ -20,7 +20,7 @@ typedef struct {
 /**
  * @brief Create an id struct.
  * Performs a deep copy on character and integer arrays.
- * If malloc fails at anypoint, cleanup is attempted and NULL is returned.
+ * If malloc fails at anypoint or either count < 0, cleanup is attempted and NULL is returned.
  * 
  * @param character_ids array of strings to add as a struct member. Assumes each string is null terminated.
  * @param integer_ids array of integers to add as a struct member.

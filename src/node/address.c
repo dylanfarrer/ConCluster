@@ -13,6 +13,11 @@ node_address* create_address(char** character_addresses,
         return NULL;
     }
 
+    if (integer_address_count < 0 || \
+        character_address_count < 0) {
+        return NULL;
+    }
+
     // plus one for null terminator
     address_struct->character_addresses = malloc(sizeof(char*) * (character_address_count + 1));
     if (address_struct->character_addresses == NULL) {

@@ -13,6 +13,11 @@ node_role* create_role(char** character_roles,
         return NULL;
     }
 
+    if (character_role_count < 0 || \
+        integer_role_count < 0) {
+        return NULL;
+    }
+
     // plus one for null terminator
     role_struct->character_roles = malloc(sizeof(char*) * (character_role_count + 1));
     if (role_struct->character_roles == NULL) {

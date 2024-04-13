@@ -13,6 +13,11 @@ node_id* create_id(char** character_ids,
         return NULL;
     }
 
+    if (character_id_count < 0 || \
+        integer_id_count < 0) {
+        return NULL;
+    }
+
     // plus one for null terminator
     id_struct->character_ids = malloc(sizeof(char*) * (character_id_count + 1));
     if (id_struct->character_ids == NULL) {
