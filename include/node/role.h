@@ -4,14 +4,14 @@
 /**
  * @brief struct to represent a node role.
  * Provides an array of both string roles and integer roles.
- * Possible use case:
+ * Possible use cases:
  *  1.
  *      character_roles -> array of named roles
  *      integer_roles -> array of bitmap permissions related to roles
  *  2.
  *      (admin use case?)
  *      character_roles -> array of all possible roles
- *      integer_roles -> array of bitmap permissions related to possible roles  
+ *      integer_roles -> array of bitmap permissions related to possible roles
  */
 typedef struct {
     char** character_roles;

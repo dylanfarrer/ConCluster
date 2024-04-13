@@ -4,7 +4,7 @@
 /**
  * @brief struct to represent a node/server id.
  * Provides an array of both string ids and integer ids.
- * Possible use case:
+ * Possible use cases:
  *  1.
  *      use arrays to store local and far identifiers for node.
  *  2.

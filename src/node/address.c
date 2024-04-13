@@ -64,11 +64,18 @@ int delete_address(node_address* address) {
         return -1;
     }
 
-    for (int i = 0; i < address->character_address_count; i++) {
-        free(address->character_addresses[i]);
+    if (address->character_addresses != NULL) {
+        for (int i = 0; i < address->character_address_count; i++) {
+            if (address->character_addresses[i] != NULL) {
+                free(address->character_addresses[i]);
+            }
+        }
+        free(address->character_addresses);
     }
-    free(address->character_addresses);
-    free(address->integer_addresses);
+
+    if (address->integer_addresses != NULL) {
+        free(address->integer_addresses);
+    }
     free(address);
     return 0;
 }

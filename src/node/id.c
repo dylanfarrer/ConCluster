@@ -64,11 +64,18 @@ int delete_id(node_id* id) {
         return -1;
     }
 
-    for (int i = 0; i < id->character_id_count; i++) {
-        free(id->character_ids[i]);
+    if (id->character_ids != NULL) {
+        for (int i = 0; i < id->character_id_count; i++) {
+            if (id->character_ids[i] != NULL) {
+                free(id->character_ids[i]);
+            }
+        }
+        free(id->character_ids);
     }
-    free(id->character_ids);
-    free(id->integer_ids);
+
+    if (id->integer_ids != NULL) {
+        free(id->integer_ids);
+    }
     free(id);
     return 0;
 }

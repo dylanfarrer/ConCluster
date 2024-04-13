@@ -4,7 +4,7 @@
 /**
  * @brief struct to represent a node/server address.
  * Provides an array of both string addresses and integer addresses.
- * Possible use case:
+ * Possible use cases:
  *  1.
  *      character_addresses -> array of IP/hostname addresses
  *      integer_addresses -> array of ports

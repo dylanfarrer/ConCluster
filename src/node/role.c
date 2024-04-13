@@ -63,11 +63,18 @@ int delete_role(node_role* role) {
         return -1;
     }
 
-    for (int i = 0; i < role->character_role_count; i++) {
-        free(role->character_roles[i]);
+    if (role->character_roles != NULL) {
+        for (int i = 0; i < role->character_role_count; i++) {
+            if (role->character_roles[i] != NULL) {
+                free(role->character_roles[i]);
+            }
+        }
+        free(role->character_roles);
     }
-    free(role->character_roles);
-    free(role->integer_roles);
+
+    if (role->integer_roles != NULL) {
+        free(role->integer_roles);
+    }
     free(role);
     return 0;
 }
