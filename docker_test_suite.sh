@@ -41,7 +41,7 @@ done
 printf "\n\nStarting Docker concluster test suite...\n"
 
 if ! docker info &>/dev/null; then
-    pritnf "\n\nDocker is not available. Exiting...\n"
+    printf "\n\nDocker is not available. Exiting...\n"
     exit 1
 fi
 
