@@ -13,7 +13,8 @@ node_address* create_address(char** character_addresses,
         return NULL;
     }
 
-    address_struct->character_addresses = malloc(sizeof(char*) * (character_address_count + 1)); // +1 for NULL termination
+    // plus one for null terminator
+    address_struct->character_addresses = malloc(sizeof(char*) * (character_address_count + 1));
     if (address_struct->character_addresses == NULL) {
         free(address_struct);
         return NULL;
@@ -21,7 +22,7 @@ node_address* create_address(char** character_addresses,
 
     for (int i = 0; i < character_address_count; i++) {
         size_t len = strlen(character_addresses[i]);
-        address_struct->character_addresses[i] = malloc(len + 1); // +1 for NULL termination
+        address_struct->character_addresses[i] = malloc(len + 1);
         if (address_struct->character_addresses[i] == NULL) {
             for (int j = 0; j < i; j++) {
                 free(address_struct->character_addresses[j]);
@@ -32,6 +33,7 @@ node_address* create_address(char** character_addresses,
         }
         strcpy(address_struct->character_addresses[i], character_addresses[i]);
     }
+    // null terminate
     address_struct->character_addresses[character_address_count] = NULL;
 
     address_struct->integer_addresses = malloc(sizeof(int) * integer_address_count);
@@ -51,12 +53,16 @@ node_address* create_address(char** character_addresses,
     return address_struct;
 }
 
-
-
 int delete_address(node_address* address) {
     if (address == NULL) {
         return 0;
     }
+
+    if (address->integer_address_count < 0 || \
+        address->character_address_count < 0) {
+        return -1;
+    }
+
     for (int i = 0; i < address->character_address_count; i++) {
         free(address->character_addresses[i]);
     }
@@ -65,4 +71,3 @@ int delete_address(node_address* address) {
     free(address);
     return 0;
 }
-

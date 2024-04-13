@@ -12,13 +12,8 @@ protected:
     void TearDown() override {}
 };
 
-void* testNodeFunction(void* args) {
-    return nullptr;
-}
-
 // Test address creation and deletion
 TEST_F(AddressTest, AddressCreationAndDeletion) {
-    
     // create components
     char** char_addresses = (char**) malloc(3 * sizeof(char*));
     char_addresses[0] = (char*) malloc(12 * sizeof(char));
@@ -35,7 +30,10 @@ TEST_F(AddressTest, AddressCreationAndDeletion) {
 
     int char_address_count = 3;
     int integer_address_count = 3;
-    node_address* address = create_address(char_addresses, integer_addresses, char_address_count, integer_address_count);
+    node_address* address = create_address(char_addresses,
+                                           integer_addresses,
+                                           char_address_count,
+                                           integer_address_count);
     ASSERT_NE(address, nullptr);
 
     int result = delete_address(address);
