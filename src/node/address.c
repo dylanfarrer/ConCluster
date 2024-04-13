@@ -21,8 +21,9 @@ node_address* create_address(char** character_addresses,
     }
 
     for (int i = 0; i < character_address_count; i++) {
-        size_t len = strlen(character_addresses[i]);
-        address_struct->character_addresses[i] = malloc(len + 1);
+        size_t address_len = strlen(character_addresses[i]);
+        // sizeof(char) is always 1
+        address_struct->character_addresses[i] = malloc(address_len + 1);
         if (address_struct->character_addresses[i] == NULL) {
             for (int j = 0; j < i; j++) {
                 free(address_struct->character_addresses[j]);
