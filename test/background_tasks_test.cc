@@ -6,7 +6,7 @@ extern "C" {
     #include "../include/node/background_tasks.h"
 }
 
-class BackgrondTasksTest : public ::testing::Test {
+class BackgroundTasksTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
@@ -29,7 +29,7 @@ static void* TestFunctionSchedule(void* value) {
 }
 
 // Test background_tasks creation and deletion
-TEST_F(BackgrondTasksTest, BackgroundTasksCreationAndDeletion) {
+TEST_F(BackgroundTasksTest, BackgroundTasksCreationAndDeletion) {
     // create components
     Action* actions_array = (Action*) malloc(3 * sizeof(Action));
     actions_array[0] = &TestFunctionOne;
