@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <memory.h>
 
 node_actions* create_actions(Action* actions, int action_count) {
     node_actions* actions_struct = malloc(sizeof(node_actions));
