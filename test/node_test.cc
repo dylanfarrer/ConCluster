@@ -1,0 +1,222 @@
+#include <gtest/gtest.h>
+#include <stdlib.h>
+
+extern "C" {
+    #include "../include/node/node.h"
+}
+
+class NodeTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+static void* TestFunctionOne(void* value) {
+    return nullptr;
+}
+
+static void* TestFunctionTwo(void* value) {
+    return nullptr;
+}
+
+static void* TestFunctionThree(void* value) {
+    return nullptr;
+}
+
+static void* TestFunctionSchedule(void* value) {
+    return nullptr;
+}
+
+static void* TestFunctionServe(void* value) {
+    return nullptr;
+}
+
+static node_id* create_id_struct() {
+    char** char_ids = (char**) malloc(3 * sizeof(char*));
+    char_ids[0] = (char*) malloc(12 * sizeof(char));
+    char_ids[1] = (char*) malloc(12 * sizeof(char));
+    char_ids[2] = (char*) malloc(12 * sizeof(char));
+    strcpy(char_ids[0], "hello world");
+    strcpy(char_ids[1], "hello world");
+    strcpy(char_ids[2], "hello world");
+
+    int* integer_ids = (int*) malloc(3 * sizeof(int));
+    integer_ids[0] = 1;
+    integer_ids[1] = 2;
+    integer_ids[2] = 3;
+
+    int char_id_count = 3;
+    int integer_id_count = 3;
+    node_id* id = create_id(char_ids,
+                            integer_ids,
+                            char_id_count,
+                            integer_id_count);
+
+    free(integer_ids);
+    free(char_ids[0]);
+    free(char_ids[1]);
+    free(char_ids[2]);
+    free(char_ids);
+
+    return id;
+}
+
+static node_role* create_role_struct() {
+    char** char_roles = (char**) malloc(3 * sizeof(char*));
+    char_roles[0] = (char*) malloc(12 * sizeof(char));
+    char_roles[1] = (char*) malloc(12 * sizeof(char));
+    char_roles[2] = (char*) malloc(12 * sizeof(char));
+    strcpy(char_roles[0], "hello world");
+    strcpy(char_roles[1], "hello world");
+    strcpy(char_roles[2], "hello world");
+
+    int* integer_roles = (int*) malloc(3 * sizeof(int));
+    integer_roles[0] = 1;
+    integer_roles[1] = 2;
+    integer_roles[2] = 3;
+
+    int char_role_count = 3;
+    int integer_role_count = 3;
+    node_role* role = create_role(char_roles,
+                                  integer_roles,
+                                  char_role_count,
+                                  integer_role_count);
+
+    free(integer_roles);
+    free(char_roles[0]);
+    free(char_roles[1]);
+    free(char_roles[2]);
+    free(char_roles);
+
+    return role;
+}
+
+static node_address* create_address_struct() {
+    char** char_addresses = (char**) malloc(3 * sizeof(char*));
+    char_addresses[0] = (char*) malloc(12 * sizeof(char));
+    char_addresses[1] = (char*) malloc(12 * sizeof(char));
+    char_addresses[2] = (char*) malloc(12 * sizeof(char));
+    strcpy(char_addresses[0], "hello world");
+    strcpy(char_addresses[1], "hello world");
+    strcpy(char_addresses[2], "hello world");
+
+    int* integer_addresses = (int*) malloc(3 * sizeof(int));
+    integer_addresses[0] = 1;
+    integer_addresses[1] = 2;
+    integer_addresses[2] = 3;
+
+    int char_address_count = 3;
+    int integer_address_count = 3;
+    node_address* address = create_address(char_addresses,
+                                           integer_addresses,
+                                           char_address_count,
+                                           integer_address_count);
+    
+    free(integer_addresses);
+    free(char_addresses[0]);
+    free(char_addresses[1]);
+    free(char_addresses[2]);
+    free(char_addresses);
+
+    return address;
+}
+
+static node_actions* create_actions_struct() {
+    Action* actions_array = (Action*) malloc(3 * sizeof(Action));
+    actions_array[0] = &TestFunctionOne;
+    actions_array[1] = &TestFunctionTwo;
+    actions_array[2] = &TestFunctionThree;
+
+    int action_count = 3;
+
+    node_actions* actions = create_actions(actions_array, action_count);
+
+    free(actions_array);
+    return actions;
+}
+
+static node_background_tasks* create_background_tasks_struct() {
+    return create_background_tasks(create_actions_struct(), &TestFunctionSchedule);
+}
+
+static node_servers* create_servers_struct() {
+    char** char_addresses = (char**) malloc(3 * sizeof(char*));
+    char_addresses[0] = (char*) malloc(12 * sizeof(char));
+    char_addresses[1] = (char*) malloc(12 * sizeof(char));
+    char_addresses[2] = (char*) malloc(12 * sizeof(char));
+    strcpy(char_addresses[0], "hello world");
+    strcpy(char_addresses[1], "hello world");
+    strcpy(char_addresses[2], "hello world");
+
+    int* integer_addresses = (int*) malloc(3 * sizeof(int));
+    integer_addresses[0] = 1;
+    integer_addresses[1] = 2;
+    integer_addresses[2] = 3;
+
+    int char_address_count = 3;
+    int integer_address_count = 3;
+
+    node_address* address = create_address(char_addresses,
+                                           integer_addresses,
+                                           char_address_count,
+                                           integer_address_count);
+
+    node_single_server* single_server_one = create_single_server(address, &TestFunctionServe);
+
+    node_address* address_two = create_address(char_addresses,
+                                           integer_addresses,
+                                           char_address_count,
+                                           integer_address_count);
+
+    node_single_server* single_server_two = create_single_server(address_two, &TestFunctionServe);
+
+    node_single_server** server_array = (node_single_server**) malloc(sizeof(node_single_server*) * 2);
+    server_array[0] = single_server_one;
+    server_array[1] = single_server_two;
+
+    int server_count = 2;
+
+    node_servers* servers = create_servers(server_array, server_count);
+
+    free(server_array);
+    free(integer_addresses);
+    free(char_addresses[0]);
+    free(char_addresses[1]);
+    free(char_addresses[2]);
+    free(char_addresses);
+
+    return servers;
+}
+
+static node_contacts* create_contacts_struct() {
+    node_address* address_one = create_address_struct();
+    node_address* address_two = create_address_struct();
+
+
+    node_address** address_array = (node_address**) malloc(sizeof(node_address*) * 2);
+    address_array[0] = address_one;
+    address_array[1] = address_two;
+
+    int address_count = 2;
+
+    node_contacts* contacts = create_contacts(address_array, address_count);
+
+    free(address_array);
+
+    return contacts;
+}
+
+// Test node creation and deletion
+TEST_F(NodeTest, NodeCreationAndDeletion) {
+    node* node_struct = create_node(create_id_struct(),
+                                    create_role_struct(),
+                                    create_address_struct(),
+                                    create_actions_struct(),
+                                    create_background_tasks_struct(),
+                                    create_servers_struct(),
+                                    create_contacts_struct());
+    ASSERT_NE(node_struct, nullptr);
+
+    int result = delete_node(node_struct);
+    ASSERT_EQ(result, 0);
+}
