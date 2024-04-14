@@ -3,7 +3,7 @@
 #include <chrono>
 
 extern "C" {
-    #include "../include/socket_handler.h"
+    #include "../examples/utils/include/socket_handler.h"
 }
 
 class SocketTest : public ::testing::Test {

@@ -12,6 +12,7 @@ WORKDIR /app
 COPY CMakeLists.txt .
 COPY include/ ./include/
 COPY src/ ./src/
+COPY examples/ ./examples/
 COPY test/ ./test/
 
 RUN mkdir build && cd build && cmake .. && make

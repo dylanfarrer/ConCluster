@@ -1,14 +1,14 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "id.h"
-#include "role.h"
-#include "address.h"
-#include "actions.h"
-#include "background_tasks.h"
-#include "servers.h"
-#include "single_server.h"
-#include "contacts.h"
+#include "node/id.h"
+#include "node/role.h"
+#include "node/address.h"
+#include "node/actions.h"
+#include "node/background_tasks.h"
+#include "node/servers.h"
+#include "node/single_server.h"
+#include "node/contacts.h"
 
 /**
  * @brief struct to represent a single node, designed to hold all the traits

@@ -4,7 +4,7 @@
 #define N_THREADS 10
 
 extern "C" {
-    #include "../include/thread_handler.h"
+    #include "../examples/utils/include/thread_handler.h"
 }
 
 class ThreadTest : public ::testing::Test {

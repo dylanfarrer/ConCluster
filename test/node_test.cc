@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 extern "C" {
-    #include "../include/node/node.h"
+    #include "../include/node.h"
 }
 
 class NodeTest : public ::testing::Test {

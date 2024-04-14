@@ -21,7 +21,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-file(GLOB_RECURSE TEST_SOURCES "test/*.cc" "src/*.c" "src/node/*.c")
+file(GLOB_RECURSE TEST_SOURCES "test/*.cc" "src/*.c" "src/node/*.c" "examples/*/*.c")
 add_executable(tests ${TEST_SOURCES})
 target_link_libraries(tests gtest_main)
 target_include_directories(tests PRIVATE include Threads::Threads)
