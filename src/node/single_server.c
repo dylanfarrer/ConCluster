@@ -1,7 +1,6 @@
 #include "../../include/node/single_server.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <memory.h>
 
 node_single_server* create_single_server(node_address* address,

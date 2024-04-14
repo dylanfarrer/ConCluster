@@ -1,20 +1,22 @@
 #include "../../include/node/address.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 node_address* create_address(char** character_addresses,
                              int* integer_addresses,
                              int character_address_count,
                              int integer_address_count) {
-    node_address* address_struct = malloc(sizeof(node_address));
-    if (address_struct == NULL) {
+    
+    if (character_addresses == NULL || \
+        integer_addresses == NULL || \
+        integer_address_count < 1 || \
+        character_address_count < 1) {
         return NULL;
     }
-
-    if (integer_address_count < 0 || \
-        character_address_count < 0) {
+    
+    node_address* address_struct = malloc(sizeof(node_address));
+    if (address_struct == NULL) {
         return NULL;
     }
 

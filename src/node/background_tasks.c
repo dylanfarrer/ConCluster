@@ -1,7 +1,6 @@
 #include "../../include/node/background_tasks.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <memory.h>
 
 node_background_tasks* create_background_tasks(node_actions* actions,

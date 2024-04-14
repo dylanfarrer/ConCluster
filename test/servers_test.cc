@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 extern "C" {
     #include "../include/node/servers.h"
@@ -16,7 +15,7 @@ static void* TestFunctionServe(void* value) {
     return nullptr;
 }
 
-// Test background_tasks creation and deletion
+// Test Servers creation and deletion
 TEST_F(ServersTest, ServersCreationAndDeletion) {
     // create components
     // create two servers

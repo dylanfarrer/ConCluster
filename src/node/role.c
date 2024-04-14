@@ -1,20 +1,21 @@
 #include "../../include/node/role.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 node_role* create_role(char** character_roles,
                        int* integer_roles,
                        int character_role_count,
                        int integer_role_count) {
-    node_role* role_struct = malloc(sizeof(node_role));
-    if (role_struct == NULL) {
+    if (character_roles == NULL || \
+        integer_roles == NULL || \
+        character_role_count < 1 || \
+        integer_role_count < 1) {
         return NULL;
     }
 
-    if (character_role_count < 0 || \
-        integer_role_count < 0) {
+    node_role* role_struct = malloc(sizeof(node_role));
+    if (role_struct == NULL) {
         return NULL;
     }
 

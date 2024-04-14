@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 extern "C" {
     #include "../include/node/background_tasks.h"

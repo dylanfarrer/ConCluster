@@ -2,22 +2,19 @@
 #include <stdlib.h>
 
 extern "C" {
-    #include "../include/node/single_server.h"
+    #include "../include/node/contacts.h"
 }
 
-class SingleServerTest : public ::testing::Test {
+class ContactsTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
 };
 
-static void* TestFunctionServe(void* value) {
-    return nullptr;
-}
-
-// Test background_tasks creation and deletion
-TEST_F(SingleServerTest, SingleServerCreationAndDeletion) {
+// Test contacts creation and deletion
+TEST_F(ContactsTest, ContactsCreationAndDeletion) {
     // create components
+    // create several address structs
     char** char_addresses = (char**) malloc(3 * sizeof(char*));
     char_addresses[0] = (char*) malloc(12 * sizeof(char));
     char_addresses[1] = (char*) malloc(12 * sizeof(char));
@@ -34,20 +31,32 @@ TEST_F(SingleServerTest, SingleServerCreationAndDeletion) {
     int char_address_count = 3;
     int integer_address_count = 3;
 
-    // create address and assert successful creation
-    node_address* address = create_address(char_addresses,
+    node_address* address_one = create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
-    ASSERT_NE(address, nullptr);
+    ASSERT_NE(address_one, nullptr);
+
+    node_address* address_two = create_address(char_addresses,
+                                               integer_addresses,
+                                               char_address_count,
+                                               integer_address_count);
+    ASSERT_NE(address_two, nullptr);
 
 
-    node_single_server* single_server = create_single_server(address, &TestFunctionServe);
-    ASSERT_NE(single_server, nullptr);
+    node_address** address_array = (node_address**) malloc(sizeof(node_address*) * 2);
+    address_array[0] = address_one;
+    address_array[1] = address_two;
 
-    int result = delete_single_server(single_server);
+    int address_count = 2;
+
+    node_contacts* contacts = create_contacts(address_array, address_count);
+    ASSERT_NE(contacts, nullptr);
+
+    int result = delete_contacts(contacts);
     ASSERT_EQ(result, 0);
 
+    free(address_array);
     free(integer_addresses);
     free(char_addresses[0]);
     free(char_addresses[1]);

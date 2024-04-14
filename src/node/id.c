@@ -1,20 +1,21 @@
 #include "../../include/node/id.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 node_id* create_id(char** character_ids,
                    int* integer_ids,
                    int character_id_count,
                    int integer_id_count) {
-    node_id* id_struct = malloc(sizeof(node_id));
-    if (id_struct == NULL) {
+    if (character_ids == NULL || \
+        integer_ids == NULL || \
+        character_id_count < 1 || \
+        integer_id_count < 1) {
         return NULL;
     }
 
-    if (character_id_count < 0 || \
-        integer_id_count < 0) {
+    node_id* id_struct = malloc(sizeof(node_id));
+    if (id_struct == NULL) {
         return NULL;
     }
 

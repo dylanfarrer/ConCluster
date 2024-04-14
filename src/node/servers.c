@@ -1,15 +1,10 @@
 #include "../../include/node/servers.h"
 
 #include <stdlib.h>
-#include <stdio.h>
 #include <memory.h>
 
 node_servers* create_servers(node_single_server** servers, int server_count) {
-    if (servers == NULL) {
-        return NULL;
-    }
-
-    if (server_count < 0) {
+    if (servers == NULL || server_count < 0) {
         return NULL;
     }
 
@@ -24,7 +19,8 @@ node_servers* create_servers(node_single_server** servers, int server_count) {
         return NULL;
     }
 
-    servers_struct->servers = malloc(sizeof(node_single_server*) * server_count);
+    // plus one for null terminator
+    servers_struct->servers = malloc(sizeof(node_single_server*) * (server_count + 1));
     if (servers_struct->servers == NULL) {
         free(servers_struct);
         return NULL;
@@ -33,6 +29,9 @@ node_servers* create_servers(node_single_server** servers, int server_count) {
     for (int i = 0; i < server_count; i++) {
         servers_struct->servers[i] = servers[i];
     }
+
+    // null terminate
+    servers_struct->servers[server_count] = NULL;
 
     servers_struct->server_count = server_count;
     return servers_struct;
