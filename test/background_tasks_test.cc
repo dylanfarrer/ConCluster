@@ -49,3 +49,11 @@ TEST_F(BackgroundTasksTest, BackgroundTasksCreationAndDeletion) {
 
     free(actions_array);
 }
+
+TEST_F(BackgroundTasksTest, BackgroundNULLTasksCreationAndDeletion) {
+    node_background_tasks* background_tasks = create_background_tasks(nullptr, nullptr);
+    ASSERT_NE(background_tasks, nullptr);
+    
+    int result = delete_background_tasks(background_tasks);
+    ASSERT_EQ(result, 0);
+}

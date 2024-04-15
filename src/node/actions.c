@@ -4,7 +4,7 @@
 #include <memory.h>
 
 node_actions* create_actions(Action* actions, int action_count) {
-    if (actions == NULL || action_count < 1) {
+    if (action_count < 0) {
         return NULL;
     }
 
@@ -12,8 +12,21 @@ node_actions* create_actions(Action* actions, int action_count) {
     if (actions_struct == NULL) {
         return NULL;
     }
-    
-    actions_struct->actions = malloc(sizeof(Action) * action_count );
+
+    if (actions == NULL) {
+        actions_struct->actions = NULL;
+        actions_struct->action_count = 0;
+        return actions_struct;
+    }
+
+    // although pointer array length cannot directly be determined,
+    // if count is less than one, it is not representative of the array.
+    if (action_count < 1) {
+        free(actions_struct);
+        return NULL;
+    }
+
+    actions_struct->actions = malloc(sizeof(Action) * action_count);
     if (actions_struct->actions == NULL) {
         free(actions_struct);
         return NULL;

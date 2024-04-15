@@ -75,3 +75,11 @@ TEST_F(ServersTest, ServersCreationAndDeletion) {
     free(char_addresses[2]);
     free(char_addresses);
 }
+
+TEST_F(ServersTest, ServersNULLCreationAndDeletion) {
+    node_servers* servers = create_servers(nullptr, 0);
+    ASSERT_NE(servers, nullptr);
+
+    int result = delete_servers(servers);
+    ASSERT_EQ(result, 0);
+}

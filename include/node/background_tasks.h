@@ -26,9 +26,9 @@ typedef struct {
 /**
  * @brief Create a background tasks struct.
  * Performs a shallow copy on the actions struct.
- * if malloc fails or actions is NULL, returns NULL.
+ * if malloc fails, returns NULL.
  * 
- * @param actions actions struct to represent background tasks. Cannot be NULL.
+ * @param actions actions struct to represent background tasks.
  * @param schedule void* (void*) function pointer to represent a schedule mechanism.
  * @return node_background_tasks* struct or NULL.
  */

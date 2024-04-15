@@ -8,10 +8,8 @@ node_address* create_address(char** character_addresses,
                              int character_address_count,
                              int integer_address_count) {
     
-    if (character_addresses == NULL || \
-        integer_addresses == NULL || \
-        integer_address_count < 1 || \
-        character_address_count < 1) {
+    if (integer_address_count < 0 || \
+        character_address_count < 0) {
         return NULL;
     }
     
@@ -20,41 +18,69 @@ node_address* create_address(char** character_addresses,
         return NULL;
     }
 
-    // plus one for null terminator
-    address_struct->character_addresses = malloc(sizeof(char*) * character_address_count);
-    if (address_struct->character_addresses == NULL) {
-        free(address_struct);
-        return NULL;
+    if (character_addresses == NULL) {
+        address_struct->character_addresses = NULL;
+        address_struct->character_address_count = 0;
+    } else {
+        // although pointer array length cannot directly be determined,
+        // if count is less than one, it is not representative of the array.
+        if (character_address_count < 1) {
+            free(address_struct);
+            return NULL;
+        }
+
+        address_struct->character_addresses = malloc(sizeof(char*) * character_address_count);
+        if (address_struct->character_addresses == NULL) {
+            free(address_struct);
+            return NULL;
+        }
+
+        for (int i = 0; i < character_address_count; i++) {
+            size_t role_length = strlen(character_addresses[i]);
+            address_struct->character_addresses[i] = malloc(role_length + 1);
+            if (address_struct->character_addresses[i] == NULL) {
+                for (int j = 0; j < i; j++) {
+                    free(address_struct->character_addresses[j]);
+                }
+                free(address_struct->character_addresses);
+                free(address_struct);
+                return NULL;
+            }
+            strcpy(address_struct->character_addresses[i], character_addresses[i]);
+        }
+
+        address_struct->character_address_count = character_address_count;
     }
 
-    for (int i = 0; i < character_address_count; i++) {
-        size_t address_len = strlen(character_addresses[i]);
-        // sizeof(char) is always 1
-        address_struct->character_addresses[i] = malloc(address_len + 1);
-        if (address_struct->character_addresses[i] == NULL) {
-            for (int j = 0; j < i; j++) {
-                free(address_struct->character_addresses[j]);
+    if (integer_addresses == NULL) {
+        address_struct->integer_addresses = NULL;
+        address_struct->integer_address_count = 0;
+    } else {
+        // although pointer array length cannot directly be determined,
+        // if count is less than one, it is not representative of the array.
+        if (integer_address_count < 1) {
+            for (int i = 0; i < address_struct->character_address_count; i++) {
+                if (address_struct->character_addresses[i] != NULL) {
+                    free(address_struct->character_addresses[i]);
+                }
+            }
+            free(address_struct);
+            return NULL;
+        }
+
+        address_struct->integer_addresses = malloc(sizeof(int) * integer_address_count);
+        if (address_struct->integer_addresses == NULL) {
+            for (int i = 0; i < address_struct->character_address_count; i++) {
+                free(address_struct->character_addresses[i]);
             }
             free(address_struct->character_addresses);
             free(address_struct);
             return NULL;
         }
-        strcpy(address_struct->character_addresses[i], character_addresses[i]);
-    }
+        memcpy(address_struct->integer_addresses, integer_addresses, sizeof(int) * integer_address_count);
 
-    address_struct->integer_addresses = malloc(sizeof(int) * integer_address_count);
-    if (address_struct->integer_addresses == NULL) {
-        for (int i = 0; i < character_address_count; i++) {
-            free(address_struct->character_addresses[i]);
-        }
-        free(address_struct->character_addresses);
-        free(address_struct);
-        return NULL;
+        address_struct->integer_address_count = integer_address_count;
     }
-    memcpy(address_struct->integer_addresses, integer_addresses, sizeof(int) * integer_address_count);
-
-    address_struct->character_address_count = character_address_count;
-    address_struct->integer_address_count = integer_address_count;
 
     return address_struct;
 }

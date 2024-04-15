@@ -18,9 +18,10 @@ typedef struct {
 /**
  * @brief Create a node_address struct.
  * Creates a new address array, but shallow copies each node_address structs.
- * if malloc fails or contacts is NULL or contact_count < 0, returns NULL.
+ * if malloc fails or contact_count < 0, returns NULL.
+ * Accepts NULL array, but will not accept NULL array items in non-NULL array.
  * 
- * @param contacts set of node_address structs to represent contacts. Cannot be NULL.
+ * @param contacts set of node_address structs to represent contacts.
  * @param contact_count number of contacts, used in operations.
  * @return node_contacts* struct or NULL.
  */

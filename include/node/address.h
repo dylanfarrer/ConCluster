@@ -25,7 +25,8 @@ typedef struct {
 /**
  * @brief Create an address struct.
  * Performs a deep copy on character and integer arrays.
- * If malloc fails at anypoint or either count < 0 or either array is NULL, cleanup is attempted and NULL is returned.
+ * If malloc fails at anypoint or either count < 0, cleanup is attempted and NULL is returned.
+ * Accepts NULL arrays, but will not accept NULL array items in non-NULL arrays.
  * 
  * @param character_addresses array of strings to add as a struct member. Assumes each string is null terminated.
  * @param integer_addresses array of integers to add as a struct member.

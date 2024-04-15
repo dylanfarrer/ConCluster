@@ -41,3 +41,11 @@ TEST_F(ActionsTest, ActionsCreationAndDeletion) {
 
     free(actions_array);
 }
+
+TEST_F(ActionsTest, ActionsNULLCreationAndDeletion) {
+    node_actions* actions = create_actions(nullptr, 0);
+    ASSERT_NE(actions, nullptr);
+
+    int result = delete_actions(actions);
+    ASSERT_EQ(result, 0);
+}
