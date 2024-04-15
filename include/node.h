@@ -50,7 +50,7 @@ node* create_node(node_id* id,
 
 /**
  * @brief deletes a node struct;
- * Calls underlying delete functions for each member, if any fial, delete operation is cancelled
+ * Calls underlying delete functions for each member, if any fail, delete operation is cancelled
  * - but not recovered from.
  * 
  * @param node struct to free

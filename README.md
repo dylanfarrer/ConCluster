@@ -9,8 +9,8 @@ structures will be available within the codebase.
 
 To be filled out when ready.
 
-Current library usage is to clone the repo, point to the node.h and
-node.c files.
+Current library usage is to clone the repo, point to the cluster.h and
+cluster.c files.
 
 ## Usage
 
