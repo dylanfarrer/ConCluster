@@ -49,6 +49,26 @@ node* create_node(node_id* id,
                   node_contacts* contacts);
 
 /**
+ * @brief Create a node from copy_node struct.
+ * Performs deep copy on copy_node struct.
+ * if malloc fails or copy_node struct is NULL, return NUL.
+ * 
+ * @param copy_node node to deep copy
+ * @return node* node struct or NULL
+ */
+node* create_node_from_node(node* copy_node);
+
+/**
+ * @brief Create a node struct and populates members with default (nullified) structs.
+ * Note: members are not null, but will contain null members themselves.
+ * if malloc fails, returns NULL.
+ * Utilises create_node_from_node.
+ * 
+ * @return node* struct or NULL
+ */
+node* create_default_node();
+
+/**
  * @brief deletes a node struct;
  * Calls underlying delete functions for each member, if any fail, delete operation is cancelled
  * - but not recovered from.

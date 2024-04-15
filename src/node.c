@@ -35,6 +35,16 @@ node* create_node(node_id* id,
     return node_struct;
 }
 
+// TOOD -> implement
+node* create_node_from_node(node* copy_node) {
+    return NULL;
+}
+
+// TOOD -> implement
+node* create_default_node() {
+    return NULL;
+}
+
 int delete_node(node* node) {
     if (node == NULL) {
         return 0;
