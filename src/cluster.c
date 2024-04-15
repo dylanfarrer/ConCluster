@@ -103,7 +103,8 @@ int delete_cluster(cluster* cluster) {
     return 0;
 }
 
-int edit_cluster_node(int node_index,
+int edit_cluster_node(cluster* cluster,
+                      int node_index,
                       node_id* id,
                       node_role* role,
                       node_address* address,
@@ -114,7 +115,8 @@ int edit_cluster_node(int node_index,
                       int deep_copy) { return 0; }
 
 // has to be deep copy
-int edit_all_cluster_nodes(node_id* id,
+int edit_all_cluster_nodes(cluster* cluster,
+                           node_id* id,
                            node_role* role,
                            node_address* address,
                            node_actions* actions,
