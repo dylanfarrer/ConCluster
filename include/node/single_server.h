@@ -34,6 +34,8 @@ typedef struct {
  */
 node_single_server* create_single_server(node_address* address, void* (*serve) (void*));
 
+/* TODO node_single_server* copy_single_server(node_single_server*); */
+
 /**
  * @brief deletes a node_single_server struct.
  * Calls address function to delete address member - if this fails, delete operation cancelled.

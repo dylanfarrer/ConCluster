@@ -37,6 +37,8 @@ node_role* create_role(char** character_roles,
                        int character_role_count,
                        int integer_role_count);
 
+/* TODO node_role* copy_role(node_role*); */
+
 /**
  * @brief deletes a role struct.
  * 

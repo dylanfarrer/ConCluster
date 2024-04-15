@@ -35,6 +35,8 @@ typedef struct {
 node_background_tasks* create_background_tasks(node_actions* actions,
                                                void* (*schedule) (void*));
 
+/* TODO node_background_tasks* copy_background_tasks(node_background_tasks*); */
+
 /**
  * @brief deletes a node_background_tasks struct.
  * Calls actions function to delete actions member - if this fails, delete operation cancelled.

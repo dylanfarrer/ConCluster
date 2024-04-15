@@ -39,6 +39,8 @@ node_address* create_address(char** character_addresses,
                              int character_address_count,
                              int integer_address_count);
 
+/* TODO node_address* copy_address(node_address*); */
+
 /**
  * @brief deletes an address struct.
  * 

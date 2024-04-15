@@ -34,6 +34,8 @@ node_id* create_id(char** character_ids,
                    int character_id_count,
                    int integer_id_count);
 
+/* TODO node_id* copy_id(node_id*); */
+
 /**
  * @brief deletes an id struct.
  * 

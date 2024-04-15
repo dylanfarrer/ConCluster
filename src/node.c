@@ -35,14 +35,49 @@ node* create_node(node_id* id,
     return node_struct;
 }
 
-// TOOD -> implement
+// TODO -> implement
+// to implement this, a copy function must be implemented for each node member
 node* create_node_from_node(node* copy_node) {
     return NULL;
 }
 
-// TOOD -> implement
 node* create_default_node() {
-    return NULL;
+    node_id* id = create_id(NULL, NULL, 0, 0);
+    if (id == NULL) {
+        return NULL;
+    }
+
+    node_role* role = create_role(NULL, NULL, 0, 0);
+    if (role == NULL) {
+        return NULL;
+    }
+
+    node_address* address = create_address(NULL, NULL, 0, 0);
+    if (address == NULL) {
+        return NULL;
+    }
+
+    node_actions* actions = create_actions(NULL, 0);
+    if (actions == NULL) {
+        return NULL;
+    }
+
+    node_background_tasks* background_tasks = create_background_tasks(NULL, NULL);
+    if (background_tasks == NULL) {
+        return NULL;
+    }
+
+    node_servers* servers = create_servers(NULL, 0);
+    if (servers == NULL) {
+        return NULL;
+    }
+
+    node_contacts* contacts = create_contacts(NULL, 0);
+    if (contacts == NULL) {
+        return NULL;
+    }
+
+    return create_node(id, role, address, actions, background_tasks, servers, contacts);
 }
 
 int delete_node(node* node) {

@@ -34,6 +34,8 @@ typedef struct {
  */
 node_actions* create_actions(Action* actions, int action_count);
 
+/* TODO node_actions* copy_actions(node_actions*); */
+
 /**
  * @brief deletes an actions struct.
  * 

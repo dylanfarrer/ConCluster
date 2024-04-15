@@ -27,6 +27,8 @@ typedef struct {
  */
 node_contacts* create_contacts(node_address** contacts, int contact_count);
 
+/* TODO node_contacts* copy_contacts(node_contacts*); */
+
 /**
  * @brief deletes a node_contacts struct.
  * Calls node_address function to delete node_address member - if this fails, delete operation cancelled.

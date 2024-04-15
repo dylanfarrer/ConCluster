@@ -27,6 +27,8 @@ typedef struct {
  */
 node_servers* create_servers(node_single_server** servers, int server_count);
 
+/* TODO node_servers* copy_servers(node_servers*); */
+
 /**
  * @brief deletes a node_servers struct.
  * Calls single_server function to delete single_server member - if this fails, delete operation cancelled.
