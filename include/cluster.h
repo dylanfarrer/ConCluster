@@ -39,6 +39,7 @@ cluster* create_cluster_from_node(node* copy_node, int node_count);
 /**
  * @brief Create a cluster of population node_count from default node struct.
  * if malloc fails or node_count is negative, returns NULL.
+ * utilises create_cluster_from_node
  * 
  * @param node_count number of nodes to have in struct.
  * @return cluster* cluster struct or NULL.
@@ -49,10 +50,28 @@ cluster* create_cluster_from_default_node(int node_count);
  * @brief deletes a cluster struct.
  * Calls underlying delete function for node, if any fail, delete operation is cancelled.
  * 
- * 
  * @param cluster struct to free.
  * @return int 0 on success, -1 on failure.
  */
 int delete_cluster(cluster* cluster);
+
+int edit_cluster_node(int node_index,
+                      node_id* id,
+                      node_role* role,
+                      node_address* address,
+                      node_actions* actions,
+                      node_background_tasks* background_tasks,
+                      node_servers* servers,
+                      node_contacts* contacts,
+                      int deep_copy);
+
+// has to be deep copy
+int edit_all_cluster_nodes(node_id* id,
+                           node_role* role,
+                           node_address* address,
+                           node_actions* actions,
+                           node_background_tasks* background_tasks,
+                           node_servers* servers,
+                           node_contacts* contacts);
 
 #endif

@@ -102,3 +102,22 @@ int delete_cluster(cluster* cluster) {
     free(cluster);
     return 0;
 }
+
+int edit_cluster_node(int node_index,
+                      node_id* id,
+                      node_role* role,
+                      node_address* address,
+                      node_actions* actions,
+                      node_background_tasks* background_tasks,
+                      node_servers* servers,
+                      node_contacts* contacts,
+                      int deep_copy) { return 0; }
+
+// has to be deep copy
+int edit_all_cluster_nodes(node_id* id,
+                           node_role* role,
+                           node_address* address,
+                           node_actions* actions,
+                           node_background_tasks* background_tasks,
+                           node_servers* servers,
+                           node_contacts* contacts) { return 0; }

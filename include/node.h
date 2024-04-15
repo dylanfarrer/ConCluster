@@ -62,7 +62,6 @@ node* create_node_from_node(node* copy_node);
  * @brief Create a node struct and populates members with default (nullified) structs.
  * Note: members are not null, but will contain null members themselves.
  * if malloc fails, returns NULL.
- * Utilises create_node_from_node.
  * 
  * @return node* struct or NULL
  */
@@ -77,5 +76,32 @@ node* create_default_node();
  * @return int 0 on success, -1 on failure.
  */
 int delete_node(node* node);
+
+
+/**
+ * @brief Edits a node struct in place.
+ * If deep_copy is 0, a deep copy is performed, else the struct members are 
+ * shallow copied.
+ * Any member argument that is not required to change should be NULL.
+ * If edit fails, -1 is returned.
+ * 
+ * @param id 
+ * @param role 
+ * @param address 
+ * @param actions 
+ * @param background_tasks 
+ * @param servers 
+ * @param contacts 
+ * @param deep_copy 
+ * @return int 0 on success, -1 on failure.
+ */
+int edit_node(node_id* id,
+              node_role* role,
+              node_address* address,
+              node_actions* actions,
+              node_background_tasks* background_tasks,
+              node_servers* servers,
+              node_contacts* contacts,
+              int deep_copy);
 
 #endif
