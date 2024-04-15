@@ -44,3 +44,11 @@ TEST_F(AddressTest, AddressCreationAndDeletion) {
     free(char_addresses[2]);
     free(char_addresses);
 }
+
+TEST_F(AddressTest, AddressNULLCreationAndDeletion) {
+    node_address* address = create_address(nullptr, nullptr, 0, 0);
+    ASSERT_NE(address, nullptr);
+
+    int result = delete_address(address);
+    ASSERT_EQ(result, 0);
+}

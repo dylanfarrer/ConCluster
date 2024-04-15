@@ -7,9 +7,7 @@ node_role* create_role(char** character_roles,
                        int* integer_roles,
                        int character_role_count,
                        int integer_role_count) {
-    if (character_roles == NULL || \
-        integer_roles == NULL || \
-        character_role_count < 0 || \
+    if (character_role_count < 0 || \
         integer_role_count < 0) {
         return NULL;
     }

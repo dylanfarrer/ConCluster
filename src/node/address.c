@@ -8,9 +8,7 @@ node_address* create_address(char** character_addresses,
                              int character_address_count,
                              int integer_address_count) {
     
-    if (character_addresses == NULL || \
-        integer_addresses == NULL || \
-        integer_address_count < 0 || \
+    if (integer_address_count < 0 || \
         character_address_count < 0) {
         return NULL;
     }

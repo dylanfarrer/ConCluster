@@ -44,3 +44,14 @@ TEST_F(RoleTest, RoleCreationAndDeletion) {
     free(char_roles[2]);
     free(char_roles);
 }
+
+TEST_F(RoleTest, RoleNULLCreationAndDeletion) {
+    node_role* role = create_role(nullptr,
+                                  nullptr,
+                                  0,
+                                  0);
+    ASSERT_NE(role, nullptr);
+
+    int result = delete_role(role);
+    ASSERT_EQ(result, 0);
+}

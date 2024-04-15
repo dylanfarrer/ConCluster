@@ -54,3 +54,11 @@ TEST_F(SingleServerTest, SingleServerCreationAndDeletion) {
     free(char_addresses[2]);
     free(char_addresses);
 }
+
+TEST_F(SingleServerTest, SingleServerNULLCreationAndDeletion) {
+    node_single_server* single_server = create_single_server(nullptr, nullptr);
+    ASSERT_NE(single_server, nullptr);
+
+    int result = delete_single_server(single_server);
+    ASSERT_EQ(result, 0);
+}

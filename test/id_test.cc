@@ -44,3 +44,14 @@ TEST_F(IdTest, IdCreationAndDeletion) {
     free(char_ids[2]);
     free(char_ids);
 }
+
+TEST_F(IdTest, IdNULLCreationAndDeletion) {
+    node_id* id = create_id(nullptr,
+                            nullptr,
+                            0,
+                            0);
+    ASSERT_NE(id, nullptr);
+
+    int result = delete_id(id);
+    ASSERT_EQ(result, 0);
+}

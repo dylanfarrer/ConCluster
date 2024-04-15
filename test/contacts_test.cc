@@ -63,3 +63,11 @@ TEST_F(ContactsTest, ContactsCreationAndDeletion) {
     free(char_addresses[2]);
     free(char_addresses);
 }
+
+TEST_F(ContactsTest, ContactsNULLCreationAndDeletion) {
+    node_contacts* contacts = create_contacts(nullptr, 0);
+    ASSERT_NE(contacts, nullptr);
+
+    int result = delete_contacts(contacts);
+    ASSERT_EQ(result, 0);
+}

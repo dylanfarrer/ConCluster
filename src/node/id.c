@@ -7,9 +7,7 @@ node_id* create_id(char** character_ids,
                    int* integer_ids,
                    int character_id_count,
                    int integer_id_count) {
-    if (character_ids == NULL || \
-        integer_ids == NULL || \
-        character_id_count < 0 || \
+    if (character_id_count < 0 || \
         integer_id_count < 0) {
         return NULL;
     }
