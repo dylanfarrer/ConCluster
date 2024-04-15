@@ -21,7 +21,7 @@ node_address* create_address(char** character_addresses,
     }
 
     // plus one for null terminator
-    address_struct->character_addresses = malloc(sizeof(char*) * (character_address_count + 1));
+    address_struct->character_addresses = malloc(sizeof(char*) * character_address_count);
     if (address_struct->character_addresses == NULL) {
         free(address_struct);
         return NULL;
@@ -41,8 +41,6 @@ node_address* create_address(char** character_addresses,
         }
         strcpy(address_struct->character_addresses[i], character_addresses[i]);
     }
-    // null terminate
-    address_struct->character_addresses[character_address_count] = NULL;
 
     address_struct->integer_addresses = malloc(sizeof(int) * integer_address_count);
     if (address_struct->integer_addresses == NULL) {

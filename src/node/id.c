@@ -19,8 +19,7 @@ node_id* create_id(char** character_ids,
         return NULL;
     }
 
-    // plus one for null terminator
-    id_struct->character_ids = malloc(sizeof(char*) * (character_id_count + 1));
+    id_struct->character_ids = malloc(sizeof(char*) * character_id_count);
     if (id_struct->character_ids == NULL) {
         free(id_struct);
         return NULL;
@@ -40,8 +39,6 @@ node_id* create_id(char** character_ids,
         }
         strcpy(id_struct->character_ids[i], character_ids[i]);
     }
-    // null terminate
-    id_struct->character_ids[character_id_count] = NULL;
 
     id_struct->integer_ids = malloc(sizeof(int) * integer_id_count);
     if (id_struct->integer_ids == NULL) {
