@@ -2,7 +2,7 @@
 
 ConCluster is a C library (under-development) for simplifying the creation of multi-agent systems.
 It will provide Cluster and Node structures that attempt to make little to no assumptions about the
-system they will integrated into. Additionally, example systems that utilise the Cluster and Node
+system they will be integrated into. Additionally, example systems that utilise the Cluster and Node
 structures will be available within the codebase.
 
 ## Installation
