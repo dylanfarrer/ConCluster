@@ -19,8 +19,7 @@ node_role* create_role(char** character_roles,
         return NULL;
     }
 
-    // plus one for null terminator
-    role_struct->character_roles = malloc(sizeof(char*) * (character_role_count + 1));
+    role_struct->character_roles = malloc(sizeof(char*) * character_role_count);
     if (role_struct->character_roles == NULL) {
         free(role_struct);
         return NULL;
@@ -38,9 +37,7 @@ node_role* create_role(char** character_roles,
             return NULL;
         }
         strcpy(role_struct->character_roles[i], character_roles[i]);
-    }
-    // null terminate
-    role_struct->character_roles[character_role_count] = NULL; 
+    } 
 
     role_struct->integer_roles = malloc(sizeof(int) * integer_role_count);
     if (role_struct->integer_roles == NULL) {

@@ -4,7 +4,7 @@
 #include <memory.h>
 
 node_contacts* create_contacts(node_address** contacts, int contact_count) {
-    if (contacts == NULL || contact_count < 0) {
+    if (contacts == NULL || contact_count < 1) {
         return NULL;
     }
 

@@ -4,7 +4,7 @@
 #include <memory.h>
 
 node_actions* create_actions(Action* actions, int action_count) {
-    if (actions == NULL || action_count < 0) {
+    if (actions == NULL || action_count < 1) {
         return NULL;
     }
 
@@ -13,16 +13,12 @@ node_actions* create_actions(Action* actions, int action_count) {
         return NULL;
     }
     
-    // plus one for null terminator
-    actions_struct->actions = malloc(sizeof(Action) * (action_count + 1));
+    actions_struct->actions = malloc(sizeof(Action) * action_count );
     if (actions_struct->actions == NULL) {
         free(actions_struct);
         return NULL;
     }
     memcpy(actions_struct->actions, actions, sizeof(Action) * action_count);
-
-    // null terminate
-    actions_struct->actions[action_count] = NULL;
 
     actions_struct->action_count = action_count;
 
