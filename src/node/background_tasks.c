@@ -5,10 +5,6 @@
 
 node_background_tasks* create_background_tasks(node_actions* actions,
                                                void* (*schedule) (void*)) {
-    if (actions == NULL) {
-        return NULL;
-    }
-
     node_background_tasks* background_tasks = malloc(sizeof(node_background_tasks));
     if (background_tasks == NULL) {
         return NULL;
@@ -28,12 +24,10 @@ int delete_background_tasks(node_background_tasks* background_tasks) {
         return 0;
     }
 
-    if (background_tasks->actions != NULL) {
-        // call action-specific function
-        if (delete_actions(background_tasks->actions) != 0) {
-            // if inner member delete failed, stop
-            return -1;
-        }
+    // call address-specific function
+    if (delete_actions(background_tasks->actions) != 0) {
+        // if inner member delete failed, stop
+        return -1;
     }
 
     free(background_tasks);

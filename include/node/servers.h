@@ -18,9 +18,10 @@ typedef struct {
 /**
  * @brief Create a node_servers struct.
  * Creates a new server array, but shallow copies each node_single_server structs.
- * if malloc fails or servers is NULL or server_count < 0, returns NULL.
+ * if malloc fails or server_count < 0, returns NULL.
+ * Accepts NULL array, but will not accept NULL array items in non-NULL array.
  * 
- * @param servers set of node_single_server structs to represent servers. Cannot be NULL.
+ * @param servers set of node_single_server structs to represent servers.
  * @param server_count number of servers, used in operations.
  * @return node_servers* struct or NULL.
  */

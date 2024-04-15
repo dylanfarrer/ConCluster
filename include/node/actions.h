@@ -26,9 +26,9 @@ typedef struct {
 /**
  * @brief Create an actions struct.
  * Performs a deep copy on the actions array.
- * If malloc fails at anypoint or action_count < 0 or actions is NULL, cleanup is attempted and NULL is returned.
+ * If malloc fails at anypoint or action_count < 0, cleanup is attempted and NULL is returned.
  * 
- * @param actions array of function pointers (void* return and paramaters). Cannot be NULL
+ * @param actions array of function pointers (void* return and paramaters).
  * @param action_count length of function pointers array, used in operations.
  * @return node_actions* actions struct, NULL if any malloc operation fails.
  */

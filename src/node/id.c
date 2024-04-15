@@ -9,8 +9,8 @@ node_id* create_id(char** character_ids,
                    int integer_id_count) {
     if (character_ids == NULL || \
         integer_ids == NULL || \
-        character_id_count < 1 || \
-        integer_id_count < 1) {
+        character_id_count < 0 || \
+        integer_id_count < 0) {
         return NULL;
     }
 
@@ -19,41 +19,70 @@ node_id* create_id(char** character_ids,
         return NULL;
     }
 
-    id_struct->character_ids = malloc(sizeof(char*) * character_id_count);
-    if (id_struct->character_ids == NULL) {
-        free(id_struct);
-        return NULL;
+    if (character_ids == NULL) {
+        id_struct->character_ids = NULL;
+        id_struct->character_id_count = 0;
+    } else {
+        // although pointer array length cannot directly be determined,
+        // if count is less than one, it is not representative of the array.
+        if (character_id_count < 1) {
+            free(id_struct);
+            return NULL;
+        }
+
+        id_struct->character_ids = malloc(sizeof(char*) * character_id_count);
+        if (id_struct->character_ids == NULL) {
+            free(id_struct);
+            return NULL;
+        }
+
+        for (int i = 0; i < character_id_count; i++) {
+            size_t role_length = strlen(character_ids[i]);
+            id_struct->character_ids[i] = malloc(role_length + 1);
+            if (id_struct->character_ids[i] == NULL) {
+                for (int j = 0; j < i; j++) {
+                    free(id_struct->character_ids[j]);
+                }
+                free(id_struct->character_ids);
+                free(id_struct);
+                return NULL;
+            }
+            strcpy(id_struct->character_ids[i], character_ids[i]);
+        }
+
+        id_struct->character_id_count = character_id_count;
     }
 
-    for (int i = 0; i < character_id_count; i++) {
-        size_t id_len = strlen(character_ids[i]);
-        // sizeof(char) is always 1
-        id_struct->character_ids[i] = malloc(id_len + 1);
-        if (id_struct->character_ids[i] == NULL) {
-            for (int j = 0; j < i; j++) {
-                free(id_struct->character_ids[j]);
+    if (integer_ids == NULL) {
+        id_struct->integer_ids = NULL;
+        id_struct->integer_id_count = 0;
+    } else {
+        // although pointer array length cannot directly be determined,
+        // if count is less than one, it is not representative of the array.
+        if (integer_id_count < 1) {
+            for (int i = 0; i < id_struct->character_id_count; i++) {
+                if (id_struct->character_ids[i] != NULL) {
+                    free(id_struct->character_ids[i]);
+                }
+            }
+            free(id_struct);
+            return NULL;
+        }
+
+        id_struct->integer_ids = malloc(sizeof(int) * integer_id_count);
+        if (id_struct->integer_ids == NULL) {
+            for (int i = 0; i < id_struct->character_id_count; i++) {
+                free(id_struct->character_ids[i]);
             }
             free(id_struct->character_ids);
             free(id_struct);
             return NULL;
         }
-        strcpy(id_struct->character_ids[i], character_ids[i]);
+        memcpy(id_struct->integer_ids, integer_ids, sizeof(int) * integer_id_count);
+
+        id_struct->integer_id_count = integer_id_count;
     }
 
-    id_struct->integer_ids = malloc(sizeof(int) * integer_id_count);
-    if (id_struct->integer_ids == NULL) {
-        for (int i = 0; i < character_id_count; i++) {
-            free(id_struct->character_ids[i]);
-        }
-        free(id_struct->character_ids);
-        free(id_struct);
-        return NULL;
-    }
-
-    memcpy(id_struct->integer_ids, integer_ids, sizeof(int) * integer_id_count);
-
-    id_struct->character_id_count = character_id_count;
-    id_struct->integer_id_count = integer_id_count;
     return id_struct;
 }
 
