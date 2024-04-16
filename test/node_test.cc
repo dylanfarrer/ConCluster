@@ -240,3 +240,62 @@ TEST_F(NodeTest, NodeCopy) {
     int result_two = delete_node(node_struct_two);
     ASSERT_EQ(result_two, 0);
 }
+
+TEST_F(NodeTest, NodeDefault) {
+    node* node_struct = create_default_node();
+    ASSERT_NE(node_struct, nullptr);
+
+    int result = delete_node(node_struct);
+    ASSERT_EQ(result, 0);
+}
+
+TEST_F(NodeTest, NodeShallowEdit) {
+    node* node_struct = create_default_node();
+    ASSERT_NE(node_struct, nullptr);
+
+    ASSERT_EQ(node_struct->address->character_address_count, 0);
+
+    node_address* address = create_address_struct();
+
+    int edit_result = edit_node(node_struct,
+                                nullptr,
+                                nullptr,
+                                address,
+                                nullptr,
+                                nullptr,
+                                nullptr,
+                                nullptr,
+                                1);
+    ASSERT_EQ(edit_result, 0);
+    
+    ASSERT_EQ(node_struct->address->character_address_count, 3);
+
+    int result = delete_node(node_struct);
+    ASSERT_EQ(result, 0);
+}
+
+TEST_F(NodeTest, NodeDeepEdit) {
+    node* node_struct = create_default_node();
+    ASSERT_NE(node_struct, nullptr);
+
+    ASSERT_EQ(node_struct->id->character_id_count, 0);
+
+    node_id* id = create_id_struct();
+
+    int edit_result = edit_node(node_struct,
+                                id,
+                                nullptr,
+                                nullptr,
+                                nullptr,
+                                nullptr,
+                                nullptr,
+                                nullptr,
+                                0);
+    ASSERT_EQ(edit_result, 0);
+    delete_id(id);
+    
+    ASSERT_EQ(node_struct->id->character_id_count, 3);
+
+    int result = delete_node(node_struct);
+    ASSERT_EQ(result, 0);
+}

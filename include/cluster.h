@@ -55,7 +55,7 @@ cluster* create_cluster_from_default_node(int node_count);
  */
 int delete_cluster(cluster* cluster);
 
-/* TODO int delete_cluster_node(cluster* cluster, int node_index); */
+int delete_cluster_node(cluster* cluster, int node_index);
 
 int edit_cluster_node(cluster* cluster,
                       int node_index,
@@ -67,19 +67,5 @@ int edit_cluster_node(cluster* cluster,
                       node_servers* servers,
                       node_contacts* contacts,
                       int deep_copy);
-
-// has to be deep copy
-int edit_all_cluster_nodes(cluster* cluster,
-                           node_id* id,
-                           node_role* role,
-                           node_address* address,
-                           node_actions* actions,
-                           node_background_tasks* background_tasks,
-                           node_servers* servers,
-                           node_contacts* contacts);
-
-/* TODO int append_node_to_cluster(cluster* cluster, node* node, int deep_copy); */
-
-/* TODO int add_node_to_cluster(cluster* cluster, node* node, int node_index, int deep_copy); */
 
 #endif

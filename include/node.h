@@ -85,6 +85,7 @@ int delete_node(node* node);
  * Any member argument that is not required to change should be NULL.
  * If edit fails, -1 is returned.
  * 
+ * @param node struct to edit
  * @param id 
  * @param role 
  * @param address 
@@ -95,7 +96,8 @@ int delete_node(node* node);
  * @param deep_copy 
  * @return int 0 on success, -1 on failure.
  */
-int edit_node(node_id* id,
+int edit_node(node* node_struct,
+              node_id* id,
               node_role* role,
               node_address* address,
               node_actions* actions,

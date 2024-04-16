@@ -1,6 +1,7 @@
 #include "../include/node.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 
 node* create_node(node_id* id,
                   node_role* role,
@@ -125,7 +126,8 @@ int delete_node(node* node) {
     return 0;
 }
 
-int edit_node(node_id* id,
+int edit_node(node* node_struct,
+              node_id* id,
               node_role* role,
               node_address* address,
               node_actions* actions,
@@ -133,5 +135,86 @@ int edit_node(node_id* id,
               node_servers* servers,
               node_contacts* contacts,
               int deep_copy) {
+    if (node_struct == NULL) {
+        return -1;
+    }
+
+    if (id != NULL) {
+        if (delete_id(node_struct->id) != 0) {
+            return -1;
+        }
+        if (deep_copy == 0) {
+            node_struct->id = copy_id(id);
+        } else {
+            node_struct->id = id;
+        }
+    }
+
+    if (role != NULL) {
+        if (delete_role(node_struct->role) != 0) {
+            return -1;
+        }
+        if (deep_copy == 0) {
+            node_struct->role = copy_role(role);
+        } else {
+            node_struct->role = role;
+        }
+    }
+
+    if (address != NULL) {
+        if (delete_address(node_struct->address) != 0) {
+            return -1;
+        }
+        if (deep_copy == 0) {
+            node_struct->address = copy_address(address);
+        } else {
+            node_struct->address = address;
+        }
+    }
+
+    if (actions != NULL) {
+        if (delete_actions(node_struct->actions) != 0) {
+            return -1;
+        }
+        if (deep_copy == 0) {
+            node_struct->actions = copy_actions(actions);
+        } else {
+            node_struct->actions = actions;
+        }
+    }
+
+    if (background_tasks != NULL) {
+        if (delete_background_tasks(node_struct->background_tasks) != 0) {
+            return -1;
+        }
+        if (deep_copy == 0) {
+            node_struct->background_tasks = copy_background_tasks(background_tasks);
+        } else {
+            node_struct->background_tasks = background_tasks;
+        }
+    }
+
+    if (servers != NULL) {
+        if (delete_servers(node_struct->servers) != 0) {
+            return -1;
+        }
+        if (deep_copy == 0) {
+            node_struct->servers = copy_servers(servers);
+        } else {
+            node_struct->servers = servers;
+        }
+    }
+
+    if (contacts != NULL) {
+        if (delete_contacts(node_struct->contacts) != 0) {
+            return -1;
+        }
+        if (deep_copy == 0) {
+            node_struct->contacts = copy_contacts(contacts);
+        } else {
+            node_struct->contacts = contacts;
+        }
+    }
+
     return 0;
 }
