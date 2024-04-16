@@ -35,10 +35,18 @@ node* create_node(node_id* id,
     return node_struct;
 }
 
-// TODO -> implement
-// to implement this, a copy function must be implemented for each node member
-node* create_node_from_node(node* copy_node) {
-    return NULL;
+node* copy_node(node* node_struct) {
+    if (node_struct == NULL) {
+        return NULL;
+    }
+
+    return create_node(copy_id(node_struct->id),
+                       copy_role(node_struct->role),
+                       copy_address(node_struct->address),
+                       copy_actions(node_struct->actions),
+                       copy_background_tasks(node_struct->background_tasks),
+                       copy_servers(node_struct->servers),
+                       copy_contacts(node_struct->contacts));
 }
 
 node* create_default_node() {

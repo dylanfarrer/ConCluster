@@ -85,6 +85,17 @@ node_address* create_address(char** character_addresses,
     return address_struct;
 }
 
+node_address* copy_address(node_address* address) {
+    if (address == NULL) {
+        return NULL;
+    }
+
+    return create_address(address->character_addresses,
+                          address->integer_addresses,
+                          address->character_address_count,
+                          address->integer_address_count);
+}
+
 int delete_address(node_address* address) {
     if (address == NULL) {
         return 0;

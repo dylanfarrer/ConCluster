@@ -34,7 +34,14 @@ typedef struct {
  */
 node_actions* create_actions(Action* actions, int action_count);
 
-/* TODO node_actions* copy_actions(node_actions*); */
+/**
+ * @brief performs deep copy on action struct to create new node_actions.
+ * if actions is NULL, return NULL
+ * 
+ * @param actions struct to copy
+ * @return node_actions* struct, or NULL
+ */
+node_actions* copy_actions(node_actions* actions);
 
 /**
  * @brief deletes an actions struct.

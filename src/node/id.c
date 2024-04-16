@@ -84,6 +84,17 @@ node_id* create_id(char** character_ids,
     return id_struct;
 }
 
+node_id* copy_id(node_id* id) {
+    if (id == NULL) {
+        return NULL;
+    }
+
+    return create_id(id->character_ids,
+                     id->integer_ids,
+                     id->character_id_count,
+                     id->integer_id_count);
+}
+
 int delete_id(node_id* id) {
     if (id == NULL) {
         return 0;

@@ -53,10 +53,10 @@ node* create_node(node_id* id,
  * Performs deep copy on copy_node struct.
  * if malloc fails or copy_node struct is NULL, return NUL.
  * 
- * @param copy_node node to deep copy
+ * @param node_struct node to deep copy
  * @return node* node struct or NULL
  */
-node* create_node_from_node(node* copy_node);
+node* copy_node(node* node_struct);
 
 /**
  * @brief Create a node struct and populates members with default (nullified) structs.

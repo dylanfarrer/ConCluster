@@ -34,7 +34,14 @@ typedef struct {
  */
 node_single_server* create_single_server(node_address* address, void* (*serve) (void*));
 
-/* TODO node_single_server* copy_single_server(node_single_server*); */
+/**
+ * @brief performs deep copy on single_server struct to create new node_single_server.
+ * if single_server is NULL, return NULL
+ * 
+ * @param single_server struct to copy
+ * @return node_single_server* struct, or NULL
+ */
+node_single_server* copy_single_server(node_single_server* single_server);
 
 /**
  * @brief deletes a node_single_server struct.

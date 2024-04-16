@@ -30,11 +30,11 @@ cluster* create_cluster(node** nodes, int node_count);
  * Deep copies each struct and original copy_node is not included in cluster.
  * if malloc fails, copy_node is null or node_count is negative, returns NULL.
  * 
- * @param copy_node node struct to clone, cannot be NULL
+ * @param node_struct node struct to clone, cannot be NULL
  * @param node_count number of nodes to create.
  * @return cluster* cluster struct or NULL.
  */
-cluster* create_cluster_from_node(node* copy_node, int node_count);
+cluster* create_cluster_from_node(node* node_struct, int node_count);
 
 /**
  * @brief Create a cluster of population node_count from default node struct.

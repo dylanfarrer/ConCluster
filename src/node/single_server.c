@@ -19,6 +19,15 @@ node_single_server* create_single_server(node_address* address,
     return single_server;
 }
 
+node_single_server* copy_single_server(node_single_server* single_server) {
+    if (single_server == NULL) {
+        return NULL;
+    }
+
+    return create_single_server(copy_address(single_server->address),
+                                single_server->serve);
+}
+
 int delete_single_server(node_single_server* single_server) {
     if (single_server == NULL) {
         return 0;

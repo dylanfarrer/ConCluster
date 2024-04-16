@@ -27,7 +27,14 @@ typedef struct {
  */
 node_contacts* create_contacts(node_address** contacts, int contact_count);
 
-/* TODO node_contacts* copy_contacts(node_contacts*); */
+/**
+ * @brief performs deep copy on contacts struct to create new node_contacts.
+ * if contacts is NULL, return NULL
+ * 
+ * @param contacts struct to copy
+ * @return node_contacts* struct, or NULL
+ */
+node_contacts* copy_contacts(node_contacts* contacts);
 
 /**
  * @brief deletes a node_contacts struct.

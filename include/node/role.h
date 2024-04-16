@@ -37,7 +37,14 @@ node_role* create_role(char** character_roles,
                        int character_role_count,
                        int integer_role_count);
 
-/* TODO node_role* copy_role(node_role*); */
+/**
+ * @brief performs deep copy on role struct to create new node_role.
+ * if role is NULL, return NULL
+ * 
+ * @param role struct to copy
+ * @return node_role* struct, or NULL
+ */
+node_role* copy_role(node_role* role);
 
 /**
  * @brief deletes a role struct.

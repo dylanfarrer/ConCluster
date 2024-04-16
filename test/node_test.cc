@@ -220,3 +220,23 @@ TEST_F(NodeTest, NodeCreationAndDeletion) {
     int result = delete_node(node_struct);
     ASSERT_EQ(result, 0);
 }
+
+TEST_F(NodeTest, NodeCopy) {
+    node* node_struct = create_node(create_id_struct(),
+                                    create_role_struct(),
+                                    create_address_struct(),
+                                    create_actions_struct(),
+                                    create_background_tasks_struct(),
+                                    create_servers_struct(),
+                                    create_contacts_struct());
+    ASSERT_NE(node_struct, nullptr);
+
+    node* node_struct_two = copy_node(node_struct);
+    ASSERT_NE(node_struct_two, nullptr);
+
+    int result = delete_node(node_struct);
+    ASSERT_EQ(result, 0);
+
+    int result_two = delete_node(node_struct_two);
+    ASSERT_EQ(result_two, 0);
+}

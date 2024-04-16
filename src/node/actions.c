@@ -38,6 +38,14 @@ node_actions* create_actions(Action* actions, int action_count) {
     return actions_struct;
 }
 
+node_actions* copy_actions(node_actions* actions) {
+    if (actions == NULL) {
+        return NULL;
+    }
+
+    return create_actions(actions->actions, actions->action_count);
+}
+
 int delete_actions(node_actions* actions) {
     if (actions == NULL) {
         return 0;

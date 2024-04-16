@@ -33,8 +33,8 @@ cluster* create_cluster(node** nodes, int node_count) {
     return cluster_struct;
 }
 
-cluster* create_cluster_from_node(node* copy_node, int node_count) {
-    if (node_count < 1 || copy_node == NULL) {
+cluster* create_cluster_from_node(node* node_struct, int node_count) {
+    if (node_count < 1 || node_struct == NULL) {
         return NULL;
     }
 
@@ -43,14 +43,14 @@ cluster* create_cluster_from_node(node* copy_node, int node_count) {
         return NULL;
     }
 
-    node_array[0] = create_node_from_node(copy_node);
+    node_array[0] = copy_node(node_struct);
     if (node_array[0] == NULL) {
         free(node_array);
         return NULL;
     }
     
     for (int i = 1; i < node_count; i++) {
-        node_array[i] = create_node_from_node(copy_node);
+        node_array[i] = copy_node(node_struct);
         if (node_array[i] == NULL) {
             for (int j = 0; j < i; j++) {
                 free(node_array[j]);

@@ -84,6 +84,16 @@ node_role* create_role(char** character_roles,
     return role_struct;
 }
 
+node_role* copy_role(node_role* role) {
+    if (role == NULL) {
+        return NULL;
+    }
+    return create_role(role->character_roles,
+                       role->integer_roles,
+                       role->character_role_count,
+                       role->integer_role_count);
+}
+
 int delete_role(node_role* role) {
     if (role == NULL) {
         return 0;

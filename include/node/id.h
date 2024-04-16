@@ -34,7 +34,14 @@ node_id* create_id(char** character_ids,
                    int character_id_count,
                    int integer_id_count);
 
-/* TODO node_id* copy_id(node_id*); */
+/**
+ * @brief performs deep copy on id struct to create new node_id.
+ * if id is NULL, return NULL
+ * 
+ * @param id struct to copy
+ * @return node_id* struct, or NULL
+ */
+node_id* copy_id(node_id* id);
 
 /**
  * @brief deletes an id struct.

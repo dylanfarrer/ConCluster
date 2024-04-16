@@ -27,7 +27,14 @@ typedef struct {
  */
 node_servers* create_servers(node_single_server** servers, int server_count);
 
-/* TODO node_servers* copy_servers(node_servers*); */
+/**
+ * @brief performs deep copy on servers struct to create new node_servers.
+ * if servers is NULL, return NULL
+ * 
+ * @param servers struct to copy
+ * @return node_servers* struct, or NULL
+ */
+node_servers* copy_servers(node_servers* servers);
 
 /**
  * @brief deletes a node_servers struct.
