@@ -7,16 +7,58 @@ structures will be available within the codebase.
 
 ## Installation
 
-To be filled out when ready.
-
-Current library usage is to clone the repo, point to the cluster.h and
-cluster.c files.
+Currently, clone repo, build/link code manually (if looking to use outside of available CMake build).
 
 ## Usage
 
-To be filled out when ready.
+Point to the cluster header
+```c
+#include "path/to/cluster.h"
 
-Current usage -> import node header and use available functions.
+// default cluster
+cluster* default_cluster = create_cluster_from_default_node(1);
+int result = delete_cluster(default_cluster);
+
+// default cloned cluster
+cluster* clone_cluster = create_cluster_from_default_node(5);
+delete_cluster(clone_cluster);
+
+// custom cloned cluster
+node* my_own_node = create_default_node();
+cluster* my_own_clone_cluster = create_cluster_from_node(my_own_node, 5);
+int node_delete_result = delete_node(my_own_node);
+delete_cluster(my_own_clone_cluster);
+
+// handrolled cluster (see node.h for further information on node creation).
+node** node_array_I_made_previously;
+int node_array_length;
+cluster* hand_rolled_cluster = create_cluster(node_array_I_made_previously, node_array_length);
+delete_cluster(hand_rolled_cluster);
+
+// pruning a cluster
+cluster* clone_cluster_to_prune = create_cluster_from_default_node(5);
+int prune_result = delete_cluster_node(clone_cluster_to_prune, 3); // give index
+delete_cluster(clone_cluster_to_prune);
+
+// editing a cluster node
+address* dummy_address = create_address(NULL, NULL, 0, 0);
+cluster* cluster_to_edit = create_cluster_from_default_node(5);
+int edit_result = edit_cluster_node(cluster_to_edit,
+                                    3,
+                                    NULL,
+                                    NULL,
+                                    dummy_address,
+                                    NULL,
+                                    NULL,
+                                    NULL,
+                                    NULL,
+                                    NULL,
+                                    0);
+                                    // 0-> deep-copy, else, shallow
+                                    // see node.h for more information on edit procedure
+int address_delete_result = delete_address(dummy_address);
+delete_cluster(cluster_to_edit);
+```
 
 ## Testing
 
