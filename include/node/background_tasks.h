@@ -36,6 +36,15 @@ node_background_tasks* create_background_tasks(node_actions* actions,
                                                void* (*schedule) (void*));
 
 /**
+ * @brief performs deep copy on background_tasks struct to create new node_background_tasks.
+ * if background_tasks is NULL, return NULL
+ * 
+ * @param background_tasks struct to copy
+ * @return node_background_tasks* struct, or NULL
+ */
+node_background_tasks* copy_background_tasks(node_background_tasks* background_tasks);
+
+/**
  * @brief deletes a node_background_tasks struct.
  * Calls actions function to delete actions member - if this fails, delete operation cancelled.
  * 

@@ -26,6 +26,27 @@ typedef struct {
 cluster* create_cluster(node** nodes, int node_count);
 
 /**
+ * @brief Create a cluster struct, cloning a copy_node struct node_count times.
+ * Deep copies each struct and original copy_node is not included in cluster.
+ * if malloc fails, copy_node is null or node_count is negative, returns NULL.
+ * 
+ * @param node_struct node struct to clone, cannot be NULL
+ * @param node_count number of nodes to create.
+ * @return cluster* cluster struct or NULL.
+ */
+cluster* create_cluster_from_node(node* node_struct, int node_count);
+
+/**
+ * @brief Create a cluster of population node_count from default node struct.
+ * if malloc fails or node_count is negative, returns NULL.
+ * utilises create_cluster_from_node
+ * 
+ * @param node_count number of nodes to have in struct.
+ * @return cluster* cluster struct or NULL.
+ */
+cluster* create_cluster_from_default_node(int node_count);
+
+/**
  * @brief deletes a cluster struct.
  * Calls underlying delete function for node, if any fail, delete operation is cancelled.
  * 
@@ -33,5 +54,18 @@ cluster* create_cluster(node** nodes, int node_count);
  * @return int 0 on success, -1 on failure.
  */
 int delete_cluster(cluster* cluster);
+
+int delete_cluster_node(cluster* cluster, int node_index);
+
+int edit_cluster_node(cluster* cluster,
+                      int node_index,
+                      node_id* id,
+                      node_role* role,
+                      node_address* address,
+                      node_actions* actions,
+                      node_background_tasks* background_tasks,
+                      node_servers* servers,
+                      node_contacts* contacts,
+                      int deep_copy);
 
 #endif

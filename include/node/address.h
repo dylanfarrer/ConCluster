@@ -40,6 +40,15 @@ node_address* create_address(char** character_addresses,
                              int integer_address_count);
 
 /**
+ * @brief performs deep copy on address struct to create new node_address.
+ * if address is NULL, return NULL
+ * 
+ * @param address struct to copy
+ * @return node_address* struct, or NULL
+ */
+node_address* copy_address(node_address* address);
+
+/**
  * @brief deletes an address struct.
  * 
  * @param address struct to free.

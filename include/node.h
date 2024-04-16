@@ -49,6 +49,25 @@ node* create_node(node_id* id,
                   node_contacts* contacts);
 
 /**
+ * @brief Create a node from copy_node struct.
+ * Performs deep copy on copy_node struct.
+ * if malloc fails or copy_node struct is NULL, return NUL.
+ * 
+ * @param node_struct node to deep copy
+ * @return node* node struct or NULL
+ */
+node* copy_node(node* node_struct);
+
+/**
+ * @brief Create a node struct and populates members with default (nullified) structs.
+ * Note: members are not null, but will contain null members themselves.
+ * if malloc fails, returns NULL.
+ * 
+ * @return node* struct or NULL
+ */
+node* create_default_node();
+
+/**
  * @brief deletes a node struct;
  * Calls underlying delete functions for each member, if any fail, delete operation is cancelled
  * - but not recovered from.
@@ -57,5 +76,34 @@ node* create_node(node_id* id,
  * @return int 0 on success, -1 on failure.
  */
 int delete_node(node* node);
+
+
+/**
+ * @brief Edits a node struct in place.
+ * If deep_copy is 0, a deep copy is performed, else the struct members are 
+ * shallow copied.
+ * Any member argument that is not required to change should be NULL.
+ * If edit fails, -1 is returned.
+ * 
+ * @param node struct to edit
+ * @param id 
+ * @param role 
+ * @param address 
+ * @param actions 
+ * @param background_tasks 
+ * @param servers 
+ * @param contacts 
+ * @param deep_copy 
+ * @return int 0 on success, -1 on failure.
+ */
+int edit_node(node* node_struct,
+              node_id* id,
+              node_role* role,
+              node_address* address,
+              node_actions* actions,
+              node_background_tasks* background_tasks,
+              node_servers* servers,
+              node_contacts* contacts,
+              int deep_copy);
 
 #endif

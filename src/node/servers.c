@@ -48,6 +48,36 @@ node_servers* create_servers(node_single_server** servers, int server_count) {
     return servers_struct;
 }
 
+node_servers* copy_servers(node_servers* servers) {
+    if (servers == NULL) {
+        return NULL;
+    }
+
+    if (servers->servers == NULL) {
+        return create_servers(NULL, 0);
+    }
+
+    // incorrect count
+    if (servers->server_count < 1) {
+        return NULL;
+    }
+
+    node_single_server** new_servers_array = malloc(sizeof(node_single_server*) * servers->server_count);
+    if (new_servers_array == NULL) {
+        return NULL;
+    }
+
+    for (int i = 0; i < servers->server_count; i++) {
+        new_servers_array[i] = copy_single_server(servers->servers[i]);
+    }
+
+    node_servers* new_servers = create_servers(new_servers_array, servers->server_count);
+
+    free(new_servers_array);
+
+    return new_servers;
+}
+
 int delete_servers(node_servers* servers) {
     if (servers == NULL) {
         return 0;

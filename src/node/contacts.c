@@ -48,6 +48,36 @@ node_contacts* create_contacts(node_address** contacts, int contact_count) {
     return contacts_struct;
 }
 
+node_contacts* copy_contacts(node_contacts* contacts) {
+    if (contacts == NULL) {
+        return NULL;
+    }
+
+    if (contacts->contacts == NULL) {
+        return create_contacts(NULL, 0);
+    }
+
+    // incorrect count
+    if (contacts->contact_count < 1) {
+        return NULL;
+    }
+
+    node_address** new_contacts_array = malloc(sizeof(node_address*) * contacts->contact_count);
+    if (new_contacts_array == NULL) {
+        return NULL;
+    }
+
+    for (int i = 0; i < contacts->contact_count; i++) {
+        new_contacts_array[i] = copy_address(contacts->contacts[i]);
+    }
+
+    node_contacts* new_contacts = create_contacts(new_contacts_array, contacts->contact_count);
+
+    free(new_contacts_array);
+
+    return new_contacts;
+}
+
 int delete_contacts(node_contacts* contacts) {
     if (contacts == NULL) {
         return 0;

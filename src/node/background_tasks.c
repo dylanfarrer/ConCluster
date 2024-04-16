@@ -19,6 +19,15 @@ node_background_tasks* create_background_tasks(node_actions* actions,
     return background_tasks;
 }
 
+node_background_tasks* copy_background_tasks(node_background_tasks* background_tasks) {
+    if (background_tasks == NULL) {
+        return NULL;
+    }
+
+    return create_background_tasks(copy_actions(background_tasks->actions),
+                                   background_tasks->schedule);
+}
+
 int delete_background_tasks(node_background_tasks* background_tasks) {
     if (background_tasks == NULL) {
         return 0;
