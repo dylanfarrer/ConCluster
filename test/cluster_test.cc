@@ -31,7 +31,7 @@ static void* TestFunctionServe(void* value) {
     return nullptr;
 }
 
-static node_id* create_id_struct() {
+static ccon_n_node_id* create_id_struct() {
     char** char_ids = (char**) malloc(3 * sizeof(char*));
     char_ids[0] = (char*) malloc(12 * sizeof(char));
     char_ids[1] = (char*) malloc(12 * sizeof(char));
@@ -47,7 +47,7 @@ static node_id* create_id_struct() {
 
     int char_id_count = 3;
     int integer_id_count = 3;
-    node_id* id = create_id(char_ids,
+    ccon_n_node_id* id = ccon_n_create_id(char_ids,
                             integer_ids,
                             char_id_count,
                             integer_id_count);
@@ -301,7 +301,7 @@ TEST_F(ClusterTest, DeepEditClusterNode) {
 
     ASSERT_EQ(cluster_struct->nodes[2]->id->character_id_count, 0);
 
-    node_id* id = create_id_struct();
+    ccon_n_node_id* id = create_id_struct();
     int edit_result = ccon_edit_cluster_node(cluster_struct,
                                         2,
                                         id,
@@ -313,7 +313,7 @@ TEST_F(ClusterTest, DeepEditClusterNode) {
                                         nullptr,
                                         0);
     ASSERT_EQ(edit_result, 0);
-    delete_id(id);
+    ccon_n_delete_id(id);
 
     ASSERT_EQ(cluster_struct->nodes[2]->id->character_id_count, 3);
 

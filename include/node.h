@@ -17,7 +17,7 @@
  * corresponding headers. (id.h, role.h, address.h ...)
  */
 typedef struct {
-    node_id* id;
+    ccon_n_node_id* id;
     node_role* role;
     node_address* address;
     node_actions* actions;
@@ -40,7 +40,7 @@ typedef struct {
  * @param contacts 
  * @return ccon_node* struct or NULL
  */
-ccon_node* ccon_create_node(node_id* id,
+ccon_node* ccon_create_node(ccon_n_node_id* id,
                             node_role* role,
                             node_address* address,
                             node_actions* actions,
@@ -97,7 +97,7 @@ int ccon_delete_node(ccon_node* node);
  * @return int 0 on success, -1 on failure.
  */
 int ccon_edit_node(ccon_node* node_struct,
-                    node_id* id,
+                    ccon_n_node_id* id,
                     node_role* role,
                     node_address* address,
                     node_actions* actions,

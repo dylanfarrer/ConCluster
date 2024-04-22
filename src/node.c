@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-ccon_node* ccon_create_node(node_id* id,
+ccon_node* ccon_create_node(ccon_n_node_id* id,
                   node_role* role,
                   node_address* address,
                   node_actions* actions,
@@ -41,7 +41,7 @@ ccon_node* ccon_copy_node(ccon_node* node_struct) {
         return NULL;
     }
 
-    return ccon_create_node(copy_id(node_struct->id),
+    return ccon_create_node(ccon_n_copy_id(node_struct->id),
                        copy_role(node_struct->role),
                        copy_address(node_struct->address),
                        copy_actions(node_struct->actions),
@@ -51,7 +51,7 @@ ccon_node* ccon_copy_node(ccon_node* node_struct) {
 }
 
 ccon_node* ccon_create_default_node() {
-    node_id* id = create_id(NULL, NULL, 0, 0);
+    ccon_n_node_id* id = ccon_n_create_id(NULL, NULL, 0, 0);
     if (id == NULL) {
         return NULL;
     }
@@ -94,7 +94,7 @@ int ccon_delete_node(ccon_node* node) {
         return 0;
     }
 
-    if (delete_id(node->id) != 0) {
+    if (ccon_n_delete_id(node->id) != 0) {
         return -1;
     }
 
@@ -127,7 +127,7 @@ int ccon_delete_node(ccon_node* node) {
 }
 
 int ccon_edit_node(ccon_node* node_struct,
-              node_id* id,
+              ccon_n_node_id* id,
               node_role* role,
               node_address* address,
               node_actions* actions,
@@ -140,11 +140,11 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (id != NULL) {
-        if (delete_id(node_struct->id) != 0) {
+        if (ccon_n_delete_id(node_struct->id) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
-            node_struct->id = copy_id(id);
+            node_struct->id = ccon_n_copy_id(id);
         } else {
             node_struct->id = id;
         }

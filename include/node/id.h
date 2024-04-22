@@ -15,10 +15,10 @@ typedef struct {
     int* integer_ids;
     int character_id_count;
     int integer_id_count;
-} node_id;
+} ccon_n_node_id;
 
 /**
- * @brief Create an id struct.
+ * @brief Create a ccon_n_id struct.
  * Performs a deep copy on character and integer arrays.
  * If malloc fails at anypoint or either count < 0, cleanup is attempted and NULL is returned.
  * Accepts NULL arrays, but will not accept NULL array items in non-NULL arrays.
@@ -27,28 +27,28 @@ typedef struct {
  * @param integer_ids array of integers to add as a struct member.
  * @param character_id_count Length of string array, used in operations.
  * @param integer_id_count Length of integer array, used in operations.
- * @return node_id* id struct. NULL if any malloc operation fails.
+ * @return ccon_n_node_id* id struct. NULL if any malloc operation fails.
  */
-node_id* create_id(char** character_ids,
-                   int* integer_ids,
-                   int character_id_count,
-                   int integer_id_count);
+ccon_n_node_id* ccon_n_create_id(char** character_ids,
+                                int* integer_ids,
+                                int character_id_count,
+                                int integer_id_count);
 
 /**
- * @brief performs deep copy on id struct to create new node_id.
+ * @brief performs deep copy on ccon_n_id struct to create new node_id.
  * if id is NULL, return NULL
  * 
  * @param id struct to copy
- * @return node_id* struct, or NULL
+ * @return ccon_n_node_id* struct, or NULL
  */
-node_id* copy_id(node_id* id);
+ccon_n_node_id* ccon_n_copy_id(ccon_n_node_id* id);
 
 /**
- * @brief deletes an id struct.
+ * @brief deletes a ccon_n_id struct.
  * 
  * @param id struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int delete_id(node_id* id);
+int ccon_n_delete_id(ccon_n_node_id* id);
 
 #endif
