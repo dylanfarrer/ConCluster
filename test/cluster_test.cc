@@ -206,8 +206,8 @@ static node_contacts* create_contacts_struct() {
     return contacts;
 }
 
-static node* create_node_struct() {
-    node* node_struct = create_node(create_id_struct(),
+static ccon_node* create_node_struct() {
+    ccon_node* node_struct = ccon_create_node(create_id_struct(),
                                     create_role_struct(),
                                     create_address_struct(),
                                     create_actions_struct(),
@@ -219,64 +219,64 @@ static node* create_node_struct() {
 
 // Test cluster creation and deletion
 TEST_F(ClusterTest, ClusterCreationAndDeletion) {
-    node** node_array = (node**) malloc(sizeof(node*) * 2);
+    ccon_node** node_array = (ccon_node**) malloc(sizeof(ccon_node*) * 2);
     node_array[0] = create_node_struct();
     node_array[1] = create_node_struct();
 
     int node_count = 2;
 
-    cluster* cluster_struct = create_cluster(node_array, node_count);
+    ccon_cluster* cluster_struct = ccon_create_cluster(node_array, node_count);
     ASSERT_NE(cluster_struct, nullptr);
 
-    int result = delete_cluster(cluster_struct);
+    int result = ccon_delete_cluster(cluster_struct);
     ASSERT_EQ(result, 0);
 
     free(node_array);
 }
 
 TEST_F(ClusterTest, ClusterCreationFromNode) {
-    node* node_struct = create_default_node();
-    cluster* cluster_struct = create_cluster_from_node(node_struct, 3);
+    ccon_node* node_struct = ccon_create_default_node();
+    ccon_cluster* cluster_struct = ccon_create_cluster_from_node(node_struct, 3);
     ASSERT_NE(cluster_struct, nullptr);
     ASSERT_EQ(cluster_struct->node_count, 3);
 
-    delete_node(node_struct);
+    ccon_delete_node(node_struct);
 
-    int result = delete_cluster(cluster_struct);
+    int result = ccon_delete_cluster(cluster_struct);
     ASSERT_EQ(result, 0);
 }
 
 TEST_F(ClusterTest, ClusterCreationFromDefaultNode) {
-    cluster* cluster_struct = create_cluster_from_default_node(3);
+    ccon_cluster* cluster_struct = ccon_create_cluster_from_default_node(3);
     ASSERT_NE(cluster_struct, nullptr);
     ASSERT_EQ(cluster_struct->node_count, 3);
 
-    int result = delete_cluster(cluster_struct);
+    int result = ccon_delete_cluster(cluster_struct);
     ASSERT_EQ(result, 0);
 }
 
 TEST_F(ClusterTest, DeleteClusterNode) {
-    cluster* cluster_struct = create_cluster_from_default_node(3);
+    ccon_cluster* cluster_struct = ccon_create_cluster_from_default_node(3);
     ASSERT_NE(cluster_struct, nullptr);
     ASSERT_EQ(cluster_struct->node_count, 3);
 
-    int delete_result = delete_cluster_node(cluster_struct, 2);
+    int delete_result = ccon_delete_cluster_node(cluster_struct, 2);
     ASSERT_EQ(delete_result, 0);
     ASSERT_EQ(cluster_struct->node_count, 2);
 
-    int result = delete_cluster(cluster_struct);
+    int result = ccon_delete_cluster(cluster_struct);
     ASSERT_EQ(result, 0);
 }
 
 TEST_F(ClusterTest, ShallowEditClusterNode) {
-    cluster* cluster_struct = create_cluster_from_default_node(3);
+    ccon_cluster* cluster_struct = ccon_create_cluster_from_default_node(3);
     ASSERT_NE(cluster_struct, nullptr);
     ASSERT_EQ(cluster_struct->node_count, 3);
 
     ASSERT_EQ(cluster_struct->nodes[2]->address->character_address_count, 0);
 
     node_address* address = create_address_struct();
-    int edit_result = edit_cluster_node(cluster_struct,
+    int edit_result = ccon_edit_cluster_node(cluster_struct,
                                         2,
                                         nullptr,
                                         nullptr,
@@ -290,19 +290,19 @@ TEST_F(ClusterTest, ShallowEditClusterNode) {
 
     ASSERT_EQ(cluster_struct->nodes[2]->address->character_address_count, 3);
 
-    int result = delete_cluster(cluster_struct);
+    int result = ccon_delete_cluster(cluster_struct);
     ASSERT_EQ(result, 0);
 }
 
 TEST_F(ClusterTest, DeepEditClusterNode) {
-    cluster* cluster_struct = create_cluster_from_default_node(3);
+    ccon_cluster* cluster_struct = ccon_create_cluster_from_default_node(3);
     ASSERT_NE(cluster_struct, nullptr);
     ASSERT_EQ(cluster_struct->node_count, 3);
 
     ASSERT_EQ(cluster_struct->nodes[2]->id->character_id_count, 0);
 
     node_id* id = create_id_struct();
-    int edit_result = edit_cluster_node(cluster_struct,
+    int edit_result = ccon_edit_cluster_node(cluster_struct,
                                         2,
                                         id,
                                         nullptr,
@@ -317,6 +317,6 @@ TEST_F(ClusterTest, DeepEditClusterNode) {
 
     ASSERT_EQ(cluster_struct->nodes[2]->id->character_id_count, 3);
 
-    int result = delete_cluster(cluster_struct);
+    int result = ccon_delete_cluster(cluster_struct);
     ASSERT_EQ(result, 0);
 }

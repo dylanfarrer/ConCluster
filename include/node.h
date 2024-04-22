@@ -24,10 +24,10 @@ typedef struct {
     node_background_tasks* background_tasks;
     node_servers* servers;
     node_contacts* contacts;
-} node;
+} ccon_node;
 
 /**
- * @brief Create a node struct.
+ * @brief Create a ccon_node struct.
  * Performs a shallow copy on each member.
  * if malloc fails or any struct is NULL, returns NULL.
  * 
@@ -38,48 +38,48 @@ typedef struct {
  * @param background_tasks 
  * @param servers 
  * @param contacts 
- * @return node* struct or NULL
+ * @return ccon_node* struct or NULL
  */
-node* create_node(node_id* id,
-                  node_role* role,
-                  node_address* address,
-                  node_actions* actions,
-                  node_background_tasks* background_tasks,
-                  node_servers* servers,
-                  node_contacts* contacts);
+ccon_node* ccon_create_node(node_id* id,
+                            node_role* role,
+                            node_address* address,
+                            node_actions* actions,
+                            node_background_tasks* background_tasks,
+                            node_servers* servers,
+                            node_contacts* contacts);
 
 /**
- * @brief Create a node from copy_node struct.
- * Performs deep copy on copy_node struct.
- * if malloc fails or copy_node struct is NULL, return NUL.
+ * @brief Create a ccon_node from node_struct struct.
+ * Performs deep copy on node_struct struct.
+ * if malloc fails or node_struct struct is NULL, return NUL.
  * 
  * @param node_struct node to deep copy
- * @return node* node struct or NULL
+ * @return ccon_node* node struct or NULL
  */
-node* copy_node(node* node_struct);
+ccon_node* ccon_copy_node(ccon_node* node_struct);
 
 /**
- * @brief Create a node struct and populates members with default (nullified) structs.
+ * @brief Create a ccon_node struct and populates members with default (nullified) structs.
  * Note: members are not null, but will contain null members themselves.
  * if malloc fails, returns NULL.
  * 
- * @return node* struct or NULL
+ * @return ccon_node* struct or NULL
  */
-node* create_default_node();
+ccon_node* ccon_create_default_node();
 
 /**
- * @brief deletes a node struct;
+ * @brief deletes a ccon_node struct;
  * Calls underlying delete functions for each member, if any fail, delete operation is cancelled
  * - but not recovered from.
  * 
  * @param node struct to free
  * @return int 0 on success, -1 on failure.
  */
-int delete_node(node* node);
+int ccon_delete_node(ccon_node* node);
 
 
 /**
- * @brief Edits a node struct in place.
+ * @brief Edits a ccon_node struct in place.
  * If deep_copy is 0, a deep copy is performed, else the struct members are 
  * shallow copied.
  * Any member argument that is not required to change should be NULL.
@@ -96,14 +96,14 @@ int delete_node(node* node);
  * @param deep_copy 
  * @return int 0 on success, -1 on failure.
  */
-int edit_node(node* node_struct,
-              node_id* id,
-              node_role* role,
-              node_address* address,
-              node_actions* actions,
-              node_background_tasks* background_tasks,
-              node_servers* servers,
-              node_contacts* contacts,
-              int deep_copy);
+int ccon_edit_node(ccon_node* node_struct,
+                    node_id* id,
+                    node_role* role,
+                    node_address* address,
+                    node_actions* actions,
+                    node_background_tasks* background_tasks,
+                    node_servers* servers,
+                    node_contacts* contacts,
+                    int deep_copy);
 
 #endif

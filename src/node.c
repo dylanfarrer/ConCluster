@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-node* create_node(node_id* id,
+ccon_node* ccon_create_node(node_id* id,
                   node_role* role,
                   node_address* address,
                   node_actions* actions,
@@ -20,7 +20,7 @@ node* create_node(node_id* id,
         return NULL;
     }
 
-    node* node_struct = malloc(sizeof(node));
+    ccon_node* node_struct = malloc(sizeof(ccon_node));
     if (node_struct == NULL) {
         return NULL;
     }
@@ -36,12 +36,12 @@ node* create_node(node_id* id,
     return node_struct;
 }
 
-node* copy_node(node* node_struct) {
+ccon_node* ccon_copy_node(ccon_node* node_struct) {
     if (node_struct == NULL) {
         return NULL;
     }
 
-    return create_node(copy_id(node_struct->id),
+    return ccon_create_node(copy_id(node_struct->id),
                        copy_role(node_struct->role),
                        copy_address(node_struct->address),
                        copy_actions(node_struct->actions),
@@ -50,7 +50,7 @@ node* copy_node(node* node_struct) {
                        copy_contacts(node_struct->contacts));
 }
 
-node* create_default_node() {
+ccon_node* ccon_create_default_node() {
     node_id* id = create_id(NULL, NULL, 0, 0);
     if (id == NULL) {
         return NULL;
@@ -86,10 +86,10 @@ node* create_default_node() {
         return NULL;
     }
 
-    return create_node(id, role, address, actions, background_tasks, servers, contacts);
+    return ccon_create_node(id, role, address, actions, background_tasks, servers, contacts);
 }
 
-int delete_node(node* node) {
+int ccon_delete_node(ccon_node* node) {
     if (node == NULL) {
         return 0;
     }
@@ -126,7 +126,7 @@ int delete_node(node* node) {
     return 0;
 }
 
-int edit_node(node* node_struct,
+int ccon_edit_node(ccon_node* node_struct,
               node_id* id,
               node_role* role,
               node_address* address,
