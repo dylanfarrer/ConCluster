@@ -18,10 +18,10 @@ typedef struct {
     int* integer_roles;
     int character_role_count;
     int integer_role_count;
-} node_role;
+} ccon_n_node_role;
 
 /**
- * @brief Create a role struct.
+ * @brief Create a ccon_n_role struct.
  * Performs a deep copy on character and integer arrays.
  * If malloc fails at anypoint or either count < 0, cleanup is attempted and NULL is returned.
  * Accepts NULL arrays, but will not accept NULL array items in non-NULL arrays.
@@ -30,28 +30,28 @@ typedef struct {
  * @param integer_roles array of integers to add as a struct member.
  * @param character_role_count Length of string array, used in operations.
  * @param integer_role_count Length of integer array, used in operations.
- * @return node_role* role struct. NULL if any malloc operation fails.
+ * @return ccon_n_node_role* ccon_n_role struct. NULL if any malloc operation fails.
  */
-node_role* create_role(char** character_roles,
-                       int* integer_roles,
-                       int character_role_count,
-                       int integer_role_count);
+ccon_n_node_role* ccon_n_create_role(char** character_roles,
+                                    int* integer_roles,
+                                    int character_role_count,
+                                    int integer_role_count);
 
 /**
- * @brief performs deep copy on role struct to create new node_role.
+ * @brief performs deep copy on ccon_n_role struct to create new node_role.
  * if role is NULL, return NULL
  * 
  * @param role struct to copy
- * @return node_role* struct, or NULL
+ * @return ccon_n_node_role* struct, or NULL
  */
-node_role* copy_role(node_role* role);
+ccon_n_node_role* ccon_n_copy_role(ccon_n_node_role* role);
 
 /**
- * @brief deletes a role struct.
+ * @brief deletes a ccon_n_role struct.
  * 
  * @param role struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int delete_role(node_role* role);
+int ccon_n_delete_role(ccon_n_node_role* role);
 
 #endif

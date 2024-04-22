@@ -61,7 +61,7 @@ static ccon_n_node_id* create_id_struct() {
     return id;
 }
 
-static node_role* create_role_struct() {
+static ccon_n_node_role* create_role_struct() {
     char** char_roles = (char**) malloc(3 * sizeof(char*));
     char_roles[0] = (char*) malloc(12 * sizeof(char));
     char_roles[1] = (char*) malloc(12 * sizeof(char));
@@ -77,7 +77,7 @@ static node_role* create_role_struct() {
 
     int char_role_count = 3;
     int integer_role_count = 3;
-    node_role* role = create_role(char_roles,
+    ccon_n_node_role* role = ccon_n_create_role(char_roles,
                                   integer_roles,
                                   char_role_count,
                                   integer_role_count);

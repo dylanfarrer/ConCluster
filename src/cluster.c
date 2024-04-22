@@ -156,7 +156,7 @@ int ccon_delete_cluster_node(ccon_cluster* cluster_struct, int node_index) {
 int ccon_edit_cluster_node(ccon_cluster* cluster,
                       int node_index,
                       ccon_n_node_id* id,
-                      node_role* role,
+                      ccon_n_node_role* role,
                       node_address* address,
                       node_actions* actions,
                       node_background_tasks* background_tasks,
