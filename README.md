@@ -21,7 +21,7 @@ Point to the cluster header
 // Inner node members use the prefix 'ccon_n_', and
 // provide create, delete and copy functions.
 //
-// See individual headers for futher information.
+// See individual headers for further information.
 
 
 // default cluster
