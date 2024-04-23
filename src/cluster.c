@@ -161,7 +161,7 @@ int ccon_edit_cluster_node(ccon_cluster* cluster,
                       ccon_n_node_actions* actions,
                       node_background_tasks* background_tasks,
                       ccon_n_node_servers* servers,
-                      node_contacts* contacts,
+                      ccon_n_node_contacts* contacts,
                       int deep_copy) {
     if (cluster == NULL || \
         node_index < 0 || \

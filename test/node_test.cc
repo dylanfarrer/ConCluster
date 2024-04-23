@@ -188,7 +188,7 @@ static ccon_n_node_servers* create_servers_struct() {
     return servers;
 }
 
-static node_contacts* create_contacts_struct() {
+static ccon_n_node_contacts* create_contacts_struct() {
     ccon_n_node_address* address_one = create_address_struct();
     ccon_n_node_address* address_two = create_address_struct();
 
@@ -199,7 +199,7 @@ static node_contacts* create_contacts_struct() {
 
     int address_count = 2;
 
-    node_contacts* contacts = create_contacts(address_array, address_count);
+    ccon_n_node_contacts* contacts = ccon_n_create_contacts(address_array, address_count);
 
     free(address_array);
 

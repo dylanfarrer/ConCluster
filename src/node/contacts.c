@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <memory.h>
 
-node_contacts* create_contacts(ccon_n_node_address** contacts, int contact_count) {
+ccon_n_node_contacts* ccon_n_create_contacts(ccon_n_node_address** contacts, int contact_count) {
     if (contact_count < 0) {
         return NULL;
     }
 
-    node_contacts* contacts_struct = malloc(sizeof(node_contacts));
+    ccon_n_node_contacts* contacts_struct = malloc(sizeof(ccon_n_node_contacts));
     if (contacts_struct == NULL) {
         return NULL;
     }
@@ -48,13 +48,13 @@ node_contacts* create_contacts(ccon_n_node_address** contacts, int contact_count
     return contacts_struct;
 }
 
-node_contacts* copy_contacts(node_contacts* contacts) {
+ccon_n_node_contacts* ccon_n_copy_contacts(ccon_n_node_contacts* contacts) {
     if (contacts == NULL) {
         return NULL;
     }
 
     if (contacts->contacts == NULL) {
-        return create_contacts(NULL, 0);
+        return ccon_n_create_contacts(NULL, 0);
     }
 
     // incorrect count
@@ -71,14 +71,14 @@ node_contacts* copy_contacts(node_contacts* contacts) {
         new_contacts_array[i] = ccon_n_copy_address(contacts->contacts[i]);
     }
 
-    node_contacts* new_contacts = create_contacts(new_contacts_array, contacts->contact_count);
+    ccon_n_node_contacts* new_contacts = ccon_n_create_contacts(new_contacts_array, contacts->contact_count);
 
     free(new_contacts_array);
 
     return new_contacts;
 }
 
-int delete_contacts(node_contacts* contacts) {
+int ccon_n_delete_contacts(ccon_n_node_contacts* contacts) {
     if (contacts == NULL) {
         return 0;
     }

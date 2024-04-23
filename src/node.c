@@ -9,7 +9,7 @@ ccon_node* ccon_create_node(ccon_n_node_id* id,
                   ccon_n_node_actions* actions,
                   node_background_tasks* background_tasks,
                   ccon_n_node_servers* servers,
-                  node_contacts* contacts) {
+                  ccon_n_node_contacts* contacts) {
     if (id == NULL || \
         role == NULL || \
         address == NULL || \
@@ -47,7 +47,7 @@ ccon_node* ccon_copy_node(ccon_node* node_struct) {
                        ccon_n_copy_actions(node_struct->actions),
                        copy_background_tasks(node_struct->background_tasks),
                        ccon_n_copy_servers(node_struct->servers),
-                       copy_contacts(node_struct->contacts));
+                       ccon_n_copy_contacts(node_struct->contacts));
 }
 
 ccon_node* ccon_create_default_node() {
@@ -81,7 +81,7 @@ ccon_node* ccon_create_default_node() {
         return NULL;
     }
 
-    node_contacts* contacts = create_contacts(NULL, 0);
+    ccon_n_node_contacts* contacts = ccon_n_create_contacts(NULL, 0);
     if (contacts == NULL) {
         return NULL;
     }
@@ -118,7 +118,7 @@ int ccon_delete_node(ccon_node* node) {
         return -1;
     }
 
-    if (delete_contacts(node->contacts) != 0) {
+    if (ccon_n_delete_contacts(node->contacts) != 0) {
         return -1;
     }
 
@@ -133,7 +133,7 @@ int ccon_edit_node(ccon_node* node_struct,
               ccon_n_node_actions* actions,
               node_background_tasks* background_tasks,
               ccon_n_node_servers* servers,
-              node_contacts* contacts,
+              ccon_n_node_contacts* contacts,
               int deep_copy) {
     if (node_struct == NULL) {
         return -1;
@@ -206,11 +206,11 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (contacts != NULL) {
-        if (delete_contacts(node_struct->contacts) != 0) {
+        if (ccon_n_delete_contacts(node_struct->contacts) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
-            node_struct->contacts = copy_contacts(contacts);
+            node_struct->contacts = ccon_n_copy_contacts(contacts);
         } else {
             node_struct->contacts = contacts;
         }

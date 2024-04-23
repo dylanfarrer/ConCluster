@@ -13,36 +13,36 @@
 typedef struct {
     ccon_n_node_address** contacts;
     int contact_count;
-} node_contacts;
+} ccon_n_node_contacts;
 
 /**
- * @brief Create a node_address struct.
+ * @brief Create a ccon_n_node_address struct.
  * Creates a new address array, but shallow copies each node_address structs.
  * if malloc fails or contact_count < 0, returns NULL.
  * Accepts NULL array, but will not accept NULL array items in non-NULL array.
  * 
  * @param contacts set of node_address structs to represent contacts.
  * @param contact_count number of contacts, used in operations.
- * @return node_contacts* struct or NULL.
+ * @return ccon_n_node_contacts* struct or NULL.
  */
-node_contacts* create_contacts(ccon_n_node_address** contacts, int contact_count);
+ccon_n_node_contacts* ccon_n_create_contacts(ccon_n_node_address** contacts, int contact_count);
 
 /**
- * @brief performs deep copy on contacts struct to create new node_contacts.
+ * @brief performs deep copy on contacts struct to create new ccon_n_node_contacts.
  * if contacts is NULL, return NULL
  * 
  * @param contacts struct to copy
- * @return node_contacts* struct, or NULL
+ * @return ccon_n_node_contacts* struct, or NULL
  */
-node_contacts* copy_contacts(node_contacts* contacts);
+ccon_n_node_contacts* ccon_n_copy_contacts(ccon_n_node_contacts* contacts);
 
 /**
- * @brief deletes a node_contacts struct.
+ * @brief deletes a ccon_n_node_contacts struct.
  * Calls node_address function to delete node_address member - if this fails, delete operation cancelled.
  * 
  * @param node_contacts struct to free.
  * @return int 0 on success, -1 on failure.
  */
-int delete_contacts(node_contacts* contacts);
+int ccon_n_delete_contacts(ccon_n_node_contacts* contacts);
 
 #endif
