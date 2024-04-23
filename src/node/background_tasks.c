@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <memory.h>
 
-node_background_tasks* create_background_tasks(node_actions* actions,
+node_background_tasks* create_background_tasks(ccon_n_node_actions* actions,
                                                void* (*schedule) (void*)) {
     node_background_tasks* background_tasks = malloc(sizeof(node_background_tasks));
     if (background_tasks == NULL) {
@@ -24,7 +24,7 @@ node_background_tasks* copy_background_tasks(node_background_tasks* background_t
         return NULL;
     }
 
-    return create_background_tasks(copy_actions(background_tasks->actions),
+    return create_background_tasks(ccon_n_copy_actions(background_tasks->actions),
                                    background_tasks->schedule);
 }
 
@@ -34,7 +34,7 @@ int delete_background_tasks(node_background_tasks* background_tasks) {
     }
 
     // call address-specific function
-    if (delete_actions(background_tasks->actions) != 0) {
+    if (ccon_n_delete_actions(background_tasks->actions) != 0) {
         // if inner member delete failed, stop
         return -1;
     }

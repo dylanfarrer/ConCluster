@@ -6,7 +6,7 @@
 ccon_node* ccon_create_node(ccon_n_node_id* id,
                   ccon_n_node_role* role,
                   ccon_n_node_address* address,
-                  node_actions* actions,
+                  ccon_n_node_actions* actions,
                   node_background_tasks* background_tasks,
                   node_servers* servers,
                   node_contacts* contacts) {
@@ -44,7 +44,7 @@ ccon_node* ccon_copy_node(ccon_node* node_struct) {
     return ccon_create_node(ccon_n_copy_id(node_struct->id),
                        ccon_n_copy_role(node_struct->role),
                        ccon_n_copy_address(node_struct->address),
-                       copy_actions(node_struct->actions),
+                       ccon_n_copy_actions(node_struct->actions),
                        copy_background_tasks(node_struct->background_tasks),
                        copy_servers(node_struct->servers),
                        copy_contacts(node_struct->contacts));
@@ -66,7 +66,7 @@ ccon_node* ccon_create_default_node() {
         return NULL;
     }
 
-    node_actions* actions = create_actions(NULL, 0);
+    ccon_n_node_actions* actions = ccon_n_create_actions(NULL, 0);
     if (actions == NULL) {
         return NULL;
     }
@@ -106,7 +106,7 @@ int ccon_delete_node(ccon_node* node) {
         return -1;
     }
 
-    if (delete_actions(node->actions) != 0) {
+    if (ccon_n_delete_actions(node->actions) != 0) {
         return -1;
     }
 
@@ -130,7 +130,7 @@ int ccon_edit_node(ccon_node* node_struct,
               ccon_n_node_id* id,
               ccon_n_node_role* role,
               ccon_n_node_address* address,
-              node_actions* actions,
+              ccon_n_node_actions* actions,
               node_background_tasks* background_tasks,
               node_servers* servers,
               node_contacts* contacts,
@@ -173,11 +173,11 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (actions != NULL) {
-        if (delete_actions(node_struct->actions) != 0) {
+        if (ccon_n_delete_actions(node_struct->actions) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
-            node_struct->actions = copy_actions(actions);
+            node_struct->actions = ccon_n_copy_actions(actions);
         } else {
             node_struct->actions = actions;
         }

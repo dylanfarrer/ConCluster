@@ -38,7 +38,7 @@ TEST_F(BackgroundTasksTest, BackgroundTasksCreationAndDeletion) {
     int action_count = 3;
 
     // create actions struct and assert success
-    node_actions* actions = create_actions(actions_array, action_count);
+    ccon_n_node_actions* actions = ccon_n_create_actions(actions_array, action_count);
     ASSERT_NE(actions, nullptr);
     
     node_background_tasks* background_tasks = create_background_tasks(actions, &TestFunctionSchedule);
@@ -60,7 +60,7 @@ TEST_F(BackgroundTasksTest, BackgroundTasksCopy) {
     int action_count = 3;
 
     // create actions struct and assert success
-    node_actions* actions = create_actions(actions_array, action_count);
+    ccon_n_node_actions* actions = ccon_n_create_actions(actions_array, action_count);
     ASSERT_NE(actions, nullptr);
     
     node_background_tasks* background_tasks = create_background_tasks(actions, &TestFunctionSchedule);

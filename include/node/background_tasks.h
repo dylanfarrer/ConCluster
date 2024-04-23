@@ -18,7 +18,7 @@
  *      schedule -> invoke a periodic caller on the functions
  */
 typedef struct {
-    node_actions* actions;
+    ccon_n_node_actions* actions;
     int invocation_status;
     void* (*schedule) (void*);
 } node_background_tasks;
@@ -32,7 +32,7 @@ typedef struct {
  * @param schedule void* (void*) function pointer to represent a schedule mechanism.
  * @return node_background_tasks* struct or NULL.
  */
-node_background_tasks* create_background_tasks(node_actions* actions,
+node_background_tasks* create_background_tasks(ccon_n_node_actions* actions,
                                                void* (*schedule) (void*));
 
 /**

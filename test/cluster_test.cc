@@ -121,7 +121,7 @@ static ccon_n_node_address* create_address_struct() {
     return address;
 }
 
-static node_actions* create_actions_struct() {
+static ccon_n_node_actions* create_actions_struct() {
     Action* actions_array = (Action*) malloc(3 * sizeof(Action));
     actions_array[0] = &TestFunctionOne;
     actions_array[1] = &TestFunctionTwo;
@@ -129,7 +129,7 @@ static node_actions* create_actions_struct() {
 
     int action_count = 3;
 
-    node_actions* actions = create_actions(actions_array, action_count);
+    ccon_n_node_actions* actions = ccon_n_create_actions(actions_array, action_count);
 
     free(actions_array);
     return actions;

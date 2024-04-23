@@ -21,34 +21,34 @@ typedef void* (*Action) (void*);
 typedef struct {
     Action* actions;
     int action_count;
-} node_actions;
+} ccon_n_node_actions;
 
 /**
- * @brief Create an actions struct.
+ * @brief Create a ccon_n_actions struct.
  * Performs a deep copy on the actions array.
  * If malloc fails at anypoint or action_count < 0, cleanup is attempted and NULL is returned.
  * 
  * @param actions array of function pointers (void* return and paramaters).
  * @param action_count length of function pointers array, used in operations.
- * @return node_actions* actions struct, NULL if any malloc operation fails.
+ * @return ccon_n_node_actions* actions struct, NULL if any malloc operation fails.
  */
-node_actions* create_actions(Action* actions, int action_count);
+ccon_n_node_actions* ccon_n_create_actions(Action* actions, int action_count);
 
 /**
- * @brief performs deep copy on action struct to create new node_actions.
+ * @brief performs deep copy on action struct to create new ccon_n_node_actions.
  * if actions is NULL, return NULL
  * 
  * @param actions struct to copy
- * @return node_actions* struct, or NULL
+ * @return ccon_n_node_actions* struct, or NULL
  */
-node_actions* copy_actions(node_actions* actions);
+ccon_n_node_actions* ccon_n_copy_actions(ccon_n_node_actions* actions);
 
 /**
- * @brief deletes an actions struct.
+ * @brief deletes a ccon_n_actions struct.
  * 
  * @param actions struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int delete_actions(node_actions* actions);
+int ccon_n_delete_actions(ccon_n_node_actions* actions);
 
 #endif

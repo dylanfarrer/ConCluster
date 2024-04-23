@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <memory.h>
 
-node_actions* create_actions(Action* actions, int action_count) {
+ccon_n_node_actions* ccon_n_create_actions(Action* actions, int action_count) {
     if (action_count < 0) {
         return NULL;
     }
 
-    node_actions* actions_struct = malloc(sizeof(node_actions));
+    ccon_n_node_actions* actions_struct = malloc(sizeof(ccon_n_node_actions));
     if (actions_struct == NULL) {
         return NULL;
     }
@@ -38,15 +38,15 @@ node_actions* create_actions(Action* actions, int action_count) {
     return actions_struct;
 }
 
-node_actions* copy_actions(node_actions* actions) {
+ccon_n_node_actions* ccon_n_copy_actions(ccon_n_node_actions* actions) {
     if (actions == NULL) {
         return NULL;
     }
 
-    return create_actions(actions->actions, actions->action_count);
+    return ccon_n_create_actions(actions->actions, actions->action_count);
 }
 
-int delete_actions(node_actions* actions) {
+int ccon_n_delete_actions(ccon_n_node_actions* actions) {
     if (actions == NULL) {
         return 0;
     }
