@@ -30,9 +30,9 @@ typedef struct {
  * @return ccon_n_node_id* id struct. NULL if any malloc operation fails.
  */
 ccon_n_node_id* ccon_n_create_id(char** character_ids,
-                                int* integer_ids,
-                                int character_id_count,
-                                int integer_id_count);
+                                 int* integer_ids,
+                                 int character_id_count,
+                                 int integer_id_count);
 
 /**
  * @brief performs deep copy on ccon_n_id struct to create new node_id.

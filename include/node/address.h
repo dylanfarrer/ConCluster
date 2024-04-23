@@ -35,9 +35,9 @@ typedef struct {
  * @return ccon_n_node_address* address struct. NULL if any malloc operation fails.
  */
 ccon_n_node_address* ccon_n_create_address(char** character_addresses,
-                             int* integer_addresses,
-                             int character_address_count,
-                             int integer_address_count);
+                                           int* integer_addresses,
+                                           int character_address_count,
+                                           int integer_address_count);
 
 /**
  * @brief performs deep copy on ccon_n_address struct to create new node_address.

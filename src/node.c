@@ -4,12 +4,12 @@
 #include <stdio.h>
 
 ccon_node* ccon_create_node(ccon_n_node_id* id,
-                  ccon_n_node_role* role,
-                  ccon_n_node_address* address,
-                  ccon_n_node_actions* actions,
-                  ccon_n_node_background_tasks* background_tasks,
-                  ccon_n_node_servers* servers,
-                  ccon_n_node_contacts* contacts) {
+                            ccon_n_node_role* role,
+                            ccon_n_node_address* address,
+                            ccon_n_node_actions* actions,
+                            ccon_n_node_background_tasks* background_tasks,
+                            ccon_n_node_servers* servers,
+                            ccon_n_node_contacts* contacts) {
     if (id == NULL || \
         role == NULL || \
         address == NULL || \
@@ -42,12 +42,12 @@ ccon_node* ccon_copy_node(ccon_node* node_struct) {
     }
 
     return ccon_create_node(ccon_n_copy_id(node_struct->id),
-                       ccon_n_copy_role(node_struct->role),
-                       ccon_n_copy_address(node_struct->address),
-                       ccon_n_copy_actions(node_struct->actions),
-                       ccon_n_copy_background_tasks(node_struct->background_tasks),
-                       ccon_n_copy_servers(node_struct->servers),
-                       ccon_n_copy_contacts(node_struct->contacts));
+                            ccon_n_copy_role(node_struct->role),
+                            ccon_n_copy_address(node_struct->address),
+                            ccon_n_copy_actions(node_struct->actions),
+                            ccon_n_copy_background_tasks(node_struct->background_tasks),
+                            ccon_n_copy_servers(node_struct->servers),
+                            ccon_n_copy_contacts(node_struct->contacts));
 }
 
 ccon_node* ccon_create_default_node() {
@@ -127,14 +127,14 @@ int ccon_delete_node(ccon_node* node) {
 }
 
 int ccon_edit_node(ccon_node* node_struct,
-              ccon_n_node_id* id,
-              ccon_n_node_role* role,
-              ccon_n_node_address* address,
-              ccon_n_node_actions* actions,
-              ccon_n_node_background_tasks* background_tasks,
-              ccon_n_node_servers* servers,
-              ccon_n_node_contacts* contacts,
-              int deep_copy) {
+                   ccon_n_node_id* id,
+                   ccon_n_node_role* role,
+                   ccon_n_node_address* address,
+                   ccon_n_node_actions* actions,
+                   ccon_n_node_background_tasks* background_tasks,
+                   ccon_n_node_servers* servers,
+                   ccon_n_node_contacts* contacts,
+                   int deep_copy) {
     if (node_struct == NULL) {
         return -1;
     }

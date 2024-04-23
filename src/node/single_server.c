@@ -4,7 +4,7 @@
 #include <memory.h>
 
 ccon_n_node_single_server* ccon_n_create_single_server(ccon_n_node_address* address,
-                                         void* (*serve) (void*)) {
+                                                       void* (*serve) (void*)) {
     ccon_n_node_single_server* single_server = malloc(sizeof(ccon_n_node_single_server));
     if (single_server == NULL) {
         return NULL;

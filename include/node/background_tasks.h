@@ -5,7 +5,7 @@
 
 /**
  * @brief struct to represent a set of background tasks and a schedule mechanism.
- * Takes an action struct as a member to represent the set of background tasks.
+ * Takes a ccon_n_actions struct as a member to represent the set of background tasks.
  * Possible use cases:
  *  1.
  *      ccon_n_node_actions -> set of work items
@@ -25,15 +25,15 @@ typedef struct {
 
 /**
  * @brief Create a ccon_n_background_tasks struct.
- * Performs a shallow copy on the actions struct.
+ * Performs a shallow copy on the ccon_n_actions struct.
  * if malloc fails, returns NULL.
  * 
- * @param actions actions struct to represent background tasks.
+ * @param actions ccon_n_actions struct to represent background tasks.
  * @param schedule void* (void*) function pointer to represent a schedule mechanism.
  * @return ccon_n_node_background_tasks* struct or NULL.
  */
 ccon_n_node_background_tasks* ccon_n_create_background_tasks(ccon_n_node_actions* actions,
-                                               void* (*schedule) (void*));
+                                                             void* (*schedule) (void*));
 
 /**
  * @brief performs deep copy on ccon_n_background_tasks struct to create new node_background_tasks.
@@ -46,7 +46,7 @@ ccon_n_node_background_tasks* ccon_n_copy_background_tasks(ccon_n_node_backgroun
 
 /**
  * @brief deletes a ccon_n_node_background_tasks struct.
- * Calls actions function to delete actions member - if this fails, delete operation cancelled.
+ * Calls ccon_n_actions function to delete ccon_n_actions member - if this fails, delete operation cancelled.
  * 
  * @param background_tasks struct to free.
  * @return int 0 on success, -1 on failure.

@@ -4,9 +4,9 @@
 #include <string.h>
 
 ccon_n_node_address* ccon_n_create_address(char** character_addresses,
-                                        int* integer_addresses,
-                                        int character_address_count,
-                                        int integer_address_count) {
+                                           int* integer_addresses,
+                                           int character_address_count,
+                                           int integer_address_count) {
     
     if (integer_address_count < 0 || \
         character_address_count < 0) {
@@ -91,9 +91,9 @@ ccon_n_node_address* ccon_n_copy_address(ccon_n_node_address* address) {
     }
 
     return ccon_n_create_address(address->character_addresses,
-                          address->integer_addresses,
-                          address->character_address_count,
-                          address->integer_address_count);
+                                 address->integer_addresses,
+                                 address->character_address_count,
+                                 address->integer_address_count);
 }
 
 int ccon_n_delete_address(ccon_n_node_address* address) {

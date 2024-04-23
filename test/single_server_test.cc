@@ -36,9 +36,9 @@ TEST_F(SingleServerTest, SingleServerCreationAndDeletion) {
 
     // create address and assert successful creation
     ccon_n_node_address* address = ccon_n_create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+                                                         integer_addresses,
+                                                         char_address_count,
+                                                         integer_address_count);
     ASSERT_NE(address, nullptr);
 
 
@@ -75,9 +75,9 @@ TEST_F(SingleServerTest, SingleServerCopy) {
 
     // create address and assert successful creation
     ccon_n_node_address* address = ccon_n_create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+                                                         integer_addresses,
+                                                         char_address_count,
+                                                         integer_address_count);
     ASSERT_NE(address, nullptr);
 
 

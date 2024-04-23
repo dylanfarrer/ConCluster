@@ -5,7 +5,7 @@
 
 /**
  * @brief struct to represent a set of 'servers'.
- * Takes an array of node_single_server structs.
+ * Takes an array of ccon_n_node_single_server structs.
  * Possible use cases:
  *  1.
  *      see single_server.h
@@ -17,11 +17,11 @@ typedef struct {
 
 /**
  * @brief Create a ccon_n_node_servers struct.
- * Creates a new server array, but shallow copies each node_single_server structs.
+ * Creates a new server array, but shallow copies each ccon_n_node_single_server structs.
  * if malloc fails or server_count < 0, returns NULL.
  * Accepts NULL array, but will not accept NULL array items in non-NULL array.
  * 
- * @param servers set of node_single_server structs to represent servers.
+ * @param servers set of ccon_n_node_single_server structs to represent servers.
  * @param server_count number of servers, used in operations.
  * @return ccon_n_node_servers* struct or NULL.
  */
@@ -38,7 +38,8 @@ ccon_n_node_servers* ccon_n_copy_servers(ccon_n_node_servers* servers);
 
 /**
  * @brief deletes a ccon_n_node_servers struct.
- * Calls single_server function to delete single_server member - if this fails, delete operation cancelled.
+ * Calls ccon_n_node_single_server function to delete ccon_n_node_single_server member - 
+ * if this fails, delete operation cancelled.
  * 
  * @param node_servers struct to free.
  * @return int 0 on success, -1 on failure.

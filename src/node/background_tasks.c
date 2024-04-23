@@ -4,7 +4,7 @@
 #include <memory.h>
 
 ccon_n_node_background_tasks* ccon_n_create_background_tasks(ccon_n_node_actions* actions,
-                                               void* (*schedule) (void*)) {
+                                                             void* (*schedule) (void*)) {
     ccon_n_node_background_tasks* background_tasks = malloc(sizeof(ccon_n_node_background_tasks));
     if (background_tasks == NULL) {
         return NULL;

@@ -5,16 +5,16 @@
 
 /**
  * @brief struct to represent a single 'server' and serve mechanism.
- * Takes an address struct as a member to represent the set of server addresses.
+ * Takes a ccon_n_node_address struct as a member to represent the set of server addresses.
  * Possible use cases:
  *  1.
- *      node_address -> set of IP addresses to serve
+ *      ccon_n_node_address -> set of IP addresses to serve
  *      serve -> serve function
  *  2.
- *      node_address -> set of files to watch
+ *      ccon_n_node_address -> set of files to watch
  *      serve -> watch/act function
  *  3.
- *      node_address -> set of message bus channels
+ *      ccon_n_node_address -> set of message bus channels
  *      serve -> subscribe function
  */
 typedef struct {
@@ -25,10 +25,10 @@ typedef struct {
 
 /**
  * @brief Create a node_single_server struct.
- * Performs a shallow copy on the address struct.
+ * Performs a shallow copy on the ccon_n_node_address struct.
  * if malloc fails, returns NULL.
  * 
- * @param address address struct to represent server addresses.
+ * @param address ccon_n_node_address struct to represent server addresses.
  * @param serve void* (void*) function pointer to represent a serve mechanism.
  * @return ccon_n_node_single_server* struct or NULL.
  */
@@ -45,7 +45,7 @@ ccon_n_node_single_server* ccon_n_copy_single_server(ccon_n_node_single_server* 
 
 /**
  * @brief deletes a ccon_n_node_single_server struct.
- * Calls address function to delete address member - if this fails, delete operation cancelled.
+ * Calls ccon_n_node_address function to delete ccon_n_node_address member - if this fails, delete operation cancelled.
  * 
  * @param node_single_server struct to free.
  * @return int 0 on success, -1 on failure.

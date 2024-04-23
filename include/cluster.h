@@ -39,16 +39,16 @@ ccon_cluster* ccon_create_cluster_from_node(ccon_node* node_struct, int node_cou
 /**
  * @brief Create a cluster of population node_count from default ccon_node struct.
  * if malloc fails or node_count is negative, returns NULL.
- * utilises create_cluster_from_node
+ * utilises ccon_create_cluster_from_node
  * 
  * @param node_count number of nodes to have in struct.
- * @return cluster* cluster struct or NULL.
+ * @return ccon_cluster* ccon_cluster struct or NULL.
  */
 ccon_cluster* ccon_create_cluster_from_default_node(int node_count);
 
 /**
- * @brief deletes a cluster struct.
- * Calls underlying delete function for node, if any fail, delete operation is cancelled.
+ * @brief deletes a ccon_cluster struct.
+ * Calls underlying delete function for ccon_node, if any fail, delete operation is cancelled.
  * 
  * @param cluster struct to free.
  * @return int 0 on success, -1 on failure.
@@ -56,18 +56,18 @@ ccon_cluster* ccon_create_cluster_from_default_node(int node_count);
 int ccon_delete_cluster(ccon_cluster* cluster);
 
 /**
- * @brief delete node from cluster struct.
- * Calls underlying delete function for node, if it fails, delete operation is cancelled.
+ * @brief delete ccon_node from ccon_cluster struct.
+ * Calls underlying delete function for ccon_node, if it fails, delete operation is cancelled.
  * 
  * @param cluster struct to free
- * @param node_index index of struct in cluster
+ * @param node_index index of struct in ccon_cluster
  * @return int 0 on success, -1 on failure
  */
 int ccon_delete_cluster_node(ccon_cluster* cluster, int node_index);
 
 /**
- * @brief edit a node in-place in a cluster.
- * Any node member items that are not NULL will be updated in the corresponding node.
+ * @brief edit a ccon_node in-place in a cluster.
+ * Any ccon_node member items that are not NULL will be updated in the corresponding ccon_node.
  * if deep copy is zero, the copy id deep, else shallow.
  * see ccon_edit_node for more info.
  * 
@@ -84,14 +84,14 @@ int ccon_delete_cluster_node(ccon_cluster* cluster, int node_index);
  * @return int 0 on success, -1 on failure.
  */
 int ccon_edit_cluster_node(ccon_cluster* cluster,
-                            int node_index,
-                            ccon_n_node_id* id,
-                            ccon_n_node_role* role,
-                            ccon_n_node_address* address,
-                            ccon_n_node_actions* actions,
-                            ccon_n_node_background_tasks* background_tasks,
-                            ccon_n_node_servers* servers,
-                            ccon_n_node_contacts* contacts,
-                            int deep_copy);
+                           int node_index,
+                           ccon_n_node_id* id,
+                           ccon_n_node_role* role,
+                           ccon_n_node_address* address,
+                           ccon_n_node_actions* actions,
+                           ccon_n_node_background_tasks* background_tasks,
+                           ccon_n_node_servers* servers,
+                           ccon_n_node_contacts* contacts,
+                           int deep_copy);
 
 #endif

@@ -4,9 +4,9 @@
 #include <string.h>
 
 ccon_n_node_id* ccon_n_create_id(char** character_ids,
-                                int* integer_ids,
-                                int character_id_count,
-                                int integer_id_count) {
+                                 int* integer_ids,
+                                 int character_id_count,
+                                 int integer_id_count) {
     if (character_id_count < 0 || \
         integer_id_count < 0) {
         return NULL;

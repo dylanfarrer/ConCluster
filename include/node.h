@@ -53,7 +53,7 @@ ccon_node* ccon_create_node(ccon_n_node_id* id,
  * Performs deep copy on node_struct struct.
  * if malloc fails or node_struct struct is NULL, return NUL.
  * 
- * @param node_struct node to deep copy
+ * @param node_struct ccon_node to deep copy
  * @return ccon_node* node struct or NULL
  */
 ccon_node* ccon_copy_node(ccon_node* node_struct);
@@ -97,13 +97,13 @@ int ccon_delete_node(ccon_node* node);
  * @return int 0 on success, -1 on failure.
  */
 int ccon_edit_node(ccon_node* node_struct,
-                    ccon_n_node_id* id,
-                    ccon_n_node_role* role,
-                    ccon_n_node_address* address,
-                    ccon_n_node_actions* actions,
-                    ccon_n_node_background_tasks* background_tasks,
-                    ccon_n_node_servers* servers,
-                    ccon_n_node_contacts* contacts,
-                    int deep_copy);
+                   ccon_n_node_id* id,
+                   ccon_n_node_role* role,
+                   ccon_n_node_address* address,
+                   ccon_n_node_actions* actions,
+                   ccon_n_node_background_tasks* background_tasks,
+                   ccon_n_node_servers* servers,
+                   ccon_n_node_contacts* contacts,
+                   int deep_copy);
 
 #endif

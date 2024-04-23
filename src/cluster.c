@@ -154,15 +154,15 @@ int ccon_delete_cluster_node(ccon_cluster* cluster_struct, int node_index) {
 }
 
 int ccon_edit_cluster_node(ccon_cluster* cluster,
-                      int node_index,
-                      ccon_n_node_id* id,
-                      ccon_n_node_role* role,
-                      ccon_n_node_address* address,
-                      ccon_n_node_actions* actions,
-                      ccon_n_node_background_tasks* background_tasks,
-                      ccon_n_node_servers* servers,
-                      ccon_n_node_contacts* contacts,
-                      int deep_copy) {
+                           int node_index,
+                           ccon_n_node_id* id,
+                           ccon_n_node_role* role,
+                           ccon_n_node_address* address,
+                           ccon_n_node_actions* actions,
+                           ccon_n_node_background_tasks* background_tasks,
+                           ccon_n_node_servers* servers,
+                           ccon_n_node_contacts* contacts,
+                           int deep_copy) {
     if (cluster == NULL || \
         node_index < 0 || \
         node_index >= cluster->node_count || \

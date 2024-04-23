@@ -33,9 +33,9 @@ typedef struct {
  * @return ccon_n_node_role* ccon_n_role struct. NULL if any malloc operation fails.
  */
 ccon_n_node_role* ccon_n_create_role(char** character_roles,
-                                    int* integer_roles,
-                                    int character_role_count,
-                                    int integer_role_count);
+                                     int* integer_roles,
+                                     int character_role_count,
+                                     int integer_role_count);
 
 /**
  * @brief performs deep copy on ccon_n_role struct to create new node_role.

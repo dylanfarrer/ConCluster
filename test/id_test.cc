@@ -30,9 +30,9 @@ TEST_F(IdTest, IdCreationAndDeletion) {
     int char_id_count = 3;
     int integer_id_count = 3;
     ccon_n_node_id* id = ccon_n_create_id(char_ids,
-                            integer_ids,
-                            char_id_count,
-                            integer_id_count);
+                                          integer_ids,
+                                          char_id_count,
+                                          integer_id_count);
     ASSERT_NE(id, nullptr);
 
     int result = ccon_n_delete_id(id);
@@ -63,9 +63,9 @@ TEST_F(IdTest, IdCopy) {
     int char_id_count = 3;
     int integer_id_count = 3;
     ccon_n_node_id* id = ccon_n_create_id(char_ids,
-                            integer_ids,
-                            char_id_count,
-                            integer_id_count);
+                                          integer_ids,
+                                          char_id_count,
+                                          integer_id_count);
     ASSERT_NE(id, nullptr);
 
     ccon_n_node_id* id_two = ccon_n_copy_id(id);
@@ -86,9 +86,9 @@ TEST_F(IdTest, IdCopy) {
 
 TEST_F(IdTest, IdNULLCreationAndDeletion) {
     ccon_n_node_id* id = ccon_n_create_id(nullptr,
-                            nullptr,
-                            0,
-                            0);
+                                          nullptr,
+                                          0,
+                                          0);
     ASSERT_NE(id, nullptr);
 
     int result = ccon_n_delete_id(id);

@@ -4,9 +4,9 @@
 #include <string.h>
 
 ccon_n_node_role* ccon_n_create_role(char** character_roles,
-                                    int* integer_roles,
-                                    int character_role_count,
-                                    int integer_role_count) {
+                                     int* integer_roles,
+                                     int character_role_count,
+                                     int integer_role_count) {
     if (character_role_count < 0 || \
         integer_role_count < 0) {
         return NULL;
@@ -89,9 +89,9 @@ ccon_n_node_role* ccon_n_copy_role(ccon_n_node_role* role) {
         return NULL;
     }
     return ccon_n_create_role(role->character_roles,
-                       role->integer_roles,
-                       role->character_role_count,
-                       role->integer_role_count);
+                              role->integer_roles,
+                              role->character_role_count,
+                              role->integer_role_count);
 }
 
 int ccon_n_delete_role(ccon_n_node_role* role) {

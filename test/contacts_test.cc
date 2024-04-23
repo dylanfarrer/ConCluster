@@ -32,15 +32,15 @@ TEST_F(ContactsTest, ContactsCreationAndDeletion) {
     int integer_address_count = 3;
 
     ccon_n_node_address* address_one = ccon_n_create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+                                                             integer_addresses,
+                                                             char_address_count,
+                                                             integer_address_count);
     ASSERT_NE(address_one, nullptr);
 
     ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
-                                               integer_addresses,
-                                               char_address_count,
-                                               integer_address_count);
+                                                             integer_addresses,
+                                                             char_address_count,
+                                                             integer_address_count);
     ASSERT_NE(address_two, nullptr);
 
 
@@ -84,15 +84,15 @@ TEST_F(ContactsTest, ContactsCopy) {
     int integer_address_count = 3;
 
     ccon_n_node_address* address_one = ccon_n_create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+                                                             integer_addresses,
+                                                             char_address_count,
+                                                             integer_address_count);
     ASSERT_NE(address_one, nullptr);
 
     ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
-                                               integer_addresses,
-                                               char_address_count,
-                                               integer_address_count);
+                                                             integer_addresses,
+                                                             char_address_count,
+                                                             integer_address_count);
     ASSERT_NE(address_two, nullptr);
 
 

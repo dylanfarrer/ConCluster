@@ -78,9 +78,9 @@ static ccon_n_node_role* create_role_struct() {
     int char_role_count = 3;
     int integer_role_count = 3;
     ccon_n_node_role* role = ccon_n_create_role(char_roles,
-                                  integer_roles,
-                                  char_role_count,
-                                  integer_role_count);
+                                                integer_roles,
+                                                char_role_count,
+                                                integer_role_count);
 
     free(integer_roles);
     free(char_roles[0]);
@@ -108,9 +108,9 @@ static ccon_n_node_address* create_address_struct() {
     int char_address_count = 3;
     int integer_address_count = 3;
     ccon_n_node_address* address = ccon_n_create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+                                                         integer_addresses,
+                                                         char_address_count,
+                                                         integer_address_count);
     
     free(integer_addresses);
     free(char_addresses[0]);
@@ -157,16 +157,16 @@ static ccon_n_node_servers* create_servers_struct() {
     int integer_address_count = 3;
 
     ccon_n_node_address* address = ccon_n_create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+                                                         integer_addresses,
+                                                         char_address_count,
+                                                         integer_address_count);
 
     ccon_n_node_single_server* single_server_one = ccon_n_create_single_server(address, &TestFunctionServe);
 
     ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+                                                             integer_addresses,
+                                                             char_address_count,
+                                                             integer_address_count);
 
     ccon_n_node_single_server* single_server_two = ccon_n_create_single_server(address_two, &TestFunctionServe);
 
@@ -208,12 +208,12 @@ static ccon_n_node_contacts* create_contacts_struct() {
 
 static ccon_node* create_node_struct() {
     ccon_node* node_struct = ccon_create_node(create_id_struct(),
-                                    create_role_struct(),
-                                    create_address_struct(),
-                                    create_actions_struct(),
-                                    create_background_tasks_struct(),
-                                    create_servers_struct(),
-                                    create_contacts_struct());
+                                              create_role_struct(),
+                                              create_address_struct(),
+                                              create_actions_struct(),
+                                              create_background_tasks_struct(),
+                                              create_servers_struct(),
+                                              create_contacts_struct());
     return node_struct;
 }
 
@@ -277,15 +277,15 @@ TEST_F(ClusterTest, ShallowEditClusterNode) {
 
     ccon_n_node_address* address = create_address_struct();
     int edit_result = ccon_edit_cluster_node(cluster_struct,
-                                        2,
-                                        nullptr,
-                                        nullptr,
-                                        address,
-                                        nullptr,
-                                        nullptr,
-                                        nullptr,
-                                        nullptr,
-                                        1);
+                                             2,
+                                             nullptr,
+                                             nullptr,
+                                             address,
+                                             nullptr,
+                                             nullptr,
+                                             nullptr,
+                                             nullptr,
+                                             1);
     ASSERT_EQ(edit_result, 0);
 
     ASSERT_EQ(cluster_struct->nodes[2]->address->character_address_count, 3);
@@ -303,15 +303,15 @@ TEST_F(ClusterTest, DeepEditClusterNode) {
 
     ccon_n_node_id* id = create_id_struct();
     int edit_result = ccon_edit_cluster_node(cluster_struct,
-                                        2,
-                                        id,
-                                        nullptr,
-                                        nullptr,
-                                        nullptr,
-                                        nullptr,
-                                        nullptr,
-                                        nullptr,
-                                        0);
+                                             2,
+                                             id,
+                                             nullptr,
+                                             nullptr,
+                                             nullptr,
+                                             nullptr,
+                                             nullptr,
+                                             nullptr,
+                                             0);
     ASSERT_EQ(edit_result, 0);
     ccon_n_delete_id(id);
 
