@@ -11,7 +11,7 @@
  *      see single_server.h
  */
 typedef struct {
-    node_single_server** servers;
+    ccon_n_node_single_server** servers;
     int server_count;
 } node_servers;
 
@@ -25,7 +25,7 @@ typedef struct {
  * @param server_count number of servers, used in operations.
  * @return node_servers* struct or NULL.
  */
-node_servers* create_servers(node_single_server** servers, int server_count);
+node_servers* create_servers(ccon_n_node_single_server** servers, int server_count);
 
 /**
  * @brief performs deep copy on servers struct to create new node_servers.

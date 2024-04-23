@@ -21,7 +21,7 @@ typedef struct {
     ccon_n_node_address* address;
     int invocation_status;
     void* (*serve) (void*);
-} node_single_server;
+} ccon_n_node_single_server;
 
 /**
  * @brief Create a node_single_server struct.
@@ -30,26 +30,26 @@ typedef struct {
  * 
  * @param address address struct to represent server addresses.
  * @param serve void* (void*) function pointer to represent a serve mechanism.
- * @return node_single_server* struct or NULL.
+ * @return ccon_n_node_single_server* struct or NULL.
  */
-node_single_server* create_single_server(ccon_n_node_address* address, void* (*serve) (void*));
+ccon_n_node_single_server* ccon_n_create_single_server(ccon_n_node_address* address, void* (*serve) (void*));
 
 /**
- * @brief performs deep copy on single_server struct to create new node_single_server.
+ * @brief performs deep copy on ccon_n_single_server struct to create new node_single_server.
  * if single_server is NULL, return NULL
  * 
  * @param single_server struct to copy
- * @return node_single_server* struct, or NULL
+ * @return ccon_n_node_single_server* struct, or NULL
  */
-node_single_server* copy_single_server(node_single_server* single_server);
+ccon_n_node_single_server* ccon_n_copy_single_server(ccon_n_node_single_server* single_server);
 
 /**
- * @brief deletes a node_single_server struct.
+ * @brief deletes a ccon_n_node_single_server struct.
  * Calls address function to delete address member - if this fails, delete operation cancelled.
  * 
  * @param node_single_server struct to free.
  * @return int 0 on success, -1 on failure.
  */
-int delete_single_server(node_single_server* single_server);
+int ccon_n_delete_single_server(ccon_n_node_single_server* single_server);
 
 #endif

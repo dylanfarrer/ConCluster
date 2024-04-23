@@ -161,16 +161,16 @@ static node_servers* create_servers_struct() {
                                            char_address_count,
                                            integer_address_count);
 
-    node_single_server* single_server_one = create_single_server(address, &TestFunctionServe);
+    ccon_n_node_single_server* single_server_one = ccon_n_create_single_server(address, &TestFunctionServe);
 
     ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
 
-    node_single_server* single_server_two = create_single_server(address_two, &TestFunctionServe);
+    ccon_n_node_single_server* single_server_two = ccon_n_create_single_server(address_two, &TestFunctionServe);
 
-    node_single_server** server_array = (node_single_server**) malloc(sizeof(node_single_server*) * 2);
+    ccon_n_node_single_server** server_array = (ccon_n_node_single_server**) malloc(sizeof(ccon_n_node_single_server*) * 2);
     server_array[0] = single_server_one;
     server_array[1] = single_server_two;
 

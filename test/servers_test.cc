@@ -43,7 +43,7 @@ TEST_F(ServersTest, ServersCreationAndDeletion) {
     ASSERT_NE(address, nullptr);
 
 
-    node_single_server* single_server_one = create_single_server(address, &TestFunctionServe);
+    ccon_n_node_single_server* single_server_one = ccon_n_create_single_server(address, &TestFunctionServe);
     ASSERT_NE(single_server_one, nullptr);
 
     // create address and assert successful creation
@@ -53,10 +53,10 @@ TEST_F(ServersTest, ServersCreationAndDeletion) {
                                            integer_address_count);
     ASSERT_NE(address_two, nullptr);
 
-    node_single_server* single_server_two = create_single_server(address_two, &TestFunctionServe);
+    ccon_n_node_single_server* single_server_two = ccon_n_create_single_server(address_two, &TestFunctionServe);
     ASSERT_NE(single_server_two, nullptr);
 
-    node_single_server** server_array = (node_single_server**) malloc(sizeof(node_single_server*) * 2);
+    ccon_n_node_single_server** server_array = (ccon_n_node_single_server**) malloc(sizeof(ccon_n_node_single_server*) * 2);
     server_array[0] = single_server_one;
     server_array[1] = single_server_two;
 
@@ -103,7 +103,7 @@ TEST_F(ServersTest, ServersCopy) {
     ASSERT_NE(address, nullptr);
 
 
-    node_single_server* single_server_one = create_single_server(address, &TestFunctionServe);
+    ccon_n_node_single_server* single_server_one = ccon_n_create_single_server(address, &TestFunctionServe);
     ASSERT_NE(single_server_one, nullptr);
 
     // create address and assert successful creation
@@ -113,10 +113,10 @@ TEST_F(ServersTest, ServersCopy) {
                                            integer_address_count);
     ASSERT_NE(address_two, nullptr);
 
-    node_single_server* single_server_two = create_single_server(address_two, &TestFunctionServe);
+    ccon_n_node_single_server* single_server_two = ccon_n_create_single_server(address_two, &TestFunctionServe);
     ASSERT_NE(single_server_two, nullptr);
 
-    node_single_server** server_array = (node_single_server**) malloc(sizeof(node_single_server*) * 2);
+    ccon_n_node_single_server** server_array = (ccon_n_node_single_server**) malloc(sizeof(ccon_n_node_single_server*) * 2);
     server_array[0] = single_server_one;
     server_array[1] = single_server_two;
 
