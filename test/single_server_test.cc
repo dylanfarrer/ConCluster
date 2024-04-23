@@ -35,17 +35,17 @@ TEST_F(SingleServerTest, SingleServerCreationAndDeletion) {
     int integer_address_count = 3;
 
     // create address and assert successful creation
-    node_address* address = create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+    ccon_n_node_address* address = ccon_n_create_address(char_addresses,
+                                                         integer_addresses,
+                                                         char_address_count,
+                                                         integer_address_count);
     ASSERT_NE(address, nullptr);
 
 
-    node_single_server* single_server = create_single_server(address, &TestFunctionServe);
+    ccon_n_node_single_server* single_server = ccon_n_create_single_server(address, &TestFunctionServe);
     ASSERT_NE(single_server, nullptr);
 
-    int result = delete_single_server(single_server);
+    int result = ccon_n_delete_single_server(single_server);
     ASSERT_EQ(result, 0);
 
     free(integer_addresses);
@@ -74,23 +74,23 @@ TEST_F(SingleServerTest, SingleServerCopy) {
     int integer_address_count = 3;
 
     // create address and assert successful creation
-    node_address* address = create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+    ccon_n_node_address* address = ccon_n_create_address(char_addresses,
+                                                         integer_addresses,
+                                                         char_address_count,
+                                                         integer_address_count);
     ASSERT_NE(address, nullptr);
 
 
-    node_single_server* single_server = create_single_server(address, &TestFunctionServe);
+    ccon_n_node_single_server* single_server = ccon_n_create_single_server(address, &TestFunctionServe);
     ASSERT_NE(single_server, nullptr);
 
-    node_single_server* single_server_two = copy_single_server(single_server);
+    ccon_n_node_single_server* single_server_two = ccon_n_copy_single_server(single_server);
     ASSERT_NE(single_server_two, nullptr);
 
-    int result = delete_single_server(single_server);
+    int result = ccon_n_delete_single_server(single_server);
     ASSERT_EQ(result, 0);
 
-    int result_two = delete_single_server(single_server_two);
+    int result_two = ccon_n_delete_single_server(single_server_two);
     ASSERT_EQ(result_two, 0);
 
     free(integer_addresses);
@@ -101,9 +101,9 @@ TEST_F(SingleServerTest, SingleServerCopy) {
 }
 
 TEST_F(SingleServerTest, SingleServerNULLCreationAndDeletion) {
-    node_single_server* single_server = create_single_server(nullptr, nullptr);
+    ccon_n_node_single_server* single_server = ccon_n_create_single_server(nullptr, nullptr);
     ASSERT_NE(single_server, nullptr);
 
-    int result = delete_single_server(single_server);
+    int result = ccon_n_delete_single_server(single_server);
     ASSERT_EQ(result, 0);
 }

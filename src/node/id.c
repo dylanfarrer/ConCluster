@@ -3,16 +3,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-node_id* create_id(char** character_ids,
-                   int* integer_ids,
-                   int character_id_count,
-                   int integer_id_count) {
+ccon_n_node_id* ccon_n_create_id(char** character_ids,
+                                 int* integer_ids,
+                                 int character_id_count,
+                                 int integer_id_count) {
     if (character_id_count < 0 || \
         integer_id_count < 0) {
         return NULL;
     }
 
-    node_id* id_struct = malloc(sizeof(node_id));
+    ccon_n_node_id* id_struct = malloc(sizeof(ccon_n_node_id));
     if (id_struct == NULL) {
         return NULL;
     }
@@ -84,18 +84,18 @@ node_id* create_id(char** character_ids,
     return id_struct;
 }
 
-node_id* copy_id(node_id* id) {
+ccon_n_node_id* ccon_n_copy_id(ccon_n_node_id* id) {
     if (id == NULL) {
         return NULL;
     }
 
-    return create_id(id->character_ids,
-                     id->integer_ids,
-                     id->character_id_count,
-                     id->integer_id_count);
+    return ccon_n_create_id(id->character_ids,
+                            id->integer_ids,
+                            id->character_id_count,
+                            id->integer_id_count);
 }
 
-int delete_id(node_id* id) {
+int ccon_n_delete_id(ccon_n_node_id* id) {
     if (id == NULL) {
         return 0;
     }

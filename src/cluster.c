@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <memory.h>
 
-cluster* create_cluster(node** nodes, int node_count) {
+ccon_cluster* ccon_create_cluster(ccon_node** nodes, int node_count) {
     if (nodes == NULL || node_count < 1) {
         return NULL;
     }
@@ -14,12 +14,12 @@ cluster* create_cluster(node** nodes, int node_count) {
         }
     }
 
-    cluster* cluster_struct = malloc(sizeof(cluster));
+    ccon_cluster* cluster_struct = malloc(sizeof(ccon_cluster));
     if (cluster_struct == NULL) {
         return NULL;
     }
 
-    cluster_struct->nodes = malloc(sizeof(node*) * node_count);
+    cluster_struct->nodes = malloc(sizeof(ccon_node*) * node_count);
     if (cluster_struct->nodes == NULL) {
         free(cluster_struct);
         return NULL;
@@ -33,24 +33,24 @@ cluster* create_cluster(node** nodes, int node_count) {
     return cluster_struct;
 }
 
-cluster* create_cluster_from_node(node* node_struct, int node_count) {
+ccon_cluster* ccon_create_cluster_from_node(ccon_node* node_struct, int node_count) {
     if (node_count < 1 || node_struct == NULL) {
         return NULL;
     }
 
-    node** node_array = malloc(sizeof(node*) * node_count);
+    ccon_node** node_array = malloc(sizeof(ccon_node*) * node_count);
     if (node_array == NULL) {
         return NULL;
     }
 
-    node_array[0] = copy_node(node_struct);
+    node_array[0] = ccon_copy_node(node_struct);
     if (node_array[0] == NULL) {
         free(node_array);
         return NULL;
     }
     
     for (int i = 1; i < node_count; i++) {
-        node_array[i] = copy_node(node_struct);
+        node_array[i] = ccon_copy_node(node_struct);
         if (node_array[i] == NULL) {
             for (int j = 0; j < i; j++) {
                 free(node_array[j]);
@@ -60,7 +60,7 @@ cluster* create_cluster_from_node(node* node_struct, int node_count) {
         }
     }
 
-    cluster* cluster_struct = create_cluster(node_array, node_count);
+    ccon_cluster* cluster_struct = ccon_create_cluster(node_array, node_count);
     if (cluster_struct == NULL) {
         free(node_array);
         return NULL;
@@ -70,15 +70,15 @@ cluster* create_cluster_from_node(node* node_struct, int node_count) {
     return cluster_struct;
 }
 
-cluster* create_cluster_from_default_node(int node_count) {
+ccon_cluster* ccon_create_cluster_from_default_node(int node_count) {
     if (node_count < 1) {
         return NULL;
     }
 
-    node* default_node = create_default_node();
+    ccon_node* default_node = ccon_create_default_node();
 
-    cluster* cluster_struct = create_cluster_from_node(default_node, node_count);
-    delete_node(default_node);
+    ccon_cluster* cluster_struct = ccon_create_cluster_from_node(default_node, node_count);
+    ccon_delete_node(default_node);
     if (cluster_struct == NULL) {
         return NULL;
     } else {
@@ -86,7 +86,7 @@ cluster* create_cluster_from_default_node(int node_count) {
     }
 }
 
-int delete_cluster(cluster* cluster) {
+int ccon_delete_cluster(ccon_cluster* cluster) {
     if (cluster == NULL) {
         return 0;
     }
@@ -97,7 +97,7 @@ int delete_cluster(cluster* cluster) {
 
     if (cluster->nodes != NULL) {
         for (int i = 0; i < cluster->node_count; i++) {
-            delete_node(cluster->nodes[i]);
+            ccon_delete_node(cluster->nodes[i]);
         }
         free(cluster->nodes);
     }
@@ -106,14 +106,14 @@ int delete_cluster(cluster* cluster) {
     return 0;
 }
 
-int delete_cluster_node(cluster* cluster_struct, int node_index) {
+int ccon_delete_cluster_node(ccon_cluster* cluster_struct, int node_index) {
     if (cluster_struct == NULL || cluster_struct->nodes == NULL || \
         cluster_struct->node_count <= node_index || node_index < 0) {
         return 0;
     }
 
     // create temp array
-    node** cluster_array = malloc(sizeof(node*) * (cluster_struct->node_count - 1));
+    ccon_node** cluster_array = malloc(sizeof(ccon_node*) * (cluster_struct->node_count - 1));
     if (cluster_array == NULL) {
         return -1;
     }
@@ -127,11 +127,11 @@ int delete_cluster_node(cluster* cluster_struct, int node_index) {
     }
 
     // free elemnt to delete and old array
-    delete_node(cluster_struct->nodes[node_index]);
+    ccon_delete_node(cluster_struct->nodes[node_index]);
     free(cluster_struct->nodes);
 
     // re allocate nodes
-    cluster_struct->nodes = malloc(sizeof(node*) * (cluster_struct->node_count - 1));
+    cluster_struct->nodes = malloc(sizeof(ccon_node*) * (cluster_struct->node_count - 1));
     if (cluster_struct->nodes == NULL) {
         for (int i = 0; i < cluster_struct->node_count - 1; i++) {
             free(cluster_array[i]);
@@ -153,16 +153,16 @@ int delete_cluster_node(cluster* cluster_struct, int node_index) {
     return 0;
 }
 
-int edit_cluster_node(cluster* cluster,
-                      int node_index,
-                      node_id* id,
-                      node_role* role,
-                      node_address* address,
-                      node_actions* actions,
-                      node_background_tasks* background_tasks,
-                      node_servers* servers,
-                      node_contacts* contacts,
-                      int deep_copy) {
+int ccon_edit_cluster_node(ccon_cluster* cluster,
+                           int node_index,
+                           ccon_n_node_id* id,
+                           ccon_n_node_role* role,
+                           ccon_n_node_address* address,
+                           ccon_n_node_actions* actions,
+                           ccon_n_node_background_tasks* background_tasks,
+                           ccon_n_node_servers* servers,
+                           ccon_n_node_contacts* contacts,
+                           int deep_copy) {
     if (cluster == NULL || \
         node_index < 0 || \
         node_index >= cluster->node_count || \
@@ -170,7 +170,7 @@ int edit_cluster_node(cluster* cluster,
         return -1;
     }
 
-    return edit_node(cluster->nodes[node_index],
+    return ccon_edit_node(cluster->nodes[node_index],
                      id,
                      role,
                      address,

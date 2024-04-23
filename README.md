@@ -1,9 +1,9 @@
 # ConCluster - Configurable Cluster
 
 ConCluster is a C library (under-development) for simplifying the creation of multi-agent systems.
-It will provide Cluster and Node structures that attempt to make little to no assumptions about the
-system they will be integrated into. Additionally, example systems that utilise the Cluster and Node
-structures will be available within the codebase.
+It provides the Cluster and Node structures, which attempt to make little to no assumptions about the
+system they are integrated into. Additionally, example systems that utilise the Cluster and Node
+structures will be worked on within the codebase.
 
 ## Installation
 
@@ -15,49 +15,59 @@ Point to the cluster header
 ```c
 #include "path/to/cluster.h"
 
+// Cluster and Node use the prefix 'ccon_', and
+// provide create, delete and edit functions. Node also has copy.
+//
+// Inner node members use the prefix 'ccon_n_', and
+// provide create, delete and copy functions.
+//
+// See individual headers for futher information.
+
+
 // default cluster
-cluster* default_cluster = create_cluster_from_default_node(1);
-int result = delete_cluster(default_cluster);
+ccon_cluster* default_cluster = ccon_create_cluster_from_default_node(1);
+int result = ccon_delete_cluster(default_cluster);
 
 // default cloned cluster
-cluster* clone_cluster = create_cluster_from_default_node(5);
-delete_cluster(clone_cluster);
+ccon_cluster* clone_cluster = ccon_create_cluster_from_default_node(5);
+ccon_delete_cluster(clone_cluster);
 
 // custom cloned cluster
-node* my_own_node = create_default_node();
-cluster* my_own_clone_cluster = create_cluster_from_node(my_own_node, 5);
-int node_delete_result = delete_node(my_own_node);
-delete_cluster(my_own_clone_cluster);
+ccon_node* my_own_node = ccon_create_default_node();
+ccon_cluster* my_own_clone_cluster = ccon_create_cluster_from_node(my_own_node, 5);
+int node_delete_result = ccon_delete_node(my_own_node);
+ccon_delete_cluster(my_own_clone_cluster);
 
 // handrolled cluster (see node.h for further information on node creation).
-node** node_array_I_made_previously;
+ccon_node** node_array_I_made_previously;
 int node_array_length;
-cluster* hand_rolled_cluster = create_cluster(node_array_I_made_previously, node_array_length);
-delete_cluster(hand_rolled_cluster);
+ccon_cluster* hand_rolled_cluster = ccon_create_cluster(node_array_I_made_previously, node_array_length);
+ccon_delete_cluster(hand_rolled_cluster);
 
 // pruning a cluster
-cluster* clone_cluster_to_prune = create_cluster_from_default_node(5);
-int prune_result = delete_cluster_node(clone_cluster_to_prune, 3); // give index
-delete_cluster(clone_cluster_to_prune);
+ccon_cluster* clone_cluster_to_prune = ccon_create_cluster_from_default_node(5);
+int prune_result = ccon_delete_cluster_node(clone_cluster_to_prune, 3); // give index
+ccon_delete_cluster(clone_cluster_to_prune);
 
 // editing a cluster node
-address* dummy_address = create_address(NULL, NULL, 0, 0);
-cluster* cluster_to_edit = create_cluster_from_default_node(5);
-int edit_result = edit_cluster_node(cluster_to_edit,
-                                    3,
-                                    NULL,
-                                    NULL,
-                                    dummy_address,
-                                    NULL,
-                                    NULL,
-                                    NULL,
-                                    NULL,
-                                    NULL,
-                                    0);
-                                    // 0-> deep-copy, else, shallow
-                                    // see node.h for more information on edit procedure
-int address_delete_result = delete_address(dummy_address);
-delete_cluster(cluster_to_edit);
+// ccon_n_address is a ccon_node member, so uses the 'ccon_n_' prefix.
+ccon_n_address* dummy_address = ccon_n_create_address(NULL, NULL, 0, 0);
+ccon_cluster* cluster_to_edit = ccon_create_cluster_from_default_node(5);
+int edit_result = ccon_edit_cluster_node(cluster_to_edit,
+                                         3,
+                                         NULL,
+                                         NULL,
+                                         dummy_address,
+                                         NULL,
+                                         NULL,
+                                         NULL,
+                                         NULL,
+                                         NULL,
+                                         0);
+                                         // 0-> deep-copy, else, shallow
+                                         // see node.h for more information on edit procedure
+int address_delete_result = ccon_n_delete_address(dummy_address);
+ccon_delete_cluster(cluster_to_edit);
 ```
 
 ## Testing

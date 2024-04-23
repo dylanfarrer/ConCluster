@@ -33,10 +33,10 @@ TEST_F(ActionsTest, ActionsCreationAndDeletion) {
 
     int action_count = 3;
 
-    node_actions* actions = create_actions(actions_array, action_count);
+    ccon_n_node_actions* actions = ccon_n_create_actions(actions_array, action_count);
     ASSERT_NE(actions, nullptr);
 
-    int result = delete_actions(actions);
+    int result = ccon_n_delete_actions(actions);
     ASSERT_EQ(result, 0);
 
     free(actions_array);
@@ -51,16 +51,16 @@ TEST_F(ActionsTest, ActionsCopy) {
 
     int action_count = 3;
 
-    node_actions* actions = create_actions(actions_array, action_count);
+    ccon_n_node_actions* actions = ccon_n_create_actions(actions_array, action_count);
     ASSERT_NE(actions, nullptr);
 
-    node_actions* actions_two = copy_actions(actions);
+    ccon_n_node_actions* actions_two = ccon_n_copy_actions(actions);
     ASSERT_NE(actions_two, nullptr);
 
-    int result = delete_actions(actions);
+    int result = ccon_n_delete_actions(actions);
     ASSERT_EQ(result, 0);
 
-    int result_two = delete_actions(actions_two);
+    int result_two = ccon_n_delete_actions(actions_two);
     ASSERT_EQ(result_two, 0);
 
     free(actions_array);
@@ -68,9 +68,9 @@ TEST_F(ActionsTest, ActionsCopy) {
 
 
 TEST_F(ActionsTest, ActionsNULLCreationAndDeletion) {
-    node_actions* actions = create_actions(nullptr, 0);
+    ccon_n_node_actions* actions = ccon_n_create_actions(nullptr, 0);
     ASSERT_NE(actions, nullptr);
 
-    int result = delete_actions(actions);
+    int result = ccon_n_delete_actions(actions);
     ASSERT_EQ(result, 0);
 }

@@ -29,13 +29,13 @@ TEST_F(IdTest, IdCreationAndDeletion) {
 
     int char_id_count = 3;
     int integer_id_count = 3;
-    node_id* id = create_id(char_ids,
-                            integer_ids,
-                            char_id_count,
-                            integer_id_count);
+    ccon_n_node_id* id = ccon_n_create_id(char_ids,
+                                          integer_ids,
+                                          char_id_count,
+                                          integer_id_count);
     ASSERT_NE(id, nullptr);
 
-    int result = delete_id(id);
+    int result = ccon_n_delete_id(id);
     ASSERT_EQ(result, 0);
 
     free(integer_ids);
@@ -62,19 +62,19 @@ TEST_F(IdTest, IdCopy) {
 
     int char_id_count = 3;
     int integer_id_count = 3;
-    node_id* id = create_id(char_ids,
-                            integer_ids,
-                            char_id_count,
-                            integer_id_count);
+    ccon_n_node_id* id = ccon_n_create_id(char_ids,
+                                          integer_ids,
+                                          char_id_count,
+                                          integer_id_count);
     ASSERT_NE(id, nullptr);
 
-    node_id* id_two = copy_id(id);
+    ccon_n_node_id* id_two = ccon_n_copy_id(id);
     ASSERT_NE(id_two, nullptr);
 
-    int result = delete_id(id);
+    int result = ccon_n_delete_id(id);
     ASSERT_EQ(result, 0);
 
-    int result_two = delete_id(id_two);
+    int result_two = ccon_n_delete_id(id_two);
     ASSERT_EQ(result_two, 0);
 
     free(integer_ids);
@@ -85,12 +85,12 @@ TEST_F(IdTest, IdCopy) {
 }
 
 TEST_F(IdTest, IdNULLCreationAndDeletion) {
-    node_id* id = create_id(nullptr,
-                            nullptr,
-                            0,
-                            0);
+    ccon_n_node_id* id = ccon_n_create_id(nullptr,
+                                          nullptr,
+                                          0,
+                                          0);
     ASSERT_NE(id, nullptr);
 
-    int result = delete_id(id);
+    int result = ccon_n_delete_id(id);
     ASSERT_EQ(result, 0);
 }

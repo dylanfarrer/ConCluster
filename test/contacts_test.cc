@@ -31,29 +31,29 @@ TEST_F(ContactsTest, ContactsCreationAndDeletion) {
     int char_address_count = 3;
     int integer_address_count = 3;
 
-    node_address* address_one = create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+    ccon_n_node_address* address_one = ccon_n_create_address(char_addresses,
+                                                             integer_addresses,
+                                                             char_address_count,
+                                                             integer_address_count);
     ASSERT_NE(address_one, nullptr);
 
-    node_address* address_two = create_address(char_addresses,
-                                               integer_addresses,
-                                               char_address_count,
-                                               integer_address_count);
+    ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
+                                                             integer_addresses,
+                                                             char_address_count,
+                                                             integer_address_count);
     ASSERT_NE(address_two, nullptr);
 
 
-    node_address** address_array = (node_address**) malloc(sizeof(node_address*) * 2);
+    ccon_n_node_address** address_array = (ccon_n_node_address**) malloc(sizeof(ccon_n_node_address*) * 2);
     address_array[0] = address_one;
     address_array[1] = address_two;
 
     int address_count = 2;
 
-    node_contacts* contacts = create_contacts(address_array, address_count);
+    ccon_n_node_contacts* contacts = ccon_n_create_contacts(address_array, address_count);
     ASSERT_NE(contacts, nullptr);
 
-    int result = delete_contacts(contacts);
+    int result = ccon_n_delete_contacts(contacts);
     ASSERT_EQ(result, 0);
 
     free(address_array);
@@ -83,35 +83,35 @@ TEST_F(ContactsTest, ContactsCopy) {
     int char_address_count = 3;
     int integer_address_count = 3;
 
-    node_address* address_one = create_address(char_addresses,
-                                           integer_addresses,
-                                           char_address_count,
-                                           integer_address_count);
+    ccon_n_node_address* address_one = ccon_n_create_address(char_addresses,
+                                                             integer_addresses,
+                                                             char_address_count,
+                                                             integer_address_count);
     ASSERT_NE(address_one, nullptr);
 
-    node_address* address_two = create_address(char_addresses,
-                                               integer_addresses,
-                                               char_address_count,
-                                               integer_address_count);
+    ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
+                                                             integer_addresses,
+                                                             char_address_count,
+                                                             integer_address_count);
     ASSERT_NE(address_two, nullptr);
 
 
-    node_address** address_array = (node_address**) malloc(sizeof(node_address*) * 2);
+    ccon_n_node_address** address_array = (ccon_n_node_address**) malloc(sizeof(ccon_n_node_address*) * 2);
     address_array[0] = address_one;
     address_array[1] = address_two;
 
     int address_count = 2;
 
-    node_contacts* contacts = create_contacts(address_array, address_count);
+    ccon_n_node_contacts* contacts = ccon_n_create_contacts(address_array, address_count);
     ASSERT_NE(contacts, nullptr);
 
-    node_contacts* contacts_two = copy_contacts(contacts);
+    ccon_n_node_contacts* contacts_two = ccon_n_copy_contacts(contacts);
     ASSERT_NE(contacts_two, nullptr);
 
-    int result = delete_contacts(contacts);
+    int result = ccon_n_delete_contacts(contacts);
     ASSERT_EQ(result, 0);
 
-    int result_two = delete_contacts(contacts_two);
+    int result_two = ccon_n_delete_contacts(contacts_two);
     ASSERT_EQ(result_two, 0);
 
     free(address_array);
@@ -123,9 +123,9 @@ TEST_F(ContactsTest, ContactsCopy) {
 }
 
 TEST_F(ContactsTest, ContactsNULLCreationAndDeletion) {
-    node_contacts* contacts = create_contacts(nullptr, 0);
+    ccon_n_node_contacts* contacts = ccon_n_create_contacts(nullptr, 0);
     ASSERT_NE(contacts, nullptr);
 
-    int result = delete_contacts(contacts);
+    int result = ccon_n_delete_contacts(contacts);
     ASSERT_EQ(result, 0);
 }

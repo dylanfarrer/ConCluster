@@ -20,10 +20,10 @@ typedef struct {
     int* integer_addresses;
     int character_address_count;
     int integer_address_count;
-} node_address;
+} ccon_n_node_address;
 
 /**
- * @brief Create an address struct.
+ * @brief Create a ccon_n_address struct.
  * Performs a deep copy on character and integer arrays.
  * If malloc fails at anypoint or either count < 0, cleanup is attempted and NULL is returned.
  * Accepts NULL arrays, but will not accept NULL array items in non-NULL arrays.
@@ -32,28 +32,28 @@ typedef struct {
  * @param integer_addresses array of integers to add as a struct member.
  * @param character_address_count Length of string array, used in operations.
  * @param integer_address_count Length of integer array, used in operations.
- * @return node_address* address struct. NULL if any malloc operation fails.
+ * @return ccon_n_node_address* address struct. NULL if any malloc operation fails.
  */
-node_address* create_address(char** character_addresses,
-                             int* integer_addresses,
-                             int character_address_count,
-                             int integer_address_count);
+ccon_n_node_address* ccon_n_create_address(char** character_addresses,
+                                           int* integer_addresses,
+                                           int character_address_count,
+                                           int integer_address_count);
 
 /**
- * @brief performs deep copy on address struct to create new node_address.
+ * @brief performs deep copy on ccon_n_address struct to create new node_address.
  * if address is NULL, return NULL
  * 
  * @param address struct to copy
- * @return node_address* struct, or NULL
+ * @return ccon_n_node_address* struct, or NULL
  */
-node_address* copy_address(node_address* address);
+ccon_n_node_address* ccon_n_copy_address(ccon_n_node_address* address);
 
 /**
- * @brief deletes an address struct.
+ * @brief deletes a ccon_n_address struct.
  * 
  * @param address struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int delete_address(node_address* address);
+int ccon_n_delete_address(ccon_n_node_address* address);
 
 #endif
