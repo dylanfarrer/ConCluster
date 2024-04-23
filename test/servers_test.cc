@@ -36,7 +36,7 @@ TEST_F(ServersTest, ServersCreationAndDeletion) {
     int integer_address_count = 3;
 
     // create address and assert successful creation
-    node_address* address = create_address(char_addresses,
+    ccon_n_node_address* address = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
@@ -47,7 +47,7 @@ TEST_F(ServersTest, ServersCreationAndDeletion) {
     ASSERT_NE(single_server_one, nullptr);
 
     // create address and assert successful creation
-    node_address* address_two = create_address(char_addresses,
+    ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
@@ -96,7 +96,7 @@ TEST_F(ServersTest, ServersCopy) {
     int integer_address_count = 3;
 
     // create address and assert successful creation
-    node_address* address = create_address(char_addresses,
+    ccon_n_node_address* address = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
@@ -107,7 +107,7 @@ TEST_F(ServersTest, ServersCopy) {
     ASSERT_NE(single_server_one, nullptr);
 
     // create address and assert successful creation
-    node_address* address_two = create_address(char_addresses,
+    ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);

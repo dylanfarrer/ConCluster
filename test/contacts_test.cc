@@ -31,20 +31,20 @@ TEST_F(ContactsTest, ContactsCreationAndDeletion) {
     int char_address_count = 3;
     int integer_address_count = 3;
 
-    node_address* address_one = create_address(char_addresses,
+    ccon_n_node_address* address_one = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
     ASSERT_NE(address_one, nullptr);
 
-    node_address* address_two = create_address(char_addresses,
+    ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
                                                integer_addresses,
                                                char_address_count,
                                                integer_address_count);
     ASSERT_NE(address_two, nullptr);
 
 
-    node_address** address_array = (node_address**) malloc(sizeof(node_address*) * 2);
+    ccon_n_node_address** address_array = (ccon_n_node_address**) malloc(sizeof(ccon_n_node_address*) * 2);
     address_array[0] = address_one;
     address_array[1] = address_two;
 
@@ -83,20 +83,20 @@ TEST_F(ContactsTest, ContactsCopy) {
     int char_address_count = 3;
     int integer_address_count = 3;
 
-    node_address* address_one = create_address(char_addresses,
+    ccon_n_node_address* address_one = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
     ASSERT_NE(address_one, nullptr);
 
-    node_address* address_two = create_address(char_addresses,
+    ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
                                                integer_addresses,
                                                char_address_count,
                                                integer_address_count);
     ASSERT_NE(address_two, nullptr);
 
 
-    node_address** address_array = (node_address**) malloc(sizeof(node_address*) * 2);
+    ccon_n_node_address** address_array = (ccon_n_node_address**) malloc(sizeof(ccon_n_node_address*) * 2);
     address_array[0] = address_one;
     address_array[1] = address_two;
 

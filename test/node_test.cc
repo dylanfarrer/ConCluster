@@ -91,7 +91,7 @@ static ccon_n_node_role* create_role_struct() {
     return role;
 }
 
-static node_address* create_address_struct() {
+static ccon_n_node_address* create_address_struct() {
     char** char_addresses = (char**) malloc(3 * sizeof(char*));
     char_addresses[0] = (char*) malloc(12 * sizeof(char));
     char_addresses[1] = (char*) malloc(12 * sizeof(char));
@@ -107,7 +107,7 @@ static node_address* create_address_struct() {
 
     int char_address_count = 3;
     int integer_address_count = 3;
-    node_address* address = create_address(char_addresses,
+    ccon_n_node_address* address = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
@@ -156,14 +156,14 @@ static node_servers* create_servers_struct() {
     int char_address_count = 3;
     int integer_address_count = 3;
 
-    node_address* address = create_address(char_addresses,
+    ccon_n_node_address* address = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
 
     node_single_server* single_server_one = create_single_server(address, &TestFunctionServe);
 
-    node_address* address_two = create_address(char_addresses,
+    ccon_n_node_address* address_two = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
@@ -189,11 +189,11 @@ static node_servers* create_servers_struct() {
 }
 
 static node_contacts* create_contacts_struct() {
-    node_address* address_one = create_address_struct();
-    node_address* address_two = create_address_struct();
+    ccon_n_node_address* address_one = create_address_struct();
+    ccon_n_node_address* address_two = create_address_struct();
 
 
-    node_address** address_array = (node_address**) malloc(sizeof(node_address*) * 2);
+    ccon_n_node_address** address_array = (ccon_n_node_address**) malloc(sizeof(ccon_n_node_address*) * 2);
     address_array[0] = address_one;
     address_array[1] = address_two;
 
@@ -255,7 +255,7 @@ TEST_F(NodeTest, NodeShallowEdit) {
 
     ASSERT_EQ(node_struct->address->character_address_count, 0);
 
-    node_address* address = create_address_struct();
+    ccon_n_node_address* address = create_address_struct();
 
     int edit_result = ccon_edit_node(node_struct,
                                 nullptr,

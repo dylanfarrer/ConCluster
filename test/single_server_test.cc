@@ -35,7 +35,7 @@ TEST_F(SingleServerTest, SingleServerCreationAndDeletion) {
     int integer_address_count = 3;
 
     // create address and assert successful creation
-    node_address* address = create_address(char_addresses,
+    ccon_n_node_address* address = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);
@@ -74,7 +74,7 @@ TEST_F(SingleServerTest, SingleServerCopy) {
     int integer_address_count = 3;
 
     // create address and assert successful creation
-    node_address* address = create_address(char_addresses,
+    ccon_n_node_address* address = ccon_n_create_address(char_addresses,
                                            integer_addresses,
                                            char_address_count,
                                            integer_address_count);

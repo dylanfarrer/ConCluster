@@ -3,17 +3,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-node_address* create_address(char** character_addresses,
-                             int* integer_addresses,
-                             int character_address_count,
-                             int integer_address_count) {
+ccon_n_node_address* ccon_n_create_address(char** character_addresses,
+                                        int* integer_addresses,
+                                        int character_address_count,
+                                        int integer_address_count) {
     
     if (integer_address_count < 0 || \
         character_address_count < 0) {
         return NULL;
     }
     
-    node_address* address_struct = malloc(sizeof(node_address));
+    ccon_n_node_address* address_struct = malloc(sizeof(ccon_n_node_address));
     if (address_struct == NULL) {
         return NULL;
     }
@@ -85,18 +85,18 @@ node_address* create_address(char** character_addresses,
     return address_struct;
 }
 
-node_address* copy_address(node_address* address) {
+ccon_n_node_address* ccon_n_copy_address(ccon_n_node_address* address) {
     if (address == NULL) {
         return NULL;
     }
 
-    return create_address(address->character_addresses,
+    return ccon_n_create_address(address->character_addresses,
                           address->integer_addresses,
                           address->character_address_count,
                           address->integer_address_count);
 }
 
-int delete_address(node_address* address) {
+int ccon_n_delete_address(ccon_n_node_address* address) {
     if (address == NULL) {
         return 0;
     }

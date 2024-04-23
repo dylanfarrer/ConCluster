@@ -19,7 +19,7 @@
 typedef struct {
     ccon_n_node_id* id;
     ccon_n_node_role* role;
-    node_address* address;
+    ccon_n_node_address* address;
     node_actions* actions;
     node_background_tasks* background_tasks;
     node_servers* servers;
@@ -42,7 +42,7 @@ typedef struct {
  */
 ccon_node* ccon_create_node(ccon_n_node_id* id,
                             ccon_n_node_role* role,
-                            node_address* address,
+                            ccon_n_node_address* address,
                             node_actions* actions,
                             node_background_tasks* background_tasks,
                             node_servers* servers,
@@ -99,7 +99,7 @@ int ccon_delete_node(ccon_node* node);
 int ccon_edit_node(ccon_node* node_struct,
                     ccon_n_node_id* id,
                     ccon_n_node_role* role,
-                    node_address* address,
+                    ccon_n_node_address* address,
                     node_actions* actions,
                     node_background_tasks* background_tasks,
                     node_servers* servers,

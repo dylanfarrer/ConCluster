@@ -18,7 +18,7 @@
  *      serve -> subscribe function
  */
 typedef struct {
-    node_address* address;
+    ccon_n_node_address* address;
     int invocation_status;
     void* (*serve) (void*);
 } node_single_server;
@@ -32,7 +32,7 @@ typedef struct {
  * @param serve void* (void*) function pointer to represent a serve mechanism.
  * @return node_single_server* struct or NULL.
  */
-node_single_server* create_single_server(node_address* address, void* (*serve) (void*));
+node_single_server* create_single_server(ccon_n_node_address* address, void* (*serve) (void*));
 
 /**
  * @brief performs deep copy on single_server struct to create new node_single_server.

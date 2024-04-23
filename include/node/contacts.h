@@ -11,7 +11,7 @@
  *      see address.h
  */
 typedef struct {
-    node_address** contacts;
+    ccon_n_node_address** contacts;
     int contact_count;
 } node_contacts;
 
@@ -25,7 +25,7 @@ typedef struct {
  * @param contact_count number of contacts, used in operations.
  * @return node_contacts* struct or NULL.
  */
-node_contacts* create_contacts(node_address** contacts, int contact_count);
+node_contacts* create_contacts(ccon_n_node_address** contacts, int contact_count);
 
 /**
  * @brief performs deep copy on contacts struct to create new node_contacts.

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <memory.h>
 
-node_contacts* create_contacts(node_address** contacts, int contact_count) {
+node_contacts* create_contacts(ccon_n_node_address** contacts, int contact_count) {
     if (contact_count < 0) {
         return NULL;
     }
@@ -34,7 +34,7 @@ node_contacts* create_contacts(node_address** contacts, int contact_count) {
         }
     }
 
-    contacts_struct->contacts = malloc(sizeof(node_address*) * contact_count);
+    contacts_struct->contacts = malloc(sizeof(ccon_n_node_address*) * contact_count);
     if (contacts_struct->contacts == NULL) {
         free(contacts_struct);
         return NULL;
@@ -62,13 +62,13 @@ node_contacts* copy_contacts(node_contacts* contacts) {
         return NULL;
     }
 
-    node_address** new_contacts_array = malloc(sizeof(node_address*) * contacts->contact_count);
+    ccon_n_node_address** new_contacts_array = malloc(sizeof(ccon_n_node_address*) * contacts->contact_count);
     if (new_contacts_array == NULL) {
         return NULL;
     }
 
     for (int i = 0; i < contacts->contact_count; i++) {
-        new_contacts_array[i] = copy_address(contacts->contacts[i]);
+        new_contacts_array[i] = ccon_n_copy_address(contacts->contacts[i]);
     }
 
     node_contacts* new_contacts = create_contacts(new_contacts_array, contacts->contact_count);
@@ -88,7 +88,7 @@ int delete_contacts(node_contacts* contacts) {
     }
 
     for (int i = 0; i < contacts->contact_count; i++) {
-        if (delete_address(contacts->contacts[i]) != 0) {
+        if (ccon_n_delete_address(contacts->contacts[i]) != 0) {
             return -1;
         }
     }
