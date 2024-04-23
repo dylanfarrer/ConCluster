@@ -16,7 +16,8 @@ Point to the cluster header
 #include "path/to/cluster.h"
 
 // Cluster and Node use the prefix 'ccon_', and
-// provide create, delete and edit functions. Node also has copy.
+// provide create, delete and edit functions.
+// Node also has copy. Cluster also has append.
 //
 // Inner node members use the prefix 'ccon_n_', and
 // provide create, delete and copy functions.
@@ -68,6 +69,13 @@ int edit_result = ccon_edit_cluster_node(cluster_to_edit,
                                          // see node.h for more information on edit procedure
 int address_delete_result = ccon_n_delete_address(dummy_address);
 ccon_delete_cluster(cluster_to_edit);
+
+// inserting node into a cluster
+ccon_node* hand_rolled_node = ccon_create_node(/* see node.h for full args */);
+ccon_cluster* changing_cluster = ccon_create_cluster_from_default_node(5);
+int insert_result = ccon_insert_cluster_node(changing_cluster, hand_rolled_node, 3 /* index */);
+// changing_cluster->node_count == 6
+ccon_delete_cluster(clone_cluster);
 ```
 
 ## Testing
