@@ -139,7 +139,7 @@ static node_background_tasks* create_background_tasks_struct() {
     return create_background_tasks(create_actions_struct(), &TestFunctionSchedule);
 }
 
-static node_servers* create_servers_struct() {
+static ccon_n_node_servers* create_servers_struct() {
     char** char_addresses = (char**) malloc(3 * sizeof(char*));
     char_addresses[0] = (char*) malloc(12 * sizeof(char));
     char_addresses[1] = (char*) malloc(12 * sizeof(char));
@@ -176,7 +176,7 @@ static node_servers* create_servers_struct() {
 
     int server_count = 2;
 
-    node_servers* servers = create_servers(server_array, server_count);
+    ccon_n_node_servers* servers = ccon_n_create_servers(server_array, server_count);
 
     free(server_array);
     free(integer_addresses);

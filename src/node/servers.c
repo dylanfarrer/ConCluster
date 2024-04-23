@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <memory.h>
 
-node_servers* create_servers(ccon_n_node_single_server** servers, int server_count) {
+ccon_n_node_servers* ccon_n_create_servers(ccon_n_node_single_server** servers, int server_count) {
     if (server_count < 0) {
         return NULL;
     }
 
-    node_servers* servers_struct = malloc(sizeof(node_servers));
+    ccon_n_node_servers* servers_struct = malloc(sizeof(ccon_n_node_servers));
     if (servers_struct == NULL) {
         return NULL;
     }
@@ -48,13 +48,13 @@ node_servers* create_servers(ccon_n_node_single_server** servers, int server_cou
     return servers_struct;
 }
 
-node_servers* copy_servers(node_servers* servers) {
+ccon_n_node_servers* ccon_n_copy_servers(ccon_n_node_servers* servers) {
     if (servers == NULL) {
         return NULL;
     }
 
     if (servers->servers == NULL) {
-        return create_servers(NULL, 0);
+        return ccon_n_create_servers(NULL, 0);
     }
 
     // incorrect count
@@ -71,14 +71,14 @@ node_servers* copy_servers(node_servers* servers) {
         new_servers_array[i] = ccon_n_copy_single_server(servers->servers[i]);
     }
 
-    node_servers* new_servers = create_servers(new_servers_array, servers->server_count);
+    ccon_n_node_servers* new_servers = ccon_n_create_servers(new_servers_array, servers->server_count);
 
     free(new_servers_array);
 
     return new_servers;
 }
 
-int delete_servers(node_servers* servers) {
+int ccon_n_delete_servers(ccon_n_node_servers* servers) {
     if (servers == NULL) {
         return 0;
     }

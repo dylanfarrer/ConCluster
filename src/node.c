@@ -8,7 +8,7 @@ ccon_node* ccon_create_node(ccon_n_node_id* id,
                   ccon_n_node_address* address,
                   ccon_n_node_actions* actions,
                   node_background_tasks* background_tasks,
-                  node_servers* servers,
+                  ccon_n_node_servers* servers,
                   node_contacts* contacts) {
     if (id == NULL || \
         role == NULL || \
@@ -46,7 +46,7 @@ ccon_node* ccon_copy_node(ccon_node* node_struct) {
                        ccon_n_copy_address(node_struct->address),
                        ccon_n_copy_actions(node_struct->actions),
                        copy_background_tasks(node_struct->background_tasks),
-                       copy_servers(node_struct->servers),
+                       ccon_n_copy_servers(node_struct->servers),
                        copy_contacts(node_struct->contacts));
 }
 
@@ -76,7 +76,7 @@ ccon_node* ccon_create_default_node() {
         return NULL;
     }
 
-    node_servers* servers = create_servers(NULL, 0);
+    ccon_n_node_servers* servers = ccon_n_create_servers(NULL, 0);
     if (servers == NULL) {
         return NULL;
     }
@@ -114,7 +114,7 @@ int ccon_delete_node(ccon_node* node) {
         return -1;
     }
 
-    if (delete_servers(node->servers) != 0) {
+    if (ccon_n_delete_servers(node->servers) != 0) {
         return -1;
     }
 
@@ -132,7 +132,7 @@ int ccon_edit_node(ccon_node* node_struct,
               ccon_n_node_address* address,
               ccon_n_node_actions* actions,
               node_background_tasks* background_tasks,
-              node_servers* servers,
+              ccon_n_node_servers* servers,
               node_contacts* contacts,
               int deep_copy) {
     if (node_struct == NULL) {
@@ -195,11 +195,11 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (servers != NULL) {
-        if (delete_servers(node_struct->servers) != 0) {
+        if (ccon_n_delete_servers(node_struct->servers) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
-            node_struct->servers = copy_servers(servers);
+            node_struct->servers = ccon_n_copy_servers(servers);
         } else {
             node_struct->servers = servers;
         }

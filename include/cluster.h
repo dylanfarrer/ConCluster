@@ -90,7 +90,7 @@ int ccon_edit_cluster_node(ccon_cluster* cluster,
                             ccon_n_node_address* address,
                             ccon_n_node_actions* actions,
                             node_background_tasks* background_tasks,
-                            node_servers* servers,
+                            ccon_n_node_servers* servers,
                             node_contacts* contacts,
                             int deep_copy);
 
