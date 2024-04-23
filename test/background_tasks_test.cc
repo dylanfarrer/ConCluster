@@ -41,10 +41,10 @@ TEST_F(BackgroundTasksTest, BackgroundTasksCreationAndDeletion) {
     ccon_n_node_actions* actions = ccon_n_create_actions(actions_array, action_count);
     ASSERT_NE(actions, nullptr);
     
-    node_background_tasks* background_tasks = create_background_tasks(actions, &TestFunctionSchedule);
+    ccon_n_node_background_tasks* background_tasks = ccon_n_create_background_tasks(actions, &TestFunctionSchedule);
     ASSERT_NE(background_tasks, nullptr);
     
-    int result = delete_background_tasks(background_tasks);
+    int result = ccon_n_delete_background_tasks(background_tasks);
     ASSERT_EQ(result, 0);
 
     free(actions_array);
@@ -63,25 +63,25 @@ TEST_F(BackgroundTasksTest, BackgroundTasksCopy) {
     ccon_n_node_actions* actions = ccon_n_create_actions(actions_array, action_count);
     ASSERT_NE(actions, nullptr);
     
-    node_background_tasks* background_tasks = create_background_tasks(actions, &TestFunctionSchedule);
+    ccon_n_node_background_tasks* background_tasks = ccon_n_create_background_tasks(actions, &TestFunctionSchedule);
     ASSERT_NE(background_tasks, nullptr);
 
-    node_background_tasks* background_tasks_two = copy_background_tasks(background_tasks);
+    ccon_n_node_background_tasks* background_tasks_two = ccon_n_copy_background_tasks(background_tasks);
     ASSERT_NE(background_tasks_two, nullptr);
     
-    int result = delete_background_tasks(background_tasks);
+    int result = ccon_n_delete_background_tasks(background_tasks);
     ASSERT_EQ(result, 0);
 
-    int result_two = delete_background_tasks(background_tasks_two);
+    int result_two = ccon_n_delete_background_tasks(background_tasks_two);
     ASSERT_EQ(result_two, 0);
 
     free(actions_array);
 }
 
 TEST_F(BackgroundTasksTest, BackgroundNULLTasksCreationAndDeletion) {
-    node_background_tasks* background_tasks = create_background_tasks(nullptr, nullptr);
+    ccon_n_node_background_tasks* background_tasks = ccon_n_create_background_tasks(nullptr, nullptr);
     ASSERT_NE(background_tasks, nullptr);
     
-    int result = delete_background_tasks(background_tasks);
+    int result = ccon_n_delete_background_tasks(background_tasks);
     ASSERT_EQ(result, 0);
 }

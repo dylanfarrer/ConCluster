@@ -21,7 +21,7 @@ typedef struct {
     ccon_n_node_role* role;
     ccon_n_node_address* address;
     ccon_n_node_actions* actions;
-    node_background_tasks* background_tasks;
+    ccon_n_node_background_tasks* background_tasks;
     ccon_n_node_servers* servers;
     ccon_n_node_contacts* contacts;
 } ccon_node;
@@ -44,7 +44,7 @@ ccon_node* ccon_create_node(ccon_n_node_id* id,
                             ccon_n_node_role* role,
                             ccon_n_node_address* address,
                             ccon_n_node_actions* actions,
-                            node_background_tasks* background_tasks,
+                            ccon_n_node_background_tasks* background_tasks,
                             ccon_n_node_servers* servers,
                             ccon_n_node_contacts* contacts);
 
@@ -101,7 +101,7 @@ int ccon_edit_node(ccon_node* node_struct,
                     ccon_n_node_role* role,
                     ccon_n_node_address* address,
                     ccon_n_node_actions* actions,
-                    node_background_tasks* background_tasks,
+                    ccon_n_node_background_tasks* background_tasks,
                     ccon_n_node_servers* servers,
                     ccon_n_node_contacts* contacts,
                     int deep_copy);

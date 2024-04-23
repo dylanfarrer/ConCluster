@@ -135,8 +135,8 @@ static ccon_n_node_actions* create_actions_struct() {
     return actions;
 }
 
-static node_background_tasks* create_background_tasks_struct() {
-    return create_background_tasks(create_actions_struct(), &TestFunctionSchedule);
+static ccon_n_node_background_tasks* create_background_tasks_struct() {
+    return ccon_n_create_background_tasks(create_actions_struct(), &TestFunctionSchedule);
 }
 
 static ccon_n_node_servers* create_servers_struct() {

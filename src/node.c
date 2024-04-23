@@ -7,7 +7,7 @@ ccon_node* ccon_create_node(ccon_n_node_id* id,
                   ccon_n_node_role* role,
                   ccon_n_node_address* address,
                   ccon_n_node_actions* actions,
-                  node_background_tasks* background_tasks,
+                  ccon_n_node_background_tasks* background_tasks,
                   ccon_n_node_servers* servers,
                   ccon_n_node_contacts* contacts) {
     if (id == NULL || \
@@ -45,7 +45,7 @@ ccon_node* ccon_copy_node(ccon_node* node_struct) {
                        ccon_n_copy_role(node_struct->role),
                        ccon_n_copy_address(node_struct->address),
                        ccon_n_copy_actions(node_struct->actions),
-                       copy_background_tasks(node_struct->background_tasks),
+                       ccon_n_copy_background_tasks(node_struct->background_tasks),
                        ccon_n_copy_servers(node_struct->servers),
                        ccon_n_copy_contacts(node_struct->contacts));
 }
@@ -71,7 +71,7 @@ ccon_node* ccon_create_default_node() {
         return NULL;
     }
 
-    node_background_tasks* background_tasks = create_background_tasks(NULL, NULL);
+    ccon_n_node_background_tasks* background_tasks = ccon_n_create_background_tasks(NULL, NULL);
     if (background_tasks == NULL) {
         return NULL;
     }
@@ -110,7 +110,7 @@ int ccon_delete_node(ccon_node* node) {
         return -1;
     }
 
-    if (delete_background_tasks(node->background_tasks) != 0) {
+    if (ccon_n_delete_background_tasks(node->background_tasks) != 0) {
         return -1;
     }
 
@@ -131,7 +131,7 @@ int ccon_edit_node(ccon_node* node_struct,
               ccon_n_node_role* role,
               ccon_n_node_address* address,
               ccon_n_node_actions* actions,
-              node_background_tasks* background_tasks,
+              ccon_n_node_background_tasks* background_tasks,
               ccon_n_node_servers* servers,
               ccon_n_node_contacts* contacts,
               int deep_copy) {
@@ -184,11 +184,11 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (background_tasks != NULL) {
-        if (delete_background_tasks(node_struct->background_tasks) != 0) {
+        if (ccon_n_delete_background_tasks(node_struct->background_tasks) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
-            node_struct->background_tasks = copy_background_tasks(background_tasks);
+            node_struct->background_tasks = ccon_n_copy_background_tasks(background_tasks);
         } else {
             node_struct->background_tasks = background_tasks;
         }
