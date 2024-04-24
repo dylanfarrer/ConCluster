@@ -28,17 +28,18 @@ ccon_n_node_single_server* ccon_n_copy_single_server(ccon_n_node_single_server* 
                                 single_server->serve);
 }
 
-int ccon_n_delete_single_server(ccon_n_node_single_server* single_server) {
-    if (single_server == NULL) {
+int ccon_n_delete_single_server(ccon_n_node_single_server** single_server) {
+    if (single_server == NULL || (*single_server) == NULL) {
         return 0;
     }
 
     // call address-specific function
-    if (ccon_n_delete_address(&(single_server->address)) != 0) {
+    if (ccon_n_delete_address(&((*single_server)->address)) != 0) {
         // if inner member delete failed, stop
         return -1;
     }
 
-    free(single_server);
+    free((*single_server));
+    *single_server = NULL;
     return 0;
 }

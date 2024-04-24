@@ -46,10 +46,11 @@ ccon_n_node_single_server* ccon_n_copy_single_server(ccon_n_node_single_server* 
 /**
  * @brief deletes a ccon_n_node_single_server struct.
  * Calls ccon_n_node_address function to delete ccon_n_node_address member - if this fails, delete operation cancelled.
+ * nullified single server struct pointer.
  * 
  * @param node_single_server struct to free.
  * @return int 0 on success, -1 on failure.
  */
-int ccon_n_delete_single_server(ccon_n_node_single_server* single_server);
+int ccon_n_delete_single_server(ccon_n_node_single_server** single_server);
 
 #endif

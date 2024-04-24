@@ -88,7 +88,7 @@ int ccon_n_delete_servers(ccon_n_node_servers* servers) {
     }
 
     for (int i = 0; i < servers->server_count; i++) {
-        if (ccon_n_delete_single_server(servers->servers[i]) != 0) {
+        if (ccon_n_delete_single_server((&servers->servers[i])) != 0) {
             return -1;
         }
     }
