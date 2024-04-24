@@ -34,7 +34,7 @@ int ccon_n_delete_background_tasks(ccon_n_node_background_tasks* background_task
     }
 
     // call address-specific function
-    if (ccon_n_delete_actions(background_tasks->actions) != 0) {
+    if (ccon_n_delete_actions(&(background_tasks->actions)) != 0) {
         // if inner member delete failed, stop
         return -1;
     }
