@@ -94,4 +94,18 @@ int ccon_edit_cluster_node(ccon_cluster* cluster,
                            ccon_n_node_contacts* contacts,
                            int deep_copy);
 
+/**
+ * @brief insert a ccon_node into the cluster.
+ * ccon_node is not copied.
+ * if node is null, index out of range or cluster is null, returns -1.
+ * Does not accept negative node_index.
+ * If node_index == cluster->node_count, node appended.
+ * 
+ * @param cluster pointer to cluster pointer
+ * @param node 
+ * @param node_index 
+ * @return int 0 on success, -1 on fail.
+ */
+int ccon_insert_cluster_node(ccon_cluster** cluster, ccon_node* node, int node_index);
+
 #endif

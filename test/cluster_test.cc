@@ -48,9 +48,9 @@ static ccon_n_node_id* create_id_struct() {
     int char_id_count = 3;
     int integer_id_count = 3;
     ccon_n_node_id* id = ccon_n_create_id(char_ids,
-                            integer_ids,
-                            char_id_count,
-                            integer_id_count);
+                                          integer_ids,
+                                          char_id_count,
+                                          integer_id_count);
 
     free(integer_ids);
     free(char_ids[0]);
@@ -318,5 +318,27 @@ TEST_F(ClusterTest, DeepEditClusterNode) {
     ASSERT_EQ(cluster_struct->nodes[2]->id->character_id_count, 3);
 
     int result = ccon_delete_cluster(cluster_struct);
+    ASSERT_EQ(result, 0);
+}
+
+TEST_F(ClusterTest, InsertClusterNode) {
+    ccon_cluster* cluster_struct = ccon_create_cluster_from_default_node(3);
+    ASSERT_NE(cluster_struct, nullptr);
+    ASSERT_EQ(cluster_struct->node_count, 3);
+
+    ASSERT_EQ(cluster_struct->nodes[1]->id->character_id_count, 0);
+
+    int result = ccon_insert_cluster_node(&cluster_struct,
+                                          create_node_struct(),
+                                          1);
+    ASSERT_EQ(result, 0);
+    // assert new array ordering and length is correct.
+    ASSERT_EQ(cluster_struct->node_count, 4);
+    ASSERT_EQ(cluster_struct->nodes[0]->id->character_id_count, 0);
+    ASSERT_EQ(cluster_struct->nodes[1]->id->character_id_count, 3);
+    ASSERT_EQ(cluster_struct->nodes[2]->id->character_id_count, 0);
+    ASSERT_EQ(cluster_struct->nodes[3]->id->character_id_count, 0);
+
+    result = ccon_delete_cluster(cluster_struct);
     ASSERT_EQ(result, 0);
 }
