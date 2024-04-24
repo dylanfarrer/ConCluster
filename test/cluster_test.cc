@@ -318,7 +318,7 @@ TEST_F(ClusterTest, DeepEditClusterNode) {
                                              nullptr,
                                              0);
     ASSERT_EQ(edit_result, 0);
-    ccon_n_delete_id(id);
+    ccon_n_delete_id(&id);
 
     ASSERT_EQ(cluster_struct->nodes[2]->id->character_id_count, 3);
 

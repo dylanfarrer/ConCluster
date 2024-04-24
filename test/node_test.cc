@@ -297,7 +297,7 @@ TEST_F(NodeTest, NodeDeepEdit) {
                                      nullptr,
                                      0);
     ASSERT_EQ(edit_result, 0);
-    ccon_n_delete_id(id);
+    ccon_n_delete_id(&id);
     
     ASSERT_EQ(node_struct->id->character_id_count, 3);
 

@@ -94,7 +94,7 @@ int ccon_delete_node(ccon_node** node) {
         return 0;
     }
 
-    if (ccon_n_delete_id((*node)->id) != 0) {
+    if (ccon_n_delete_id((&(*node)->id)) != 0) {
         return -1;
     }
 
@@ -141,7 +141,7 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (id != NULL) {
-        if (ccon_n_delete_id(node_struct->id) != 0) {
+        if (ccon_n_delete_id((&node_struct->id)) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
