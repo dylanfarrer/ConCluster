@@ -48,10 +48,11 @@ ccon_n_node_role* ccon_n_copy_role(ccon_n_node_role* role);
 
 /**
  * @brief deletes a ccon_n_role struct.
+ * nullifies role struct pointer.
  * 
  * @param role struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int ccon_n_delete_role(ccon_n_node_role* role);
+int ccon_n_delete_role(ccon_n_node_role** role);
 
 #endif

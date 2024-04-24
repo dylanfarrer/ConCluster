@@ -39,10 +39,11 @@ ccon_n_node_contacts* ccon_n_copy_contacts(ccon_n_node_contacts* contacts);
 /**
  * @brief deletes a ccon_n_node_contacts struct.
  * Calls ccon_n_node_address function to delete ccon_n_node_address member - if this fails, delete operation cancelled.
+ * nullifies contacts struct pointer.
  * 
  * @param node_contacts struct to free.
  * @return int 0 on success, -1 on failure.
  */
-int ccon_n_delete_contacts(ccon_n_node_contacts* contacts);
+int ccon_n_delete_contacts(ccon_n_node_contacts** contacts);
 
 #endif

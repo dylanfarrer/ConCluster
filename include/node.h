@@ -71,11 +71,12 @@ ccon_node* ccon_create_default_node();
  * @brief deletes a ccon_node struct;
  * Calls underlying delete functions for each member, if any fail, delete operation is cancelled
  * - but not recovered from.
+ * sets node to NULL.
  * 
  * @param node struct to free
  * @return int 0 on success, -1 on failure.
  */
-int ccon_delete_node(ccon_node* node);
+int ccon_delete_node(ccon_node** node);
 
 
 /**

@@ -35,8 +35,9 @@ TEST_F(RoleTest, RoleCreationAndDeletion) {
                                                 integer_role_count);
     ASSERT_NE(role, nullptr);
 
-    int result = ccon_n_delete_role(role);
+    int result = ccon_n_delete_role(&role);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(role, nullptr);
 
     free(integer_roles);
     free(char_roles[0]);
@@ -71,11 +72,13 @@ TEST_F(RoleTest, RoleCopy) {
     ccon_n_node_role* role_two = ccon_n_copy_role(role);
     ASSERT_NE(role_two, nullptr);
 
-    int result = ccon_n_delete_role(role);
+    int result = ccon_n_delete_role(&role);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(role, nullptr);
 
-    int result_two = ccon_n_delete_role(role_two);
+    int result_two = ccon_n_delete_role(&role_two);
     ASSERT_EQ(result_two, 0);
+    ASSERT_EQ(role_two, nullptr);
 
     free(integer_roles);
     free(char_roles[0]);
@@ -91,6 +94,7 @@ TEST_F(RoleTest, RoleNULLCreationAndDeletion) {
                                   0);
     ASSERT_NE(role, nullptr);
 
-    int result = ccon_n_delete_role(role);
+    int result = ccon_n_delete_role(&role);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(role, nullptr);
 }

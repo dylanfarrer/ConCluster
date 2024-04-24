@@ -78,22 +78,23 @@ ccon_n_node_servers* ccon_n_copy_servers(ccon_n_node_servers* servers) {
     return new_servers;
 }
 
-int ccon_n_delete_servers(ccon_n_node_servers* servers) {
-    if (servers == NULL) {
+int ccon_n_delete_servers(ccon_n_node_servers** servers) {
+    if (servers == NULL || (*servers) == NULL) {
         return 0;
     }
 
-    if (servers->server_count < 0) {
+    if ((*servers)->server_count < 0) {
         return -1;
     }
 
-    for (int i = 0; i < servers->server_count; i++) {
-        if (ccon_n_delete_single_server(servers->servers[i]) != 0) {
+    for (int i = 0; i < (*servers)->server_count; i++) {
+        if (ccon_n_delete_single_server((&(*servers)->servers[i])) != 0) {
             return -1;
         }
     }
-    free(servers->servers);
+    free((*servers)->servers);
 
-    free(servers);
+    free((*servers));
+    *servers = NULL;
     return 0;
 }

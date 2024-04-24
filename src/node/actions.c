@@ -46,19 +46,20 @@ ccon_n_node_actions* ccon_n_copy_actions(ccon_n_node_actions* actions) {
     return ccon_n_create_actions(actions->actions, actions->action_count);
 }
 
-int ccon_n_delete_actions(ccon_n_node_actions* actions) {
-    if (actions == NULL) {
+int ccon_n_delete_actions(ccon_n_node_actions** actions) {
+    if (actions == NULL || (*actions) == NULL) {
         return 0;
     }
 
-    if (actions->action_count < 0) {
+    if ((*actions)->action_count < 0) {
         return -1;
     }
 
-    if (actions->actions != NULL) {
-        free(actions->actions);
+    if ((*actions)->actions != NULL) {
+        free((*actions)->actions);
     }
 
-    free(actions);
+    free((*actions));
+    *actions = NULL;
     return 0;
 }

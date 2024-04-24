@@ -95,28 +95,29 @@ ccon_n_node_id* ccon_n_copy_id(ccon_n_node_id* id) {
                             id->integer_id_count);
 }
 
-int ccon_n_delete_id(ccon_n_node_id* id) {
-    if (id == NULL) {
+int ccon_n_delete_id(ccon_n_node_id** id) {
+    if (id == NULL || (*id) == NULL) {
         return 0;
     }
 
-    if (id->integer_id_count < 0 || \
-        id->character_id_count < 0) {
+    if ((*id)->integer_id_count < 0 || \
+        (*id)->character_id_count < 0) {
         return -1;
     }
 
-    if (id->character_ids != NULL) {
-        for (int i = 0; i < id->character_id_count; i++) {
-            if (id->character_ids[i] != NULL) {
-                free(id->character_ids[i]);
+    if ((*id)->character_ids != NULL) {
+        for (int i = 0; i < (*id)->character_id_count; i++) {
+            if ((*id)->character_ids[i] != NULL) {
+                free((*id)->character_ids[i]);
             }
         }
-        free(id->character_ids);
+        free((*id)->character_ids);
     }
 
-    if (id->integer_ids != NULL) {
-        free(id->integer_ids);
+    if ((*id)->integer_ids != NULL) {
+        free((*id)->integer_ids);
     }
-    free(id);
+    free((*id));
+    *id = NULL;
     return 0;
 }

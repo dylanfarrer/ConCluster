@@ -45,10 +45,11 @@ ccon_n_node_id* ccon_n_copy_id(ccon_n_node_id* id);
 
 /**
  * @brief deletes a ccon_n_id struct.
+ * nullifies id struct pointer.
  * 
  * @param id struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int ccon_n_delete_id(ccon_n_node_id* id);
+int ccon_n_delete_id(ccon_n_node_id** id);
 
 #endif

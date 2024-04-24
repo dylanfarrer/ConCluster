@@ -89,40 +89,41 @@ ccon_node* ccon_create_default_node() {
     return ccon_create_node(id, role, address, actions, background_tasks, servers, contacts);
 }
 
-int ccon_delete_node(ccon_node* node) {
-    if (node == NULL) {
+int ccon_delete_node(ccon_node** node) {
+    if (node == NULL || (*node) == NULL) {
         return 0;
     }
 
-    if (ccon_n_delete_id(node->id) != 0) {
+    if (ccon_n_delete_id((&(*node)->id)) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_role(node->role) != 0) {
+    if (ccon_n_delete_role((&(*node)->role)) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_address(node->address) != 0) {
+    if (ccon_n_delete_address(&((*node)->address)) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_actions(node->actions) != 0) {
+    if (ccon_n_delete_actions(&((*node)->actions)) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_background_tasks(node->background_tasks) != 0) {
+    if (ccon_n_delete_background_tasks((&(*node)->background_tasks)) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_servers(node->servers) != 0) {
+    if (ccon_n_delete_servers((&(*node)->servers)) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_contacts(node->contacts) != 0) {
+    if (ccon_n_delete_contacts((&(*node)->contacts)) != 0) {
         return -1;
     }
 
-    free(node);
+    free((*node));
+    *node = NULL;
     return 0;
 }
 
@@ -140,7 +141,7 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (id != NULL) {
-        if (ccon_n_delete_id(node_struct->id) != 0) {
+        if (ccon_n_delete_id((&node_struct->id)) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
@@ -151,7 +152,7 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (role != NULL) {
-        if (ccon_n_delete_role(node_struct->role) != 0) {
+        if (ccon_n_delete_role((&node_struct->role)) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
@@ -162,7 +163,7 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (address != NULL) {
-        if (ccon_n_delete_address(node_struct->address) != 0) {
+        if (ccon_n_delete_address((&node_struct->address)) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
@@ -173,7 +174,7 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (actions != NULL) {
-        if (ccon_n_delete_actions(node_struct->actions) != 0) {
+        if (ccon_n_delete_actions(&(node_struct->actions)) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
@@ -184,7 +185,7 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (background_tasks != NULL) {
-        if (ccon_n_delete_background_tasks(node_struct->background_tasks) != 0) {
+        if (ccon_n_delete_background_tasks((&node_struct->background_tasks)) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
@@ -195,7 +196,7 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (servers != NULL) {
-        if (ccon_n_delete_servers(node_struct->servers) != 0) {
+        if (ccon_n_delete_servers((&node_struct->servers)) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
@@ -206,7 +207,7 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (contacts != NULL) {
-        if (ccon_n_delete_contacts(node_struct->contacts) != 0) {
+        if (ccon_n_delete_contacts((&node_struct->contacts)) != 0) {
             return -1;
         }
         if (deep_copy == 0) {

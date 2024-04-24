@@ -94,28 +94,29 @@ ccon_n_node_role* ccon_n_copy_role(ccon_n_node_role* role) {
                               role->integer_role_count);
 }
 
-int ccon_n_delete_role(ccon_n_node_role* role) {
-    if (role == NULL) {
+int ccon_n_delete_role(ccon_n_node_role** role) {
+    if (role == NULL || (*role) == NULL) {
         return 0;
     }
 
-    if (role->integer_role_count < 0 || \
-        role->character_role_count < 0) {
+    if ((*role)->integer_role_count < 0 || \
+        (*role)->character_role_count < 0) {
         return -1;
     }
 
-    if (role->character_roles != NULL) {
-        for (int i = 0; i < role->character_role_count; i++) {
-            if (role->character_roles[i] != NULL) {
-                free(role->character_roles[i]);
+    if ((*role)->character_roles != NULL) {
+        for (int i = 0; i < (*role)->character_role_count; i++) {
+            if ((*role)->character_roles[i] != NULL) {
+                free((*role)->character_roles[i]);
             }
         }
-        free(role->character_roles);
+        free((*role)->character_roles);
     }
 
-    if (role->integer_roles != NULL) {
-        free(role->integer_roles);
+    if ((*role)->integer_roles != NULL) {
+        free((*role)->integer_roles);
     }
-    free(role);
+    free((*role));
+    *role = NULL;
     return 0;
 }

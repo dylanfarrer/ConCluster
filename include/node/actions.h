@@ -45,10 +45,11 @@ ccon_n_node_actions* ccon_n_copy_actions(ccon_n_node_actions* actions);
 
 /**
  * @brief deletes a ccon_n_actions struct.
+ * Nullifies the struct pointer.
  * 
  * @param actions struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int ccon_n_delete_actions(ccon_n_node_actions* actions);
+int ccon_n_delete_actions(ccon_n_node_actions** actions);
 
 #endif

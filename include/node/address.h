@@ -50,10 +50,11 @@ ccon_n_node_address* ccon_n_copy_address(ccon_n_node_address* address);
 
 /**
  * @brief deletes a ccon_n_address struct.
+ * nullifies struct pointer.
  * 
  * @param address struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int ccon_n_delete_address(ccon_n_node_address* address);
+int ccon_n_delete_address(ccon_n_node_address** address);
 
 #endif

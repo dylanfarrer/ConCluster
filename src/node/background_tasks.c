@@ -28,17 +28,18 @@ ccon_n_node_background_tasks* ccon_n_copy_background_tasks(ccon_n_node_backgroun
                                    background_tasks->schedule);
 }
 
-int ccon_n_delete_background_tasks(ccon_n_node_background_tasks* background_tasks) {
-    if (background_tasks == NULL) {
+int ccon_n_delete_background_tasks(ccon_n_node_background_tasks** background_tasks) {
+    if (background_tasks == NULL || (*background_tasks) == NULL) {
         return 0;
     }
 
     // call address-specific function
-    if (ccon_n_delete_actions(background_tasks->actions) != 0) {
+    if (ccon_n_delete_actions(&((*background_tasks)->actions)) != 0) {
         // if inner member delete failed, stop
         return -1;
     }
 
-    free(background_tasks);
+    free((*background_tasks));
+    *background_tasks = NULL;
     return 0;
 }
