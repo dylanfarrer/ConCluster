@@ -98,7 +98,7 @@ int ccon_delete_node(ccon_node** node) {
         return -1;
     }
 
-    if (ccon_n_delete_role((*node)->role) != 0) {
+    if (ccon_n_delete_role((&(*node)->role)) != 0) {
         return -1;
     }
 
@@ -152,7 +152,7 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (role != NULL) {
-        if (ccon_n_delete_role(node_struct->role) != 0) {
+        if (ccon_n_delete_role((&node_struct->role)) != 0) {
             return -1;
         }
         if (deep_copy == 0) {
