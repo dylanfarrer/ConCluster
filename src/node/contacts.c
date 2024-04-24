@@ -78,22 +78,23 @@ ccon_n_node_contacts* ccon_n_copy_contacts(ccon_n_node_contacts* contacts) {
     return new_contacts;
 }
 
-int ccon_n_delete_contacts(ccon_n_node_contacts* contacts) {
-    if (contacts == NULL) {
+int ccon_n_delete_contacts(ccon_n_node_contacts** contacts) {
+    if (contacts == NULL || (*contacts) == NULL) {
         return 0;
     }
 
-    if (contacts->contact_count < 0) {
+    if ((*contacts)->contact_count < 0) {
         return -1;
     }
 
-    for (int i = 0; i < contacts->contact_count; i++) {
-        if (ccon_n_delete_address(&(contacts->contacts[i])) != 0) {
+    for (int i = 0; i < (*contacts)->contact_count; i++) {
+        if (ccon_n_delete_address(&((*contacts)->contacts[i])) != 0) {
             return -1;
         }
     }
-    free(contacts->contacts);
+    free((*contacts)->contacts);
 
-    free(contacts);
+    free((*contacts));
+    *contacts = NULL;
     return 0;
 }
