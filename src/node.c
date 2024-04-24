@@ -102,7 +102,7 @@ int ccon_delete_node(ccon_node** node) {
         return -1;
     }
 
-    if (ccon_n_delete_address((*node)->address) != 0) {
+    if (ccon_n_delete_address(&((*node)->address)) != 0) {
         return -1;
     }
 
@@ -163,7 +163,7 @@ int ccon_edit_node(ccon_node* node_struct,
     }
 
     if (address != NULL) {
-        if (ccon_n_delete_address(node_struct->address) != 0) {
+        if (ccon_n_delete_address((&node_struct->address)) != 0) {
             return -1;
         }
         if (deep_copy == 0) {

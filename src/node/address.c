@@ -96,28 +96,29 @@ ccon_n_node_address* ccon_n_copy_address(ccon_n_node_address* address) {
                                  address->integer_address_count);
 }
 
-int ccon_n_delete_address(ccon_n_node_address* address) {
-    if (address == NULL) {
+int ccon_n_delete_address(ccon_n_node_address** address) {
+    if (address == NULL || (*address) == NULL) {
         return 0;
     }
 
-    if (address->integer_address_count < 0 || \
-        address->character_address_count < 0) {
+    if ((*address)->integer_address_count < 0 || \
+        (*address)->character_address_count < 0) {
         return -1;
     }
 
-    if (address->character_addresses != NULL) {
-        for (int i = 0; i < address->character_address_count; i++) {
-            if (address->character_addresses[i] != NULL) {
-                free(address->character_addresses[i]);
+    if ((*address)->character_addresses != NULL) {
+        for (int i = 0; i < (*address)->character_address_count; i++) {
+            if ((*address)->character_addresses[i] != NULL) {
+                free((*address)->character_addresses[i]);
             }
         }
-        free(address->character_addresses);
+        free((*address)->character_addresses);
     }
 
-    if (address->integer_addresses != NULL) {
-        free(address->integer_addresses);
+    if ((*address)->integer_addresses != NULL) {
+        free((*address)->integer_addresses);
     }
-    free(address);
+    free((*address));
+    *address = NULL;
     return 0;
 }

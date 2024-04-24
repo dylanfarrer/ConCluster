@@ -34,7 +34,7 @@ int ccon_n_delete_single_server(ccon_n_node_single_server* single_server) {
     }
 
     // call address-specific function
-    if (ccon_n_delete_address(single_server->address) != 0) {
+    if (ccon_n_delete_address(&(single_server->address)) != 0) {
         // if inner member delete failed, stop
         return -1;
     }

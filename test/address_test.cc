@@ -35,8 +35,9 @@ TEST_F(AddressTest, AddressCreationAndDeletion) {
                                                          integer_address_count);
     ASSERT_NE(address, nullptr);
 
-    int result = ccon_n_delete_address(address);
+    int result = ccon_n_delete_address(&address);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(address, nullptr);
 
     free(integer_addresses);
     free(char_addresses[0]);
@@ -71,11 +72,13 @@ TEST_F(AddressTest, AddressCopy) {
     ccon_n_node_address* address_two = ccon_n_copy_address(address);
     ASSERT_NE(address_two, nullptr);
 
-    int result = ccon_n_delete_address(address);
+    int result = ccon_n_delete_address(&address);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(address, nullptr);
 
-    int result_two = ccon_n_delete_address(address_two);
+    int result_two = ccon_n_delete_address(&address_two);
     ASSERT_EQ(result_two, 0);
+    ASSERT_EQ(address_two, nullptr);
 
     free(integer_addresses);
     free(char_addresses[0]);
@@ -88,6 +91,7 @@ TEST_F(AddressTest, AddressNULLCreationAndDeletion) {
     ccon_n_node_address* address = ccon_n_create_address(nullptr, nullptr, 0, 0);
     ASSERT_NE(address, nullptr);
 
-    int result = ccon_n_delete_address(address);
+    int result = ccon_n_delete_address(&address);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(address, nullptr);
 }

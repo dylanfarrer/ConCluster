@@ -88,7 +88,7 @@ int ccon_n_delete_contacts(ccon_n_node_contacts* contacts) {
     }
 
     for (int i = 0; i < contacts->contact_count; i++) {
-        if (ccon_n_delete_address(contacts->contacts[i]) != 0) {
+        if (ccon_n_delete_address(&(contacts->contacts[i])) != 0) {
             return -1;
         }
     }
