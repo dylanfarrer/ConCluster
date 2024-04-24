@@ -332,8 +332,12 @@ TEST_F(ClusterTest, InsertClusterNode) {
                                           create_node_struct(),
                                           1);
     ASSERT_EQ(result, 0);
+    // assert new array ordering and length is correct.
     ASSERT_EQ(cluster_struct->node_count, 4);
+    ASSERT_EQ(cluster_struct->nodes[0]->id->character_id_count, 0);
     ASSERT_EQ(cluster_struct->nodes[1]->id->character_id_count, 3);
+    ASSERT_EQ(cluster_struct->nodes[2]->id->character_id_count, 0);
+    ASSERT_EQ(cluster_struct->nodes[3]->id->character_id_count, 0);
 
     result = ccon_delete_cluster(cluster_struct);
     ASSERT_EQ(result, 0);

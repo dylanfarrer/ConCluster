@@ -101,7 +101,6 @@ int ccon_delete_cluster(ccon_cluster* cluster) {
         }
         free(cluster->nodes);
     }
-
     free(cluster);
     return 0;
 }
@@ -190,11 +189,11 @@ int ccon_insert_cluster_node(ccon_cluster** cluster, ccon_node* node, int node_i
         return -1;
     }
 
-    ccon_cluster* temp = *cluster;
+    ccon_node** temp_nodes = (*cluster)->nodes;
 
-    *cluster = realloc(*cluster, sizeof(ccon_node*) * ((*cluster)->node_count + 1));
-    if (cluster == NULL) {
-        *cluster = temp;
+    (*cluster)->nodes = realloc((*cluster)->nodes, sizeof(ccon_node*) * ((*cluster)->node_count + 1));
+    if ((*cluster)->nodes == NULL) {
+        (*cluster)->nodes = temp_nodes;
         return -1;
     }
 
