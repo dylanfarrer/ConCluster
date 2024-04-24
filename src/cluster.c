@@ -78,7 +78,7 @@ ccon_cluster* ccon_create_cluster_from_default_node(int node_count) {
     ccon_node* default_node = ccon_create_default_node();
 
     ccon_cluster* cluster_struct = ccon_create_cluster_from_node(default_node, node_count);
-    ccon_delete_node(default_node);
+    ccon_delete_node(&default_node);
     if (cluster_struct == NULL) {
         return NULL;
     } else {
@@ -97,7 +97,7 @@ int ccon_delete_cluster(ccon_cluster** cluster) {
 
     if ((*cluster)->nodes != NULL) {
         for (int i = 0; i < (*cluster)->node_count; i++) {
-            ccon_delete_node((*cluster)->nodes[i]);
+            ccon_delete_node(&(*cluster)->nodes[i]);
         }
         free((*cluster)->nodes);
     }
@@ -127,7 +127,7 @@ int ccon_delete_cluster_node(ccon_cluster* cluster_struct, int node_index) {
     }
 
     // free elemnt to delete and old array
-    ccon_delete_node(cluster_struct->nodes[node_index]);
+    ccon_delete_node(&cluster_struct->nodes[node_index]);
     free(cluster_struct->nodes);
 
     // re allocate nodes

@@ -241,7 +241,7 @@ TEST_F(ClusterTest, ClusterCreationFromNode) {
     ASSERT_NE(cluster_struct, nullptr);
     ASSERT_EQ(cluster_struct->node_count, 3);
 
-    ccon_delete_node(node_struct);
+    ccon_delete_node(&node_struct);
 
     int result = ccon_delete_cluster(&cluster_struct);
     ASSERT_EQ(result, 0);

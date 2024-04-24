@@ -89,40 +89,41 @@ ccon_node* ccon_create_default_node() {
     return ccon_create_node(id, role, address, actions, background_tasks, servers, contacts);
 }
 
-int ccon_delete_node(ccon_node* node) {
-    if (node == NULL) {
+int ccon_delete_node(ccon_node** node) {
+    if (node == NULL || (*node) == NULL) {
         return 0;
     }
 
-    if (ccon_n_delete_id(node->id) != 0) {
+    if (ccon_n_delete_id((*node)->id) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_role(node->role) != 0) {
+    if (ccon_n_delete_role((*node)->role) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_address(node->address) != 0) {
+    if (ccon_n_delete_address((*node)->address) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_actions(node->actions) != 0) {
+    if (ccon_n_delete_actions((*node)->actions) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_background_tasks(node->background_tasks) != 0) {
+    if (ccon_n_delete_background_tasks((*node)->background_tasks) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_servers(node->servers) != 0) {
+    if (ccon_n_delete_servers((*node)->servers) != 0) {
         return -1;
     }
 
-    if (ccon_n_delete_contacts(node->contacts) != 0) {
+    if (ccon_n_delete_contacts((*node)->contacts) != 0) {
         return -1;
     }
 
-    free(node);
+    free((*node));
+    *node = NULL;
     return 0;
 }
 

@@ -217,8 +217,9 @@ TEST_F(NodeTest, NodeCreationAndDeletion) {
                                               create_contacts_struct());
     ASSERT_NE(node_struct, nullptr);
 
-    int result = ccon_delete_node(node_struct);
+    int result = ccon_delete_node(&node_struct);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(node_struct, nullptr);
 }
 
 TEST_F(NodeTest, NodeCopy) {
@@ -234,19 +235,22 @@ TEST_F(NodeTest, NodeCopy) {
     ccon_node* node_struct_two = ccon_copy_node(node_struct);
     ASSERT_NE(node_struct_two, nullptr);
 
-    int result = ccon_delete_node(node_struct);
+    int result = ccon_delete_node(&node_struct);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(node_struct, nullptr);
 
-    int result_two = ccon_delete_node(node_struct_two);
+    int result_two = ccon_delete_node(&node_struct_two);
     ASSERT_EQ(result_two, 0);
+    ASSERT_EQ(node_struct_two, nullptr);
 }
 
 TEST_F(NodeTest, NodeDefault) {
     ccon_node* node_struct = ccon_create_default_node();
     ASSERT_NE(node_struct, nullptr);
 
-    int result = ccon_delete_node(node_struct);
+    int result = ccon_delete_node(&node_struct);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(node_struct, nullptr);
 }
 
 TEST_F(NodeTest, NodeShallowEdit) {
@@ -270,8 +274,9 @@ TEST_F(NodeTest, NodeShallowEdit) {
     
     ASSERT_EQ(node_struct->address->character_address_count, 3);
 
-    int result = ccon_delete_node(node_struct);
+    int result = ccon_delete_node(&node_struct);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(node_struct, nullptr);
 }
 
 TEST_F(NodeTest, NodeDeepEdit) {
@@ -296,6 +301,7 @@ TEST_F(NodeTest, NodeDeepEdit) {
     
     ASSERT_EQ(node_struct->id->character_id_count, 3);
 
-    int result = ccon_delete_node(node_struct);
+    int result = ccon_delete_node(&node_struct);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(node_struct, nullptr);
 }
