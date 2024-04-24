@@ -47,10 +47,11 @@ ccon_n_node_background_tasks* ccon_n_copy_background_tasks(ccon_n_node_backgroun
 /**
  * @brief deletes a ccon_n_node_background_tasks struct.
  * Calls ccon_n_actions function to delete ccon_n_actions member - if this fails, delete operation cancelled.
+ * nullifies background_task struct pointer.
  * 
  * @param background_tasks struct to free.
  * @return int 0 on success, -1 on failure.
  */
-int ccon_n_delete_background_tasks(ccon_n_node_background_tasks* background_tasks);
+int ccon_n_delete_background_tasks(ccon_n_node_background_tasks** background_tasks);
 
 #endif
