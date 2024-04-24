@@ -86,22 +86,23 @@ ccon_cluster* ccon_create_cluster_from_default_node(int node_count) {
     }
 }
 
-int ccon_delete_cluster(ccon_cluster* cluster) {
-    if (cluster == NULL) {
+int ccon_delete_cluster(ccon_cluster** cluster) {
+    if (cluster == NULL || (*cluster) == NULL) {
         return 0;
     }
 
-    if (cluster->node_count < 0) {
+    if ((*cluster)->node_count < 0) {
         return -1;
     }
 
-    if (cluster->nodes != NULL) {
-        for (int i = 0; i < cluster->node_count; i++) {
-            ccon_delete_node(cluster->nodes[i]);
+    if ((*cluster)->nodes != NULL) {
+        for (int i = 0; i < (*cluster)->node_count; i++) {
+            ccon_delete_node((*cluster)->nodes[i]);
         }
-        free(cluster->nodes);
+        free((*cluster)->nodes);
     }
-    free(cluster);
+    free((*cluster));
+    *cluster = NULL;
     return 0;
 }
 

@@ -49,11 +49,12 @@ ccon_cluster* ccon_create_cluster_from_default_node(int node_count);
 /**
  * @brief deletes a ccon_cluster struct.
  * Calls underlying delete function for ccon_node, if any fail, delete operation is cancelled.
+ * Sets cluster to NULL
  * 
  * @param cluster struct to free.
  * @return int 0 on success, -1 on failure.
  */
-int ccon_delete_cluster(ccon_cluster* cluster);
+int ccon_delete_cluster(ccon_cluster** cluster);
 
 /**
  * @brief delete ccon_node from ccon_cluster struct.
