@@ -65,8 +65,9 @@ TEST_F(ServersTest, ServersCreationAndDeletion) {
     ccon_n_node_servers* servers = ccon_n_create_servers(server_array, server_count);
     ASSERT_NE(servers, nullptr);
 
-    int result = ccon_n_delete_servers(servers);
+    int result = ccon_n_delete_servers(&servers);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(servers, nullptr);
 
     free(server_array);
     free(integer_addresses);
@@ -128,11 +129,13 @@ TEST_F(ServersTest, ServersCopy) {
     ccon_n_node_servers* servers_two = ccon_n_copy_servers(servers);
     ASSERT_NE(servers_two, nullptr);
 
-    int result = ccon_n_delete_servers(servers);
+    int result = ccon_n_delete_servers(&servers);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(servers, nullptr);
 
-    int result_two = ccon_n_delete_servers(servers_two);
+    int result_two = ccon_n_delete_servers(&servers_two);
     ASSERT_EQ(result_two, 0);
+    ASSERT_EQ(servers_two, nullptr);
 
     free(server_array);
     free(integer_addresses);
@@ -146,6 +149,7 @@ TEST_F(ServersTest, ServersNULLCreationAndDeletion) {
     ccon_n_node_servers* servers = ccon_n_create_servers(nullptr, 0);
     ASSERT_NE(servers, nullptr);
 
-    int result = ccon_n_delete_servers(servers);
+    int result = ccon_n_delete_servers(&servers);
     ASSERT_EQ(result, 0);
+    ASSERT_EQ(servers, nullptr);
 }
