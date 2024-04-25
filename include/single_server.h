@@ -19,7 +19,7 @@
  *      ccon_n_node_address -> set of message bus channels
  *      serve -> subscribe function
  */
-EXPORT typedef struct {
+typedef struct {
     ccon_n_node_address* address;
     int invocation_status;
     void* (*serve) (void*);

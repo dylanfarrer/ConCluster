@@ -12,7 +12,7 @@
  *  1.
  *      see single_server.h
  */
-EXPORT typedef struct {
+typedef struct {
     ccon_n_node_single_server** servers;
     int server_count;
 } ccon_n_node_servers;

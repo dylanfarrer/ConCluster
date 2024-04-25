@@ -12,7 +12,7 @@
  *  1.
  *      see address.h
  */
-EXPORT typedef struct {
+typedef struct {
     ccon_n_node_address** contacts;
     int contact_count;
 } ccon_n_node_contacts;

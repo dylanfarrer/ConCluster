@@ -12,7 +12,7 @@
  *  2.
  *      use arrays to store each 'level' the node is available in wrt system topology.
  */
-EXPORT typedef struct {
+typedef struct {
     char** character_ids;
     int* integer_ids;
     int character_id_count;

@@ -11,7 +11,7 @@
  * Additional cluster-level logic should be implemented in a wrapper.
  * For creation/deletion information on for the node array, see node.h
  */
-EXPORT typedef struct {
+typedef struct {
     ccon_node** nodes;
     int node_count;
 } ccon_cluster;

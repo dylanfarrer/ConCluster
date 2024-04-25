@@ -7,7 +7,7 @@
  * @brief typedef for easy creation of Action arrays/items.
  * 
  */
-EXPORT typedef void* (*Action) (void*);
+typedef void* (*Action) (void*);
 
 /**
  * @brief struct to represent a set of callable actions.
@@ -20,7 +20,7 @@ EXPORT typedef void* (*Action) (void*);
  *  3.
  *      possible items to populate a workqueue.
  */
-EXPORT typedef struct {
+typedef struct {
     Action* actions;
     int action_count;
 } ccon_n_node_actions;

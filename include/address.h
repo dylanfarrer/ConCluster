@@ -17,7 +17,7 @@
  *  4.
  *      integer_addresses -> array of process IDs
  */
-EXPORT typedef struct {
+typedef struct {
     char** character_addresses;
     int* integer_addresses;
     int character_address_count;

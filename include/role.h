@@ -15,7 +15,7 @@
  *      character_roles -> array of all possible roles
  *      integer_roles -> array of bitmap permissions related to possible roles
  */
-EXPORT typedef struct {
+typedef struct {
     char** character_roles;
     int* integer_roles;
     int character_role_count;

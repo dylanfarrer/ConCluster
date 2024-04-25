@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.22)
 project(ConCluster)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-deprecated-declarations -Wno-attributes") # -address sanitize if needed
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-deprecated-declarations -Wno-attributes") # -address sanitize if needed
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-deprecated-declarations") # -address sanitize if needed
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-deprecated-declarations") # -address sanitize if needed
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}") # -address sanitize if needed
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)

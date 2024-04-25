@@ -18,7 +18,7 @@
  * For creation/deletion information on each individual member, see
  * corresponding headers. (id.h, role.h, address.h ...)
  */
-EXPORT typedef struct {
+typedef struct {
     ccon_n_node_id* id;
     ccon_n_node_role* role;
     ccon_n_node_address* address;

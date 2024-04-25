@@ -19,7 +19,7 @@
  *      ccon_n_node_actions -> maintenance functions in Distributed Hash Table protocol
  *      schedule -> invoke a periodic caller on the functions
  */
-EXPORT typedef struct {
+typedef struct {
     ccon_n_node_actions* actions;
     int invocation_status;
     void* (*schedule) (void*);
