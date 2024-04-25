@@ -1,4 +1,4 @@
-#include "../../include/node/id.h"
+#include "include/id.h"
 
 #include <stdlib.h>
 #include <string.h>

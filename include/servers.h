@@ -1,6 +1,8 @@
 #ifndef SERVERS_H
 #define SERVERS_H
 
+#define EXPORT __attribute__((__visibility__("default")))
+
 #include "single_server.h"
 
 /**
@@ -10,7 +12,7 @@
  *  1.
  *      see single_server.h
  */
-typedef struct {
+EXPORT typedef struct {
     ccon_n_node_single_server** servers;
     int server_count;
 } ccon_n_node_servers;
@@ -25,7 +27,7 @@ typedef struct {
  * @param server_count number of servers, used in operations.
  * @return ccon_n_node_servers* struct or NULL.
  */
-ccon_n_node_servers* ccon_n_create_servers(ccon_n_node_single_server** servers, int server_count);
+EXPORT ccon_n_node_servers* ccon_n_create_servers(ccon_n_node_single_server** servers, int server_count);
 
 /**
  * @brief performs deep copy on ccon_n_node_servers struct to create new node_servers.
@@ -34,7 +36,7 @@ ccon_n_node_servers* ccon_n_create_servers(ccon_n_node_single_server** servers, 
  * @param servers struct to copy
  * @return ccon_n_node_servers* struct, or NULL
  */
-ccon_n_node_servers* ccon_n_copy_servers(ccon_n_node_servers* servers);
+EXPORT ccon_n_node_servers* ccon_n_copy_servers(ccon_n_node_servers* servers);
 
 /**
  * @brief deletes a ccon_n_node_servers struct.
@@ -45,6 +47,6 @@ ccon_n_node_servers* ccon_n_copy_servers(ccon_n_node_servers* servers);
  * @param node_servers struct to free.
  * @return int 0 on success, -1 on failure.
  */
-int ccon_n_delete_servers(ccon_n_node_servers** servers);
+EXPORT int ccon_n_delete_servers(ccon_n_node_servers** servers);
 
 #endif

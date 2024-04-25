@@ -1,11 +1,13 @@
 #ifndef ACTIONS_H
 #define ACTIONS_H
 
+#define EXPORT __attribute__((__visibility__("default")))
+
 /**
  * @brief typedef for easy creation of Action arrays/items.
  * 
  */
-typedef void* (*Action) (void*);
+EXPORT typedef void* (*Action) (void*);
 
 /**
  * @brief struct to represent a set of callable actions.
@@ -18,7 +20,7 @@ typedef void* (*Action) (void*);
  *  3.
  *      possible items to populate a workqueue.
  */
-typedef struct {
+EXPORT typedef struct {
     Action* actions;
     int action_count;
 } ccon_n_node_actions;
@@ -32,7 +34,7 @@ typedef struct {
  * @param action_count length of function pointers array, used in operations.
  * @return ccon_n_node_actions* actions struct, NULL if any malloc operation fails.
  */
-ccon_n_node_actions* ccon_n_create_actions(Action* actions, int action_count);
+EXPORT ccon_n_node_actions* ccon_n_create_actions(Action* actions, int action_count);
 
 /**
  * @brief performs deep copy on action struct to create new ccon_n_node_actions.
@@ -41,7 +43,7 @@ ccon_n_node_actions* ccon_n_create_actions(Action* actions, int action_count);
  * @param actions struct to copy
  * @return ccon_n_node_actions* struct, or NULL
  */
-ccon_n_node_actions* ccon_n_copy_actions(ccon_n_node_actions* actions);
+EXPORT ccon_n_node_actions* ccon_n_copy_actions(ccon_n_node_actions* actions);
 
 /**
  * @brief deletes a ccon_n_actions struct.
@@ -50,6 +52,6 @@ ccon_n_node_actions* ccon_n_copy_actions(ccon_n_node_actions* actions);
  * @param actions struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int ccon_n_delete_actions(ccon_n_node_actions** actions);
+EXPORT int ccon_n_delete_actions(ccon_n_node_actions** actions);
 
 #endif

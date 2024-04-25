@@ -1,4 +1,4 @@
-#include "../../include/node/actions.h"
+#include "include/actions.h"
 
 #include <stdlib.h>
 #include <memory.h>

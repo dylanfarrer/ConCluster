@@ -1,6 +1,8 @@
 #ifndef ADDRESS_H
 #define ADDRESS_H
 
+#define EXPORT __attribute__((__visibility__("default")))
+
 /**
  * @brief struct to represent a node/server address.
  * Provides an array of both string addresses and integer addresses.
@@ -15,7 +17,7 @@
  *  4.
  *      integer_addresses -> array of process IDs
  */
-typedef struct {
+EXPORT typedef struct {
     char** character_addresses;
     int* integer_addresses;
     int character_address_count;
@@ -34,7 +36,7 @@ typedef struct {
  * @param integer_address_count Length of integer array, used in operations.
  * @return ccon_n_node_address* address struct. NULL if any malloc operation fails.
  */
-ccon_n_node_address* ccon_n_create_address(char** character_addresses,
+EXPORT ccon_n_node_address* ccon_n_create_address(char** character_addresses,
                                            int* integer_addresses,
                                            int character_address_count,
                                            int integer_address_count);
@@ -46,7 +48,7 @@ ccon_n_node_address* ccon_n_create_address(char** character_addresses,
  * @param address struct to copy
  * @return ccon_n_node_address* struct, or NULL
  */
-ccon_n_node_address* ccon_n_copy_address(ccon_n_node_address* address);
+EXPORT ccon_n_node_address* ccon_n_copy_address(ccon_n_node_address* address);
 
 /**
  * @brief deletes a ccon_n_address struct.
@@ -55,6 +57,6 @@ ccon_n_node_address* ccon_n_copy_address(ccon_n_node_address* address);
  * @param address struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int ccon_n_delete_address(ccon_n_node_address** address);
+EXPORT int ccon_n_delete_address(ccon_n_node_address** address);
 
 #endif

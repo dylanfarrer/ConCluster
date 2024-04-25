@@ -1,6 +1,8 @@
 #ifndef ID_H
 #define ID_H
 
+#define EXPORT __attribute__((__visibility__("default")))
+
 /**
  * @brief struct to represent a node/server id.
  * Provides an array of both string ids and integer ids.
@@ -10,7 +12,7 @@
  *  2.
  *      use arrays to store each 'level' the node is available in wrt system topology.
  */
-typedef struct {
+EXPORT typedef struct {
     char** character_ids;
     int* integer_ids;
     int character_id_count;
@@ -29,7 +31,7 @@ typedef struct {
  * @param integer_id_count Length of integer array, used in operations.
  * @return ccon_n_node_id* id struct. NULL if any malloc operation fails.
  */
-ccon_n_node_id* ccon_n_create_id(char** character_ids,
+EXPORT ccon_n_node_id* ccon_n_create_id(char** character_ids,
                                  int* integer_ids,
                                  int character_id_count,
                                  int integer_id_count);
@@ -41,7 +43,7 @@ ccon_n_node_id* ccon_n_create_id(char** character_ids,
  * @param id struct to copy
  * @return ccon_n_node_id* struct, or NULL
  */
-ccon_n_node_id* ccon_n_copy_id(ccon_n_node_id* id);
+EXPORT ccon_n_node_id* ccon_n_copy_id(ccon_n_node_id* id);
 
 /**
  * @brief deletes a ccon_n_id struct.
@@ -50,6 +52,6 @@ ccon_n_node_id* ccon_n_copy_id(ccon_n_node_id* id);
  * @param id struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int ccon_n_delete_id(ccon_n_node_id** id);
+EXPORT int ccon_n_delete_id(ccon_n_node_id** id);
 
 #endif

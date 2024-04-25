@@ -12,10 +12,11 @@ WORKDIR /app
 COPY CMakeLists.txt .
 COPY include/ ./include/
 COPY src/ ./src/
-COPY examples/ ./examples/
 COPY test/ ./test/
 
-RUN mkdir build && cd build && cmake .. && make
+RUN mkdir build && cd build && cmake .. && make && make install
+
+RUN cd test && rm -rf build &&mkdir build && cd build && cmake .. && make
 
 # run stage
 FROM ubuntu:latest
@@ -24,6 +25,7 @@ RUN apt-get update
 
 WORKDIR /app
 
-COPY --from=builder /app/build/tests .
+COPY --from=builder /app/test/build/tests .
+COPY --from=builder /usr/local/lib/libconcluster.so.1 /usr/local/lib/
 
 CMD ["./tests"]

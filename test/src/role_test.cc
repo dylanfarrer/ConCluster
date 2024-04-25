@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 extern "C" {
-    #include "../include/node/role.h"
+    #include <concluster/cluster.h>
 }
 
 class RoleTest : public ::testing::Test {

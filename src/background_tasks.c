@@ -1,4 +1,4 @@
-#include "../../include/node/background_tasks.h"
+#include "include/background_tasks.h"
 
 #include <stdlib.h>
 #include <memory.h>

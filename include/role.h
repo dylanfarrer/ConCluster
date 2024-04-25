@@ -1,6 +1,8 @@
 #ifndef ROLE_H
 #define ROLE_H
 
+#define EXPORT __attribute__((__visibility__("default")))
+
 /**
  * @brief struct to represent a node role.
  * Provides an array of both string roles and integer roles.
@@ -13,7 +15,7 @@
  *      character_roles -> array of all possible roles
  *      integer_roles -> array of bitmap permissions related to possible roles
  */
-typedef struct {
+EXPORT typedef struct {
     char** character_roles;
     int* integer_roles;
     int character_role_count;
@@ -32,7 +34,7 @@ typedef struct {
  * @param integer_role_count Length of integer array, used in operations.
  * @return ccon_n_node_role* ccon_n_role struct. NULL if any malloc operation fails.
  */
-ccon_n_node_role* ccon_n_create_role(char** character_roles,
+EXPORT ccon_n_node_role* ccon_n_create_role(char** character_roles,
                                      int* integer_roles,
                                      int character_role_count,
                                      int integer_role_count);
@@ -44,7 +46,7 @@ ccon_n_node_role* ccon_n_create_role(char** character_roles,
  * @param role struct to copy
  * @return ccon_n_node_role* struct, or NULL
  */
-ccon_n_node_role* ccon_n_copy_role(ccon_n_node_role* role);
+EXPORT ccon_n_node_role* ccon_n_copy_role(ccon_n_node_role* role);
 
 /**
  * @brief deletes a ccon_n_role struct.
@@ -53,6 +55,6 @@ ccon_n_node_role* ccon_n_copy_role(ccon_n_node_role* role);
  * @param role struct to free.
  * @return int 0 on success, -1 if count members are negative (free operation not possible).
  */
-int ccon_n_delete_role(ccon_n_node_role** role);
+EXPORT int ccon_n_delete_role(ccon_n_node_role** role);
 
 #endif

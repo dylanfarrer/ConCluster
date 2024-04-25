@@ -1,4 +1,4 @@
-#include "../../include/node/role.h"
+#include "include/role.h"
 
 #include <stdlib.h>
 #include <string.h>

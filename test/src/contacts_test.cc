@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 extern "C" {
-    #include "../include/node/contacts.h"
+    #include <concluster/cluster.h>
 }
 
 class ContactsTest : public ::testing::Test {

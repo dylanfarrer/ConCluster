@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 extern "C" {
-    #include "../include/node/single_server.h"
+    #include <concluster/cluster.h>
 }
 
 class SingleServerTest : public ::testing::Test {

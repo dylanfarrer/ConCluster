@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 extern "C" {
-    #include "../include/node/id.h"
+    #include <concluster/cluster.h>
 }
 
 class IdTest : public ::testing::Test {

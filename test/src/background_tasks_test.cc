@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 extern "C" {
-    #include "../include/node/background_tasks.h"
+    #include <concluster/cluster.h>
 }
 
 class BackgroundTasksTest : public ::testing::Test {

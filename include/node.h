@@ -1,14 +1,16 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "node/id.h"
-#include "node/role.h"
-#include "node/address.h"
-#include "node/actions.h"
-#include "node/background_tasks.h"
-#include "node/servers.h"
-#include "node/single_server.h"
-#include "node/contacts.h"
+#define EXPORT __attribute__((__visibility__("default")))
+
+#include "id.h"
+#include "role.h"
+#include "address.h"
+#include "actions.h"
+#include "background_tasks.h"
+#include "servers.h"
+#include "single_server.h"
+#include "contacts.h"
 
 /**
  * @brief struct to represent a single node, designed to hold all the traits
@@ -16,7 +18,7 @@
  * For creation/deletion information on each individual member, see
  * corresponding headers. (id.h, role.h, address.h ...)
  */
-typedef struct {
+EXPORT typedef struct {
     ccon_n_node_id* id;
     ccon_n_node_role* role;
     ccon_n_node_address* address;
@@ -40,7 +42,7 @@ typedef struct {
  * @param contacts 
  * @return ccon_node* struct or NULL
  */
-ccon_node* ccon_create_node(ccon_n_node_id* id,
+EXPORT ccon_node* ccon_create_node(ccon_n_node_id* id,
                             ccon_n_node_role* role,
                             ccon_n_node_address* address,
                             ccon_n_node_actions* actions,
@@ -56,7 +58,7 @@ ccon_node* ccon_create_node(ccon_n_node_id* id,
  * @param node_struct ccon_node to deep copy
  * @return ccon_node* node struct or NULL
  */
-ccon_node* ccon_copy_node(ccon_node* node_struct);
+EXPORT ccon_node* ccon_copy_node(ccon_node* node_struct);
 
 /**
  * @brief Create a ccon_node struct and populates members with default (nullified) structs.
@@ -65,7 +67,7 @@ ccon_node* ccon_copy_node(ccon_node* node_struct);
  * 
  * @return ccon_node* struct or NULL
  */
-ccon_node* ccon_create_default_node();
+EXPORT ccon_node* ccon_create_default_node();
 
 /**
  * @brief deletes a ccon_node struct;
@@ -76,7 +78,7 @@ ccon_node* ccon_create_default_node();
  * @param node struct to free
  * @return int 0 on success, -1 on failure.
  */
-int ccon_delete_node(ccon_node** node);
+EXPORT int ccon_delete_node(ccon_node** node);
 
 
 /**
@@ -97,7 +99,7 @@ int ccon_delete_node(ccon_node** node);
  * @param deep_copy 
  * @return int 0 on success, -1 on failure.
  */
-int ccon_edit_node(ccon_node* node_struct,
+EXPORT int ccon_edit_node(ccon_node* node_struct,
                    ccon_n_node_id* id,
                    ccon_n_node_role* role,
                    ccon_n_node_address* address,

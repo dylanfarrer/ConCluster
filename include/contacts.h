@@ -1,6 +1,8 @@
 #ifndef CONTACTS_H
 #define CONTACTS_H
 
+#define EXPORT __attribute__((__visibility__("default")))
+
 #include "address.h"
 
 /**
@@ -10,7 +12,7 @@
  *  1.
  *      see address.h
  */
-typedef struct {
+EXPORT typedef struct {
     ccon_n_node_address** contacts;
     int contact_count;
 } ccon_n_node_contacts;
@@ -25,7 +27,7 @@ typedef struct {
  * @param contact_count number of contacts, used in operations.
  * @return ccon_n_node_contacts* struct or NULL.
  */
-ccon_n_node_contacts* ccon_n_create_contacts(ccon_n_node_address** contacts, int contact_count);
+EXPORT ccon_n_node_contacts* ccon_n_create_contacts(ccon_n_node_address** contacts, int contact_count);
 
 /**
  * @brief performs deep copy on contacts struct to create new ccon_n_node_contacts.
@@ -34,7 +36,7 @@ ccon_n_node_contacts* ccon_n_create_contacts(ccon_n_node_address** contacts, int
  * @param contacts struct to copy
  * @return ccon_n_node_contacts* struct, or NULL
  */
-ccon_n_node_contacts* ccon_n_copy_contacts(ccon_n_node_contacts* contacts);
+EXPORT ccon_n_node_contacts* ccon_n_copy_contacts(ccon_n_node_contacts* contacts);
 
 /**
  * @brief deletes a ccon_n_node_contacts struct.
@@ -44,6 +46,6 @@ ccon_n_node_contacts* ccon_n_copy_contacts(ccon_n_node_contacts* contacts);
  * @param node_contacts struct to free.
  * @return int 0 on success, -1 on failure.
  */
-int ccon_n_delete_contacts(ccon_n_node_contacts** contacts);
+EXPORT int ccon_n_delete_contacts(ccon_n_node_contacts** contacts);
 
 #endif

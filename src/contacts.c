@@ -1,4 +1,4 @@
-#include "../../include/node/contacts.h"
+#include "include/contacts.h"
 
 #include <stdlib.h>
 #include <memory.h>

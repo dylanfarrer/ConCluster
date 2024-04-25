@@ -1,6 +1,8 @@
 #ifndef BACKGROUND_TASKS
 #define BACKGROUND_TASKS
 
+#define EXPORT __attribute__((__visibility__("default")))
+
 #include "actions.h"
 
 /**
@@ -17,7 +19,7 @@
  *      ccon_n_node_actions -> maintenance functions in Distributed Hash Table protocol
  *      schedule -> invoke a periodic caller on the functions
  */
-typedef struct {
+EXPORT typedef struct {
     ccon_n_node_actions* actions;
     int invocation_status;
     void* (*schedule) (void*);
@@ -32,7 +34,7 @@ typedef struct {
  * @param schedule void* (void*) function pointer to represent a schedule mechanism.
  * @return ccon_n_node_background_tasks* struct or NULL.
  */
-ccon_n_node_background_tasks* ccon_n_create_background_tasks(ccon_n_node_actions* actions,
+EXPORT ccon_n_node_background_tasks* ccon_n_create_background_tasks(ccon_n_node_actions* actions,
                                                              void* (*schedule) (void*));
 
 /**
@@ -42,7 +44,7 @@ ccon_n_node_background_tasks* ccon_n_create_background_tasks(ccon_n_node_actions
  * @param background_tasks struct to copy
  * @return ccon_n_node_background_tasks* struct, or NULL
  */
-ccon_n_node_background_tasks* ccon_n_copy_background_tasks(ccon_n_node_background_tasks* background_tasks);
+EXPORT ccon_n_node_background_tasks* ccon_n_copy_background_tasks(ccon_n_node_background_tasks* background_tasks);
 
 /**
  * @brief deletes a ccon_n_node_background_tasks struct.
@@ -52,6 +54,6 @@ ccon_n_node_background_tasks* ccon_n_copy_background_tasks(ccon_n_node_backgroun
  * @param background_tasks struct to free.
  * @return int 0 on success, -1 on failure.
  */
-int ccon_n_delete_background_tasks(ccon_n_node_background_tasks** background_tasks);
+EXPORT int ccon_n_delete_background_tasks(ccon_n_node_background_tasks** background_tasks);
 
 #endif
