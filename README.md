@@ -10,7 +10,7 @@ ConCluster is offered as a shared library. It relies on a few standard library h
 cmake -B build
 cmake --build build
 # may need sudo
-sudo ctest --install build
+sudo cmake --install build
 ```
 
 Example CMakeLists.txt file (with a main.c):
