@@ -28,8 +28,6 @@ target_link_libraries(my_program ${CONCLUSTER_LIB})
 ```
 
 ## Usage
-
-Point to the cluster header
 ```c
 #include <concluster/cluster.h>
 
