@@ -1,30 +1,65 @@
-cmake_minimum_required(VERSION 3.22)
-project(ConCluster)
+cmake_minimum_required(VERSION 3.19)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-deprecated-declarations") # -address sanitize if needed
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-deprecated-declarations") # -address sanitize if needed
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}") # -address sanitize if needed
+SET(PROJECT_NAME "ConCluster")
+SET(BINARY_NAME "concluster")
 
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads REQUIRED)
+PROJECT(${PROJECT_NAME} VERSION 1.0.0 LANGUAGES C)
 
-include(GoogleTest)
+set(LIBRARY_VERSION_MAJOR 1)
+set(LIBRARY_VERSION_MINOR 0)
+set(LIBRARY_VERSION_PATCH 0)
+set(LIBRARY_VERSION_STRING "${LIBRARY_VERSION_MAJOR}.${LIBRARY_VERSION_MINOR}.${LIBRARY_VERSION_PATCH}")
 
-include(FetchContent)
-Set(FETCHCONTENT_QUIET FALSE)
+INCLUDE(GNUInstallDirs)
 
-FetchContent_Declare(
-    googletest
-    DOWNLOAD_EXTRACT_TIMESTAMP true
-    URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+SET(LIBRARY_BASE_PATH "${PROJECT_SOURCE_DIR}")
+
+INCLUDE_DIRECTORIES (
+    "${LIBRARY_BASE_PATH}"
 )
-FetchContent_MakeAvailable(googletest)
 
-enable_testing()
+SET(PUBLIC_SOURCES_FILES
+    "${LIBRARY_BASE_PATH}/src/cluster.c"
+    "${LIBRARY_BASE_PATH}/src/node.c"
+    "${LIBRARY_BASE_PATH}/src/actions.c"
+    "${LIBRARY_BASE_PATH}/src/address.c"
+    "${LIBRARY_BASE_PATH}/src/id.c"
+    "${LIBRARY_BASE_PATH}/src/role.c"
+    "${LIBRARY_BASE_PATH}/src/background_tasks.c"
+    "${LIBRARY_BASE_PATH}/src/single_server.c"
+    "${LIBRARY_BASE_PATH}/src/servers.c"
+    "${LIBRARY_BASE_PATH}/src/contacts.c"
+)
 
-file(GLOB_RECURSE TEST_SOURCES "test/*.cc" "src/*.c" "src/node/*.c" "examples/*/*.c")
-add_executable(tests ${TEST_SOURCES})
-target_link_libraries(tests gtest_main)
-target_include_directories(tests PRIVATE include Threads::Threads)
-gtest_discover_tests(tests)
+SET(PUBLIC_HEADER_FILES
+    "${LIBRARY_BASE_PATH}/include/cluster.h"
+    "${LIBRARY_BASE_PATH}/include/node.h"
+    "${LIBRARY_BASE_PATH}/include/actions.h"
+    "${LIBRARY_BASE_PATH}/include/address.h"
+    "${LIBRARY_BASE_PATH}/include/id.h"
+    "${LIBRARY_BASE_PATH}/include/role.h"
+    "${LIBRARY_BASE_PATH}/include/background_tasks.h"
+    "${LIBRARY_BASE_PATH}/include/single_server.h"
+    "${LIBRARY_BASE_PATH}/include/servers.h"
+    "${LIBRARY_BASE_PATH}/include/contacts.h"
+)
+
+
+SET(CMAKE_C_VISIBILITY_PRESET hidden)
+
+ADD_LIBRARY (
+    ${BINARY_NAME} SHARED ${PUBLIC_SOURCES_FILES}
+)
+
+SET_TARGET_PROPERTIES (
+    ${BINARY_NAME} PROPERTIES
+    VERSION ${LIBRARY_VERSION_STRING}
+    SOVERSION ${LIBRARY_VERSION_MAJOR}
+    PUBLIC_HEADER "${PUBLIC_HEADER_FILES}"
+)
+
+INSTALL (
+    TARGETS ${BINARY_NAME}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${BINARY_NAME}"
+)

@@ -1,19 +1,35 @@
 # ConCluster - Configurable Cluster
 
 ConCluster is a C library (under-development) for simplifying the creation of multi-agent systems.
-It provides the Cluster and Node structures, which attempt to make little to no assumptions about the
-system they are integrated into. Additionally, example systems that utilise the Cluster and Node
-structures will be worked on within the codebase.
+It provides the Cluster and Node structures, which attempt to make little-to-no assumptions about
+the client requirements, such as cluster topology or node interaction medium.
 
 ## Installation
+ConCluster is offered as a shared library. It relies on a few standard library headers.
+```bash
+cmake -B build
+cmake --build build
+# may need sudo
+sudo cmake --install build
+```
 
-Currently, clone repo, build/link code manually (if looking to use outside of available CMake build).
+Example CMakeLists.txt file (with a main.c):
+```bash
+cmake_minimum_required(VERSION 3.0)
+project(MyProject)
+
+find_library(CONCLUSTER_LIB concluster PATHS /usr/local/lib)
+
+include_directories(/usr/local/include/)
+
+add_executable(my_program main.c)
+
+target_link_libraries(my_program ${CONCLUSTER_LIB})
+```
 
 ## Usage
-
-Point to the cluster header
 ```c
-#include "path/to/cluster.h"
+#include <concluster/cluster.h>
 
 // Cluster and Node use the prefix 'ccon_', and
 // provide create, delete and edit functions.
@@ -81,10 +97,11 @@ ccon_delete_cluster(clone_cluster);
 ## Testing
 
 The library and examples are tested together in a GTest suite. This can be run either with CMake,
-or Docker.
+or Docker. CMake assumes the library has been installed.
 
 ```bash
 # CMake testing
+cd tests
 cmake -B build
 cmake --build build
 ctest --test-dir build
