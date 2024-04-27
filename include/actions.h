@@ -54,4 +54,22 @@ EXPORT ccon_n_node_actions* ccon_n_copy_actions(ccon_n_node_actions* actions);
  */
 EXPORT int ccon_n_delete_actions(ccon_n_node_actions** actions);
 
+/**
+ * @brief invokes an action in the ccon_n_node_actions struct
+ * result must be a valid pointer, otherwise NULL is returned.
+ * if action_index is out of range, result is -1.
+ * action_index will be set to zero if the function is invoked,
+ * but does not necessarily indicate successful function execution.
+ * 
+ * @param actions struct to utilise
+ * @param action_index index of action
+ * @param result must not be NULL, will be overwritten to 0 or -1.
+ * @param arguments args to give to action
+ * @return void* returns action return value.
+ */
+EXPORT void* ccon_n_invoke_action(ccon_n_node_actions* actions,
+                                  int action_index,
+                                  int* result,
+                                  void* arguments);
+
 #endif
