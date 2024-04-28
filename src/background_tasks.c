@@ -51,7 +51,8 @@ void* ccon_n_invoke_scheduler(ccon_n_node_background_tasks* background_tasks,
         return NULL;
     }
 
-    if (background_tasks == NULL) {
+    if (background_tasks == NULL || \
+        background_tasks->schedule == NULL) {
         *result = -1;
         return NULL;
     }

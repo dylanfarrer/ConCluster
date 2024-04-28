@@ -74,7 +74,8 @@ void* ccon_n_invoke_action(ccon_n_node_actions* actions,
 
     if (actions == NULL || \
         action_index < 0 || \
-        action_index >= actions->action_count) {
+        action_index >= actions->action_count || \
+        actions->actions[action_index] == NULL) {
         *result = -1;
         return NULL;
     }

@@ -55,4 +55,19 @@ EXPORT ccon_n_node_single_server* ccon_n_copy_single_server(ccon_n_node_single_s
  */
 EXPORT int ccon_n_delete_single_server(ccon_n_node_single_server** single_server);
 
+/**
+ * @brief invokes the serve function pointer in the ccon_n_node_single_server struct
+ * result must be a valid pointer, otherwise NULL is returned.
+ * result will be set to zero if the function is invoked,
+ * but does not necessarily indicate successful function execution.
+ * 
+ * @param single_server struct to utilise
+ * @param result must not be NULL, will be overwritten to 0 or -1.
+ * @param arguments args to give to server
+ * @return void* returns serve return value.
+ */
+EXPORT void* ccon_n_invoke_server(ccon_n_node_single_server* single_server,
+                                  int* result,
+                                  void* arguments);
+
 #endif
