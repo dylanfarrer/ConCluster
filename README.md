@@ -92,6 +92,28 @@ ccon_cluster* changing_cluster = ccon_create_cluster_from_default_node(5);
 int insert_result = ccon_insert_cluster_node(changing_cluster, hand_rolled_node, 3 /* index */);
 // changing_cluster->node_count == 6
 ccon_delete_cluster(clone_cluster);
+
+// invocations
+ccon_node* premade_cluster;
+int invocation_result = 0; // did the invocation work?
+void* premade_arguments;
+
+void* action_result = ccon_n_invoke_action(premade_cluster->nodes[0]->actions,
+                                           /*action_index*/ 0,
+                                           &invocation_result,
+                                           premade_arguments);
+
+void* serve_result = ccon_n_invoke_server(premade_cluster->nodes[0]->servers->servers[0],
+                                          &invocation_result,
+                                          premade_arguments);
+
+void* schedule_result = ccon_n_invoke_scheduler(premade_cluster->nodes[0]->background_tasks,
+                                                &invocation_result,
+                                                premade_arguments);
+
+free(action_result);
+free(serve_result);
+free(schedule_result);
 ```
 
 ## Testing
