@@ -43,3 +43,20 @@ int ccon_n_delete_background_tasks(ccon_n_node_background_tasks** background_tas
     *background_tasks = NULL;
     return 0;
 }
+
+void* ccon_n_invoke_scheduler(ccon_n_node_background_tasks* background_tasks,
+                              int* result,
+                              void* arguments) {
+    if (result == NULL) {
+        return NULL;
+    }
+
+    if (background_tasks == NULL) {
+        *result = -1;
+        return NULL;
+    }
+
+    *result = 0;
+    background_tasks->invocation_status = 1;
+    return background_tasks->schedule(arguments);
+}

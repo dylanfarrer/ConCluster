@@ -56,4 +56,19 @@ EXPORT ccon_n_node_background_tasks* ccon_n_copy_background_tasks(ccon_n_node_ba
  */
 EXPORT int ccon_n_delete_background_tasks(ccon_n_node_background_tasks** background_tasks);
 
+/**
+ * @brief invokes the schedule function pointer in the background tasks struct.
+ * result must be a valid pointer, otherwise NULL is returned.
+ * action_index will be zero if the function is invoked, but does not
+ * necessarily indicate successful function execution.
+ * 
+ * @param background_tasks 
+ * @param result must not be NULL, will be overwritten to 0 or -1.
+ * @param arguments args to give to schedule.
+ * @return void* returns action return value.
+ */
+EXPORT void* ccon_n_invoke_scheduler(ccon_n_node_background_tasks* background_tasks,
+                                     int* result,
+                                     void* arguments);
+
 #endif
