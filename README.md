@@ -89,7 +89,7 @@ ccon_delete_cluster(&cluster_to_edit);
 // inserting node into a cluster
 ccon_node* hand_rolled_node = ccon_create_node(/* see node.h for full args */);
 ccon_cluster* changing_cluster = ccon_create_cluster_from_default_node(5);
-int insert_result = ccon_insert_cluster_node(&changing_cluster, hand_rolled_node, 3 /* index */);
+int insert_result = ccon_insert_cluster_node(changing_cluster, hand_rolled_node, 3 /* index */);
 // changing_cluster->node_count == 6
 ccon_delete_cluster(clone_cluster);
 
