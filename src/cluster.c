@@ -181,29 +181,28 @@ int ccon_edit_cluster_node(ccon_cluster* cluster,
                           deep_copy);
 }
 
-int ccon_insert_cluster_node(ccon_cluster** cluster, ccon_node* node, int node_index) {
+int ccon_insert_cluster_node(ccon_cluster* cluster, ccon_node* node, int node_index) {
     if (cluster == NULL || \
-        *cluster == NULL || \
         node_index < 0 || \
-        node_index > (*cluster)->node_count || \
+        node_index > cluster->node_count || \
         node == NULL) {
         return -1;
     }
 
-    ccon_node** temp_nodes = (*cluster)->nodes;
+    ccon_node** temp_nodes = cluster->nodes;
 
-    (*cluster)->nodes = realloc((*cluster)->nodes, sizeof(ccon_node*) * ((*cluster)->node_count + 1));
-    if ((*cluster)->nodes == NULL) {
-        (*cluster)->nodes = temp_nodes;
+    cluster->nodes = realloc(cluster->nodes, sizeof(ccon_node*) * (cluster->node_count + 1));
+    if (cluster->nodes == NULL) {
+        cluster->nodes = temp_nodes;
         return -1;
     }
 
-    for (int i = (*cluster)->node_count; i > node_index; i--) {
-        (*cluster)->nodes[i] = (*cluster)->nodes[i - 1];
+    for (int i = cluster->node_count; i > node_index; i--) {
+        cluster->nodes[i] = cluster->nodes[i - 1];
     }
 
-    (*cluster)->nodes[node_index] = node;
+    cluster->nodes[node_index] = node;
 
-    (*cluster)->node_count = (*cluster)->node_count + 1;
+    cluster->node_count = cluster->node_count + 1;
     return 0;
 }
