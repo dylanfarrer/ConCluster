@@ -43,3 +43,21 @@ int ccon_n_delete_single_server(ccon_n_node_single_server** single_server) {
     *single_server = NULL;
     return 0;
 }
+
+void* ccon_n_invoke_server(ccon_n_node_single_server* single_server,
+                           int* result,
+                           void* arguments) {
+    if (result == NULL) {
+        return NULL;
+    }
+
+    if (single_server == NULL || \
+        single_server->serve == NULL) {
+        *result = -1;
+        return NULL;
+    }
+
+    *result = 0;
+    single_server->invocation_status = 1;
+    return single_server->serve(arguments);
+}

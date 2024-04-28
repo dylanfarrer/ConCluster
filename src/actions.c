@@ -63,3 +63,23 @@ int ccon_n_delete_actions(ccon_n_node_actions** actions) {
     *actions = NULL;
     return 0;
 }
+
+void* ccon_n_invoke_action(ccon_n_node_actions* actions,
+                           int action_index,
+                           int* result,
+                           void* arguments) {
+    if (result == NULL) {
+        return NULL;
+    }
+
+    if (actions == NULL || \
+        action_index < 0 || \
+        action_index >= actions->action_count || \
+        actions->actions[action_index] == NULL) {
+        *result = -1;
+        return NULL;
+    }
+
+    *result = 0;
+    return actions->actions[action_index](arguments);
+}

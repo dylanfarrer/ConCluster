@@ -104,11 +104,11 @@ EXPORT int ccon_edit_cluster_node(ccon_cluster* cluster,
  * Does not accept negative node_index.
  * If node_index == cluster->node_count, node appended.
  * 
- * @param cluster pointer to cluster pointer
+ * @param cluster cluster pointer
  * @param node 
  * @param node_index 
  * @return int 0 on success, -1 on fail.
  */
-EXPORT int ccon_insert_cluster_node(ccon_cluster** cluster, ccon_node* node, int node_index);
+EXPORT int ccon_insert_cluster_node(ccon_cluster* cluster, ccon_node* node, int node_index);
 
 #endif

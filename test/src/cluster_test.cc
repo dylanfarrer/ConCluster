@@ -334,7 +334,7 @@ TEST_F(ClusterTest, InsertClusterNode) {
 
     ASSERT_EQ(cluster_struct->nodes[1]->id->character_id_count, 0);
 
-    int result = ccon_insert_cluster_node(&cluster_struct,
+    int result = ccon_insert_cluster_node(cluster_struct,
                                           create_node_struct(),
                                           1);
     ASSERT_EQ(result, 0);
