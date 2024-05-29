@@ -13,7 +13,7 @@
  * nodes.
  */
 typedef struct {
-    ccon_cluster cluster;
+    ccon_cluster* cluster;
     _Atomic(int) message_count;
 } cluster;
 
@@ -31,14 +31,13 @@ cluster* generate_cluster(int node_count);
  * @param ms_time 
  * @return int 
  */
-int perform_chatter_event(int ms_time);
+int perform_chatter_event(cluster* cluster_to_invoke, int ms_time);
 
 /**
  * @brief delete a cluster struct.
  * 
  * @param cluster_to_delete 
- * @return true 
- * @return false 
+ * @return int 0 if success, -1 else  
  */
 int delete_cluster(cluster** cluster_to_delete);
 
