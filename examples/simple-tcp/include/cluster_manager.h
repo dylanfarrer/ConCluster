@@ -40,6 +40,6 @@ int perform_chatter_event(int ms_time);
  * @return true 
  * @return false 
  */
-bool delete_cluster(cluster** cluster_to_delete);
+int delete_cluster(cluster** cluster_to_delete);
 
 #endif
