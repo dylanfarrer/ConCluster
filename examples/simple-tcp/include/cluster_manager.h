@@ -8,7 +8,7 @@
 #include <stdatomic.h>
 
 /**
- * @brief struct that wraps arounf ccon_cluster, providing an additional
+ * @brief struct that wraps around ccon_cluster, providing an additional
  * message_count metric, that will log the number of messages sent between
  * nodes.
  */

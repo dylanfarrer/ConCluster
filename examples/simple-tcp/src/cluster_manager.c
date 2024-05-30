@@ -5,6 +5,17 @@
 #include <pthread.h>
 #include <time.h>
 
+typedef struct {
+    int target_port;
+    const char* target_ip;
+    const char* message;
+} action_args;
+
+typedef struct {
+    int port;
+    _Atomic int* message_counter;
+} server_args;
+
 cluster* generate_cluster(int node_count) {
     if (node_count > 100 || node_count < 2) {
         return NULL;
@@ -88,9 +99,59 @@ int delete_cluster(cluster** cluster_to_delete) {
 }
 
 ccon_node* create_node() {
-    return NULL;
+    // create custom members
+    ccon_n_node_address* node_address = ccon_n_create_address(NULL, NULL, 0, 0);
+
+    ccon_n_node_actions* node_actions = ccon_n_create_actions(NULL, 0);
+
+    ccon_n_node_servers* node_servers = ccon_n_create_servers(NULL, 0);
+    
+    // return a node, filled out with default and custom members
+    return ccon_create_node(ccon_n_create_id(NULL, NULL, 0, 0),
+                            ccon_n_create_role(NULL, NULL, 0, 0),
+                            node_address,
+                            node_actions,
+                            ccon_n_create_background_tasks(NULL, NULL),
+                            node_servers,
+                            ccon_n_create_contacts(NULL, 0));
 }
 
 int delete_node(ccon_node** node) {
     return ccon_delete_node(node);
+}
+
+void* node_background_action(void* args) {
+    action_args* parameters = (struct Args*)args;
+
+    const char* ip = parameters->target_ip;
+    int port = parameters->target_port;
+    const char* message = parameters->message;
+
+    char* response = send_and_recieve_on_socket(ip, port, message);
+
+    if (response != NULL) {
+        printf("Response from server: %s\n", response);
+        free(response);
+    } else {
+        printf("Failed to receive a response from the server.\n");
+    }
+    return NULL;
+}
+void* node_serve(void* args) {
+    server_args* parameters = (struct ServerArgs*)args;
+    int port = parameters->port;
+    _Atomic int* message_counter = parameters->message_counter;
+
+    char* endpoints[] = { "/" };
+    FunctionPtr functions[] = {};
+
+    int result = listen_on_socket(port, endpoints, functions, 1, 1);
+
+    if (result == 0) {
+        printf("Server successfully killed.\n");
+    } else {
+        printf("Error starting server.\n");
+    }
+
+    return NULL;
 }
