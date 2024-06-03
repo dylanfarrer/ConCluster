@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.10)
+
+# Set the project name
+project(SimpleTCPProject)
+
+# Set the C standard
+set(CMAKE_C_STANDARD 99)
+
+find_library(CONCLUSTER_LIB concluster PATHS /usr/local/lib)
+
+# Include directories
+include_directories(
+    /usr/local/include
+    simple-tcp/include
+    utils/include
+)
+
+# Source files for the simple-tcp component
+set(SIMPLE_TCP_SOURCES
+    simple-tcp/main.c
+    simple-tcp/src/cluster_manager.c
+)
+
+# Source files for the utils component
+set(UTILS_SOURCES
+    utils/src/socket_handler.c
+    utils/src/thread_handler.c
+)
+
+# Add the executable
+add_executable(SimpleTCP ${SIMPLE_TCP_SOURCES} ${UTILS_SOURCES})
+
+target_link_libraries(SimpleTCP ${CONCLUSTER_LIB})

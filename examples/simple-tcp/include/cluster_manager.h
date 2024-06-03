@@ -1,8 +1,8 @@
 #ifndef CLUSTER_MANAGER_H
 #define CLUSTER_MANAGER_H
 
-#include "../../utils/include/socker_handler.h"
-#include "../../utils/include/thread_handler.h"
+#include "socket_handler.h"
+#include "thread_handler.h"
 
 #include <concluster/cluster.h>
 #include <stdatomic.h>

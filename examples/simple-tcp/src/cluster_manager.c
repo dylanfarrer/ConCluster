@@ -1,9 +1,18 @@
-#include "../include/cluster_manager.h"
+#include "cluster_manager.h"
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <memory.h>
 #include <pthread.h>
 #include <time.h>
+
+cluster* generate_cluster(int node_count);
+int perform_chatter_event(cluster* cluster_to_invoke, int ms_time);
+int delete_cluster(cluster** cluster_to_delete);
+ccon_node* create_node(void);
+int delete_node(ccon_node** node);
+void* node_background_action(void* args);
+void* node_serve(void* args);
 
 typedef struct {
     int target_port;
@@ -16,6 +25,7 @@ typedef struct {
     _Atomic int* message_counter;
 } server_args;
 
+
 cluster* generate_cluster(int node_count) {
     if (node_count > 100 || node_count < 2) {
         return NULL;
@@ -26,12 +36,19 @@ cluster* generate_cluster(int node_count) {
         return NULL;
     }
 
-    ccon_cluster* cluster = ccon_create_cluster_from_node(model_node, node_count);
-    if (cluster != NULL) {
-        ccon_delete_node(model_node);
-        return cluster;
+    ccon_cluster* inner_cluster = ccon_create_cluster_from_node(model_node, node_count);
+    if (inner_cluster != NULL) {
+        ccon_delete_node(&model_node);
+        
+        cluster* generate_cluster = malloc(sizeof(cluster));
+        if (generate_cluster == NULL) {
+            return NULL;
+        }
+        generate_cluster->cluster = inner_cluster;
+        generate_cluster->message_count = 0;
+        return generate_cluster;
     } else {
-        ccon_delete_node(model_node);
+        ccon_delete_node(&model_node);
         return NULL;
     }
 }
@@ -100,11 +117,14 @@ int delete_cluster(cluster** cluster_to_delete) {
 
 ccon_node* create_node() {
     // create custom members
-    ccon_n_node_address* node_address = ccon_n_create_address(NULL, NULL, 0, 0);
+    char* address_array[1] = {"127.0.0.1"};
+    ccon_n_node_address* node_address = ccon_n_create_address(address_array, NULL, 1, 0);
 
-    ccon_n_node_actions* node_actions = ccon_n_create_actions(NULL, 0);
+    Action action_array[1] = {node_background_action};
+    ccon_n_node_actions* node_actions = ccon_n_create_actions(action_array, 1);
 
-    ccon_n_node_servers* node_servers = ccon_n_create_servers(NULL, 0);
+    ccon_n_node_single_server* server_array[1] = { ccon_n_create_single_server(node_address, node_serve) };
+    ccon_n_node_servers* node_servers = ccon_n_create_servers(server_array, 1);
     
     // return a node, filled out with default and custom members
     return ccon_create_node(ccon_n_create_id(NULL, NULL, 0, 0),
@@ -121,7 +141,7 @@ int delete_node(ccon_node** node) {
 }
 
 void* node_background_action(void* args) {
-    action_args* parameters = (struct Args*)args;
+    action_args* parameters = args;
 
     const char* ip = parameters->target_ip;
     int port = parameters->target_port;
@@ -137,8 +157,9 @@ void* node_background_action(void* args) {
     }
     return NULL;
 }
+
 void* node_serve(void* args) {
-    server_args* parameters = (struct ServerArgs*)args;
+    server_args* parameters = args;
     int port = parameters->port;
     _Atomic int* message_counter = parameters->message_counter;
 

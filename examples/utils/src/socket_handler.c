@@ -1,4 +1,4 @@
-#include "../include/socket_handler.h"
+#include "socket_handler.h"
 
 #include <sys/socket.h>
 #include <arpa/inet.h>

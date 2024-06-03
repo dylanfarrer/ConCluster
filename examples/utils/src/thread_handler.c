@@ -1,4 +1,4 @@
-#include "../include/thread_handler.h"
+#include "thread_handler.h"
 
 #include <stdlib.h>
 #include <stdio.h>
