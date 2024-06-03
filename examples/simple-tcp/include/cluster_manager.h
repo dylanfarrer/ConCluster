@@ -26,12 +26,11 @@ typedef struct {
 cluster* generate_cluster(int node_count);
 
 /**
- * @brief start the nodes talking with each other for a given time frame.
+ * @brief start the nodes talking with each other for one full cycle.
  * 
- * @param ms_time 
- * @return int 
+ * @return int nunmber of successful messages recieved
  */
-int perform_chatter_event(cluster* cluster_to_invoke, int ms_time);
+int perform_chatter_event(cluster* cluster_to_invoke);
 
 /**
  * @brief delete a cluster struct.

@@ -4,15 +4,16 @@
 #include <stdio.h>
 #include <memory.h>
 #include <pthread.h>
-#include <time.h>
 
 cluster* generate_cluster(int node_count);
-int perform_chatter_event(cluster* cluster_to_invoke, int ms_time);
+int perform_chatter_event(cluster* cluster_to_invoke);
 int delete_cluster(cluster** cluster_to_delete);
 ccon_node* create_node(void);
 int delete_node(ccon_node** node);
 void* node_background_action(void* args);
 void* node_serve(void* args);
+void* invoke_server(void* args);
+void* invoke_action(void* args);
 
 typedef struct {
     int target_port;
@@ -25,6 +26,8 @@ typedef struct {
     _Atomic int* message_counter;
 } server_args;
 
+int servers_index = 0;
+int actions_index = 0;
 
 cluster* generate_cluster(int node_count) {
     if (node_count > 100 || node_count < 2) {
@@ -53,59 +56,37 @@ cluster* generate_cluster(int node_count) {
     }
 }
 
-int perform_chatter_event(cluster* cluster_to_invoke, int ms_time) {
-    if (ms_time < 1000 || ms_time > 60000) {
-        return -1;
-    }
-    
+int perform_chatter_event(cluster* cluster_to_invoke) {
+    servers_index = 0;
+    actions_index = 0;
+
     // perform check to ensure servers and chatter event is not already occuring
 
-    // start the servers
-    int server_invocation_result = 0;
-    void* premade_server_arguments;
+    pthread_t* server_threads[cluster_to_invoke->cluster->node_count];
+    pthread_t* action_threads[cluster_to_invoke->cluster->node_count];
+
+    server_args server_args_struct;
+    server_args_struct.port = 6000;
+    server_args_struct.message_counter = &(cluster_to_invoke->message_count);
     for (int i = 0; i < cluster_to_invoke->cluster->node_count; i++) {
-        ccon_n_invoke_server(cluster_to_invoke->cluster->nodes[i]->servers->servers[0],
-                             &server_invocation_result,
-                             premade_server_arguments);
-        if (server_invocation_result == 0) {
-            // handle error
-            ;
-        }
-        server_invocation_result = 0;
+        server_threads[i] = run_thread(NULL, invoke_server, (void*)&server_args_struct);
+        ++server_args_struct.port;
     }
 
+    action_args action_args_struct;
+    action_args_struct.target_port = 6000;
+    action_args_struct.target_ip = "127.0.0.1";
+    action_args_struct.message = "Hello, World!";
+    for (int i = 1; i < cluster_to_invoke->cluster->node_count; i++) {
+        action_threads[i] = run_thread(NULL, invoke_action, (void*)&action_args_struct);
+        ++action_args_struct.target_port;
+    }
+    action_threads[0] = run_thread(NULL, invoke_action, (void*)&action_args_struct);
 
-    // start the actions
-    // this should be threaded
-    int action_invocation_result = 0;
-    void* premade_action_arguments;
     for (int i = 0; i < cluster_to_invoke->cluster->node_count; i++) {
-        ccon_n_invoke_action(cluster_to_invoke->cluster->nodes[i]->actions,
-                             0,
-                             &action_invocation_result,
-                             premade_action_arguments);
-        if (action_invocation_result == 0) {
-            // handle error
-            ;
-        }
-        action_invocation_result = 0;
+        join_thread(server_threads[i], NULL);
+        join_thread(action_threads[i], NULL);
     }
-
-    // wait for the alloated ms_time, then join the threads
-
-    /*
-    struct timespec ts;
-    ts.tv_sec = ms_time / 1000;
-    ts.tv_nsec = (ms_time % 1000) * 1000000;
-    nanosleep(&ts, NULL);
-
-    for (int i = 0; i < NUM_THREADS; i++) {
-        if (pthread_join(threads[i], NULL) != 0) {
-            fprintf(stderr, "Error joining thread %d\n", i);
-            return EXIT_FAILURE;
-        }
-    }
-    */
 
     // return the (hopefully) incremented message count
     return cluster_to_invoke->message_count;
@@ -173,4 +154,21 @@ void* node_serve(void* args) {
     }
 
     return NULL;
+}
+
+void* invoke_server(void* args) {
+    int invocation_result = 0;
+    ccon_n_invoke_server(cluster_to_invoke->cluster->nodes[servers_index++]->servers->servers[0],
+                         &invocation_result,
+                         args);
+    return;
+}
+
+void* invoke_action(void* args) {
+    int invocation_result = 0;
+    ccon_n_invoke_action(cluster_to_invoke->cluster->nodes[actions_index++]->actions,
+                         0,
+                         &invocation_result,
+                         args);
+    return;
 }
