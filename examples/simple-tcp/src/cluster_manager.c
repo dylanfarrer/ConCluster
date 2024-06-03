@@ -117,19 +117,17 @@ int delete_cluster(cluster** cluster_to_delete) {
 
 ccon_node* create_node() {
     // create custom members
-    char* address_array[1] = {"127.0.0.1"};
-    ccon_n_node_address* node_address = ccon_n_create_address(address_array, NULL, 1, 0);
-
     Action action_array[1] = {node_background_action};
     ccon_n_node_actions* node_actions = ccon_n_create_actions(action_array, 1);
 
-    ccon_n_node_single_server* server_array[1] = { ccon_n_create_single_server(node_address, node_serve) };
+    char* address_array[1] = {"127.0.0.1"};
+    ccon_n_node_single_server* server_array[1] = { ccon_n_create_single_server(ccon_n_create_address(address_array, NULL, 1, 0), node_serve) };
     ccon_n_node_servers* node_servers = ccon_n_create_servers(server_array, 1);
     
     // return a node, filled out with default and custom members
     return ccon_create_node(ccon_n_create_id(NULL, NULL, 0, 0),
                             ccon_n_create_role(NULL, NULL, 0, 0),
-                            node_address,
+                            ccon_n_create_address(NULL, NULL, 0, 0),
                             node_actions,
                             ccon_n_create_background_tasks(NULL, NULL),
                             node_servers,
