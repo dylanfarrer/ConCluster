@@ -19,10 +19,12 @@ typedef struct {
     int target_port;
     const char* target_ip;
     const char* message;
+    cluster* cluster_to_invoke;
 } action_args;
 
 typedef struct {
     int port;
+    cluster* cluster_to_invoke;
     _Atomic int* message_counter;
 } server_args;
 
@@ -67,6 +69,7 @@ int perform_chatter_event(cluster* cluster_to_invoke) {
 
     server_args server_args_struct;
     server_args_struct.port = 6000;
+    server_args_struct.cluster_to_invoke = cluster_to_invoke;
     server_args_struct.message_counter = &(cluster_to_invoke->message_count);
     for (int i = 0; i < cluster_to_invoke->cluster->node_count; i++) {
         server_threads[i] = run_thread(NULL, invoke_server, (void*)&server_args_struct);
@@ -77,6 +80,7 @@ int perform_chatter_event(cluster* cluster_to_invoke) {
     action_args_struct.target_port = 6000;
     action_args_struct.target_ip = "127.0.0.1";
     action_args_struct.message = "Hello, World!";
+    action_args_struct.cluster_to_invoke = cluster_to_invoke;
     for (int i = 1; i < cluster_to_invoke->cluster->node_count; i++) {
         action_threads[i] = run_thread(NULL, invoke_action, (void*)&action_args_struct);
         ++action_args_struct.target_port;
@@ -158,17 +162,19 @@ void* node_serve(void* args) {
 
 void* invoke_server(void* args) {
     int invocation_result = 0;
-    ccon_n_invoke_server(cluster_to_invoke->cluster->nodes[servers_index++]->servers->servers[0],
+    server_args* parameters = args;
+    ccon_n_invoke_server(parameters->cluster_to_invoke->cluster->nodes[servers_index++]->servers->servers[0],
                          &invocation_result,
                          args);
-    return;
+    return NULL;
 }
 
 void* invoke_action(void* args) {
     int invocation_result = 0;
-    ccon_n_invoke_action(cluster_to_invoke->cluster->nodes[actions_index++]->actions,
+    action_args* parameters = args;
+    ccon_n_invoke_action(parameters->cluster_to_invoke->cluster->nodes[actions_index++]->actions,
                          0,
                          &invocation_result,
                          args);
-    return;
+    return NULL;
 }
