@@ -116,6 +116,15 @@ free(serve_result);
 free(schedule_result);
 ```
 
+## Examples
+
+There are examples of library clients in the examples directory. The examples can be built by navigating to the directory and running:
+```
+cmake -B build
+cmake --build build
+```
+The binarys will then be available within the examples/build/ directory, where they can be run. ReadMes are available within each example directory.
+
 ## Testing
 
 The library and examples are tested together in a GTest suite. This can be run either with CMake,
