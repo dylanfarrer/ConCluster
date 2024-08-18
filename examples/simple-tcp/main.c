@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 
     printf("Starting chatter event...\n");
 
-    /*
+
     int result = perform_chatter_event(cl);
     if (result < 0) {
         fprintf(stderr, "Chatter event failed\n");
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     }
 
     printf("Finished chatter event...\n");
-    */
+
 
     printf("Final message count: %d\n", cl->message_count);
     if (delete_cluster(&cl) == -1) {

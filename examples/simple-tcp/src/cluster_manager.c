@@ -18,7 +18,6 @@ void* invoke_action(void* args);
 typedef struct {
     int target_port;
     const char* target_ip;
-    const char* message;
     cluster* cluster_to_invoke;
 } action_args;
 
@@ -45,13 +44,13 @@ cluster* generate_cluster(int node_count) {
     if (inner_cluster != NULL) {
         ccon_delete_node(&model_node);
         
-        cluster* generate_cluster = malloc(sizeof(cluster));
-        if (generate_cluster == NULL) {
+        cluster* generated_cluster = malloc(sizeof(cluster));
+        if (generated_cluster == NULL) {
             return NULL;
         }
-        generate_cluster->cluster = inner_cluster;
-        generate_cluster->message_count = 0;
-        return generate_cluster;
+        generated_cluster->cluster = inner_cluster;
+        generated_cluster->message_count = 0;
+        return generated_cluster;
     } else {
         ccon_delete_node(&model_node);
         return NULL;
@@ -62,38 +61,47 @@ int perform_chatter_event(cluster* cluster_to_invoke) {
     servers_index = 0;
     actions_index = 0;
 
-    // perform check to ensure servers and chatter event is not already occuring
-
     pthread_t* server_threads[cluster_to_invoke->cluster->node_count];
     pthread_t* action_threads[cluster_to_invoke->cluster->node_count];
 
-    server_args server_args_struct;
-    server_args_struct.port = 6000;
-    server_args_struct.cluster_to_invoke = cluster_to_invoke;
-    server_args_struct.message_counter = &(cluster_to_invoke->message_count);
     for (int i = 0; i < cluster_to_invoke->cluster->node_count; i++) {
-        server_threads[i] = run_thread(NULL, invoke_server, (void*)&server_args_struct);
-        ++server_args_struct.port;
+        server_args* server_args_struct = malloc(sizeof(server_args));
+        if (server_args_struct == NULL) {
+            printf("Failed to allocate memory for server_args.\n");
+            return -1;
+        }
+        server_args_struct->port = 6000 + i;
+        server_args_struct->cluster_to_invoke = cluster_to_invoke;
+        server_args_struct->message_counter = &(cluster_to_invoke->message_count);
+        server_threads[i] = run_thread(NULL, invoke_server, (void*)server_args_struct);
+
+        action_args* action_args_struct = malloc(sizeof(action_args));
+        if (action_args_struct == NULL) {
+            printf("Failed to allocate memory for action_args.\n");
+            return -1;
+        }
+
+        // Set target_port for the action_args_struct
+        if (i < cluster_to_invoke->cluster->node_count - 1) {
+            action_args_struct->target_port = 6000 + i + 1;
+        } else {
+            action_args_struct->target_port = 6000;
+        }
+
+        action_args_struct->target_ip = "127.0.0.1";
+        action_args_struct->cluster_to_invoke = cluster_to_invoke;
+        action_threads[i] = run_thread(NULL, invoke_action, (void*)action_args_struct);
     }
 
-    action_args action_args_struct;
-    action_args_struct.target_port = 6000;
-    action_args_struct.target_ip = "127.0.0.1";
-    action_args_struct.message = "Hello, World!";
-    action_args_struct.cluster_to_invoke = cluster_to_invoke;
-    for (int i = 1; i < cluster_to_invoke->cluster->node_count; i++) {
-        action_threads[i] = run_thread(NULL, invoke_action, (void*)&action_args_struct);
-        ++action_args_struct.target_port;
-    }
-    action_threads[0] = run_thread(NULL, invoke_action, (void*)&action_args_struct);
-
     for (int i = 0; i < cluster_to_invoke->cluster->node_count; i++) {
+        printf("Waiting on server thread.\n");
         join_thread(server_threads[i], NULL);
+        printf("Waiting on action thread.\n");
         join_thread(action_threads[i], NULL);
     }
 
-    // return the (hopefully) incremented message count
-    return cluster_to_invoke->message_count;
+    // return the incremented message count
+    return atomic_load(&(cluster_to_invoke->message_count));
 }
 
 int delete_cluster(cluster** cluster_to_delete) {
@@ -128,17 +136,20 @@ void* node_background_action(void* args) {
 
     const char* ip = parameters->target_ip;
     int port = parameters->target_port;
-    const char* message = parameters->message;
 
-    char* response = send_and_recieve_on_socket(ip, port, message);
+    int result = send_kill_message(ip, port);
 
-    if (response != NULL) {
-        printf("Response from server: %s\n", response);
-        free(response);
+    if (result != 0) {
+        printf("Failed to send kill message to the server.\n");
     } else {
-        printf("Failed to receive a response from the server.\n");
+        printf("Sent kill message to the server.\n");
     }
+
     return NULL;
+}
+
+char* pass_function() {
+    return "PASS";
 }
 
 void* node_serve(void* args) {
@@ -146,13 +157,14 @@ void* node_serve(void* args) {
     int port = parameters->port;
     _Atomic int* message_counter = parameters->message_counter;
 
-    char* endpoints[] = { "/" };
+    char* endpoints[] = {};
     FunctionPtr functions[] = {};
 
     int result = listen_on_socket(port, endpoints, functions, 1, 1);
 
     if (result == 0) {
         printf("Server successfully killed.\n");
+        (*message_counter) += 1;
     } else {
         printf("Error starting server.\n");
     }

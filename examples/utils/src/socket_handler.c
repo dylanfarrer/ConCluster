@@ -36,6 +36,7 @@ int listen_on_socket(int port,
     socklen_t client_addr_len = sizeof(client_addr);
 
 
+    printf("Starting to listen...\n");
     int item_sent = -1; // flag to indicate successful recieve/response in each iteration.
     while (1) {
         // Accept incoming connections
@@ -193,7 +194,7 @@ static int create_listener_socket(int port) {
 	char sendBuff[BUFFER_SIZE];
 
 	listenfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (listen_on_socket < 0) {
+    if (listenfd < 0) {
         printf("Could not create listener socket.\n");
         return -1;
     }
