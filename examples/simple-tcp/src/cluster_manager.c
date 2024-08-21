@@ -40,7 +40,7 @@ cluster* generate_cluster(int node_count) {
         return NULL;
     }
 
-    ccon_cluster* inner_cluster = ccon_create_cluster_from_node(model_node, node_count);
+    ccon_cluster* inner_cluster = ccon_create_cluster_from_node(model_node, node_count, -1);
     if (inner_cluster != NULL) {
         ccon_delete_node(&model_node);
         
@@ -141,6 +141,7 @@ void* node_background_action(void* args) {
 
     if (result != 0) {
         printf("Failed to send kill message to the server.\n");
+        exit(-1);
     } else {
         printf("Sent kill message to the server.\n");
     }

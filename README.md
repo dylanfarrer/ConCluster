@@ -51,8 +51,7 @@ ccon_delete_cluster(&clone_cluster);
 
 // custom cloned cluster
 ccon_node* my_own_node = ccon_create_default_node();
-ccon_cluster* my_own_clone_cluster = ccon_create_cluster_from_node(my_own_node, 5);
-int node_delete_result = ccon_delete_node(&my_own_node);
+ccon_cluster* my_own_clone_cluster = ccon_create_cluster_from_node(my_own_node, 5, 0);
 ccon_delete_cluster(&my_own_clone_cluster);
 
 // handrolled cluster (see node.h for further information on node creation).
@@ -132,7 +131,7 @@ or Docker. CMake assumes the library has been installed.
 
 ```bash
 # CMake testing
-cd tests
+cd test
 cmake -B build
 cmake --build build
 ctest --test-dir build

@@ -34,9 +34,12 @@ EXPORT ccon_cluster* ccon_create_cluster(ccon_node** nodes, int node_count);
  * 
  * @param node_struct ccon_node struct to clone, cannot be NULL
  * @param node_count number of nodes to create.
+ * @param include_node if 0, include node in the created cluster, else don't.
  * @return cluster* cluster struct or NULL.
  */
-EXPORT ccon_cluster* ccon_create_cluster_from_node(ccon_node* node_struct, int node_count);
+EXPORT ccon_cluster* ccon_create_cluster_from_node(ccon_node* node_struct,
+                                                   int node_count,
+                                                   int include_node);
 
 /**
  * @brief Create a cluster of population node_count from default ccon_node struct.

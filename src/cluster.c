@@ -33,7 +33,9 @@ ccon_cluster* ccon_create_cluster(ccon_node** nodes, int node_count) {
     return cluster_struct;
 }
 
-ccon_cluster* ccon_create_cluster_from_node(ccon_node* node_struct, int node_count) {
+ccon_cluster* ccon_create_cluster_from_node(ccon_node* node_struct,
+                                            int node_count,
+                                            int include_node) {
     if (node_count < 1 || node_struct == NULL) {
         return NULL;
     }
@@ -43,10 +45,14 @@ ccon_cluster* ccon_create_cluster_from_node(ccon_node* node_struct, int node_cou
         return NULL;
     }
 
-    node_array[0] = ccon_copy_node(node_struct);
-    if (node_array[0] == NULL) {
-        free(node_array);
-        return NULL;
+    if (include_node == 0) {
+        node_array[0] = node_struct;
+    } else {
+        node_array[0] = ccon_copy_node(node_struct);
+        if (node_array[0] == NULL) {
+            free(node_array);
+            return NULL;
+        }
     }
     
     for (int i = 1; i < node_count; i++) {
@@ -77,8 +83,7 @@ ccon_cluster* ccon_create_cluster_from_default_node(int node_count) {
 
     ccon_node* default_node = ccon_create_default_node();
 
-    ccon_cluster* cluster_struct = ccon_create_cluster_from_node(default_node, node_count);
-    ccon_delete_node(&default_node);
+    ccon_cluster* cluster_struct = ccon_create_cluster_from_node(default_node, node_count, 0);
     if (cluster_struct == NULL) {
         return NULL;
     } else {

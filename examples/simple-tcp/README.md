@@ -5,3 +5,5 @@ This client creates X number of nodes (each with a server and client functionali
 To do this, a cluster is created with X nodes, each node has a serve function associated with it, and an action function.
 
 To undertake the chatter event, the server of each node is invoked, and then shortly after the action function (the sender) is invoked. The action of each node sends a shut off request to a different node.
+
+Note: the TCP code that this example relies on is very simple -> if a connection/send fails, the program will just exit (but that's not what's being showcased here...).
