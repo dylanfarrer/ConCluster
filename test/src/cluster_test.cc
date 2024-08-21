@@ -237,11 +237,22 @@ TEST_F(ClusterTest, ClusterCreationAndDeletion) {
 
 TEST_F(ClusterTest, ClusterCreationFromNode) {
     ccon_node* node_struct = ccon_create_default_node();
-    ccon_cluster* cluster_struct = ccon_create_cluster_from_node(node_struct, 3);
+    ccon_cluster* cluster_struct = ccon_create_cluster_from_node(node_struct, 3, -1);
     ASSERT_NE(cluster_struct, nullptr);
     ASSERT_EQ(cluster_struct->node_count, 3);
 
     ccon_delete_node(&node_struct);
+
+    int result = ccon_delete_cluster(&cluster_struct);
+    ASSERT_EQ(result, 0);
+    ASSERT_EQ(cluster_struct, nullptr);
+}
+
+TEST_F(ClusterTest, ClusterInclusiveCreationFromNode) {
+    ccon_node* node_struct = ccon_create_default_node();
+    ccon_cluster* cluster_struct = ccon_create_cluster_from_node(node_struct, 3, 0);
+    ASSERT_NE(cluster_struct, nullptr);
+    ASSERT_EQ(cluster_struct->node_count, 3);
 
     int result = ccon_delete_cluster(&cluster_struct);
     ASSERT_EQ(result, 0);
